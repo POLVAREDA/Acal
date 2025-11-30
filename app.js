@@ -202,3 +202,27 @@ window.addEventListener("click", (event) => {
     closeModal();
   }
 });
+
+
+class LottiUI {
+  constructor(x, y) {
+    const div = document.createElement('dotlottie-player');
+    div.setAttribute('src', 'https://lottie.host/824cb754-a11a-4458-bba0-1f5129c3ed76/NuLW5jGi8g.lottie');
+    div.setAttribute('background', 'transparent');
+    div.setAttribute('speed', '1');
+    div.setAttribute('loop', true);
+    div.setAttribute('autoplay', true);
+    div.style.cssText = 'top: ' + y + 'px; left: ' + x + 'px';
+    document.body.append(div);
+
+    setTimeout(() => {
+      div.remove();
+    }, 3000);
+  }
+}
+
+document.addEventListener('pointerdown', event => {
+  const x = event.clientX;
+  const y = event.clientY;
+  new LottiUI(x, y);
+});
