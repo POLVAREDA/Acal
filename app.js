@@ -1,5 +1,4 @@
 // [설정] 12월 1일 ~ 12월 10일용 데이터 정의
-// ★ 변경점: quiz(문제)와 answer(정답) 필드가 추가되었습니다.
 const daysData = [
   {
     day: 1,
@@ -87,19 +86,46 @@ const currentYear = today.getFullYear();
 const currentMonth = today.getMonth() + 1;
 const currentDay = today.getDate();
 
-const isDebugMode = false;
+const isDebugMode = false; // 테스트 시 true로 변경
 let openedDays = JSON.parse(localStorage.getItem("openedDays_Dec")) || [];
 const targetMonth = 12;
 
-// [함수 분리] 문을 여는 공통 로직 (당일 오픈 or 퀴즈 정답 시 호출)
+// --- [추가] LottiUI 클래스 정의 ---
+class LottiUI {
+  constructor(x, y) {
+    const div = document.createElement("dotlottie-player");
+    div.setAttribute(
+        "src",
+        "https://lottie.host/824cb754-a11a-4458-bba0-1f5129c3ed76/NuLW5jGi8g.lottie"
+    );
+    div.setAttribute("background", "transparent");
+    div.setAttribute("speed", "1");
+    div.setAttribute("loop", "false"); // 폭죽은 한 번만 터지게 false 설정
+    div.setAttribute("autoplay", "true");
+
+    // CSS에서 position: fixed와 transform을 잡고 있으므로 top, left만 지정
+    // (CSS에 dotlottie-player 스타일이 없으면 style.cssText에 position:fixed 등 추가 필요)
+    div.style.left = x + "px";
+    div.style.top = y + "px";
+
+    document.body.append(div);
+
+    // 3초 후 제거
+    setTimeout(() => {
+      div.remove();
+    }, 3000);
+  }
+}
+
+// [함수] 문을 여는 공통 로직
 function openDoor(data, doorElement) {
   // 1. 시각적 열림 처리
   doorElement.classList.add("open");
 
-  // 2. missed 클래스가 있다면 제거 (퀴즈를 맞춰서 열었으므로)
+  // 2. missed 클래스가 있다면 제거
   doorElement.classList.remove("missed");
 
-  // 3. localStorage 저장 (중복 방지)
+  // 3. localStorage 저장
   if (!openedDays.includes(data.day)) {
     openedDays.push(data.day);
     localStorage.setItem("openedDays_Dec", JSON.stringify(openedDays));
@@ -123,11 +149,11 @@ daysData.forEach((data) => {
     isPast = true;
   }
 
-  // 초기 CSS 클래스 부여
+  // 초기 상태 설정
   if (isOpened) {
     door.classList.add("open");
   } else if (isPast && !isDebugMode) {
-    door.classList.add("missed"); // 회색 처리 등 스타일 유지를 위해 클래스는 붙임
+    door.classList.add("missed");
   }
 
   door.innerHTML = `
@@ -140,36 +166,32 @@ daysData.forEach((data) => {
       </div>
   `;
 
-  // 클릭 이벤트 리스너 등록
+  // 클릭 이벤트
   door.addEventListener("click", () => {
-    // 상황 1: 이미 열었던 문 -> 그냥 모달 보여줌
+    // 1. 이미 열린 문
     if (openedDays.includes(data.day)) {
       showModal(data);
       return;
     }
 
-    // 상황 2: 날짜가 지난 문 (Missed) -> ★ 퀴즈 로직 추가 ★
+    // 2. 지난 날짜 (퀴즈)
     if (isPast && !isDebugMode) {
-      // 퀴즈 내용을 prompt 창으로 띄움
       const userAnswer = prompt(
-        `[퀴즈] ${data.quiz}\n정답을 입력하면 문이 열려요!`
+          `[퀴즈] ${data.quiz}\n정답을 입력하면 문이 열려요!`
       );
-
-      // 사용자가 취소 버튼을 누르지 않았고, 정답과 일치할 경우 (공백 제거 후 비교)
       if (userAnswer && userAnswer.trim() === data.answer) {
         alert("정답입니다! 문이 열립니다 🎉");
-        openDoor(data, door); // 문 여는 함수 호출
+        openDoor(data, door);
       } else if (userAnswer !== null) {
-        // 취소 버튼이 아닌데 틀렸을 경우
         alert("틀렸습니다. 다시 시도해보세요 😢");
       }
       return;
     }
 
-    // 상황 3: 아직 날짜가 안 된 미래의 문
+    // 3. 미래의 문
     if (
-      currentMonth < targetMonth ||
-      (currentMonth === targetMonth && currentDay < data.day)
+        currentMonth < targetMonth ||
+        (currentMonth === targetMonth && currentDay < data.day)
     ) {
       if (!isDebugMode) {
         alert(`아직 12월 ${data.day}일이 되지 않았어요! 조금만 기다려주세요.`);
@@ -177,19 +199,24 @@ daysData.forEach((data) => {
       }
     }
 
-    // 상황 4: 정상 오픈 (오늘 날짜)
-    openDoor(data, door); // 문 여는 함수 호출
+    // 4. 정상 오픈
+    openDoor(data, door);
   });
 
   calendarContainer.appendChild(door);
 });
 
-// --- 모달 관련 함수들 (기존과 동일) ---
+// --- 모달 관련 함수 ---
 function showModal(data) {
   modalDate.textContent = `12월 ${data.day}일`;
   modalImage.src = data.image;
   modalMessage.textContent = data.message;
   modal.classList.add("active");
+
+  // ★ 팝업이 열릴 때 화면 중앙에서 컨패티 터트리기 ★
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+  new LottiUI(centerX, centerY);
 }
 
 function closeModal() {
@@ -201,28 +228,4 @@ window.addEventListener("click", (event) => {
   if (event.target === modal) {
     closeModal();
   }
-});
-
-
-class LottiUI {
-  constructor(x, y) {
-    const div = document.createElement('dotlottie-player');
-    div.setAttribute('src', 'https://lottie.host/824cb754-a11a-4458-bba0-1f5129c3ed76/NuLW5jGi8g.lottie');
-    div.setAttribute('background', 'transparent');
-    div.setAttribute('speed', '1');
-    div.setAttribute('loop', true);
-    div.setAttribute('autoplay', true);
-    div.style.cssText = 'top: ' + y + 'px; left: ' + x + 'px';
-    document.body.append(div);
-
-    setTimeout(() => {
-      div.remove();
-    }, 3000);
-  }
-}
-
-document.addEventListener('pointerdown', event => {
-  const x = event.clientX;
-  const y = event.clientY;
-  new LottiUI(x, y);
 });

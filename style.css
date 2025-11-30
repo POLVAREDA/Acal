@@ -198,11 +198,12 @@ h1 {
 }
 
 
-
-dotlottie-player{
+/* [추가] 컨패티 애니메이션 스타일 */
+dotlottie-player {
   position: fixed;
   width: 400px;
   height: 400px;
-  z-index: 99;
+  z-index: 2001; /* 모달(2000)보다 높아야 위에 보입니다 */
   transform: translate(-50%, -50%);
+  pointer-events: none; /* 애니메이션이 클릭을 막지 않도록 설정 */
 }
