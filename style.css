@@ -125,20 +125,24 @@ h1 {
   /* --- Font Awesome을 사용하기 위한 핵심 코드 --- */
   content: "\f023"; /* 자물쇠 아이콘의 유니코드 (Solid Lock) */
   font-family: "Font Awesome 6 Free";
-  font-weight: 900; /* Solid 아이콘을 위해 필수 */
-  font-size: 28px; /* 아이콘 크기 */
-  color: #8c6a5a; /* 아이콘 색상 (숫자와 동일) */
-  background-image: none; /* 기존 이미지 제거 */
-  /* ----------------------------------------------- */
+  font-weight: 900;
+  font-size: 20px; /* 크기를 코너에 맞게 조정 */
+  color: #8c6a5a;
+  background-image: none;
 
   position: absolute;
-  width: auto; /* 아이콘 폰트는 width/height가 필요 없음 */
+  width: auto;
   height: auto;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
+
+  /* --- 오른쪽 상단으로 위치 수정 --- */
+  top: 10px;
+  right: 10px;
+  left: auto; /* 기존 left 속성 무시 */
+  transform: none; /* 기존 transform 속성 무시 */
+  /* ---------------------------------- */
+
   opacity: 0.8;
-  z-index: 3;
+  z-index: 5; /* 숫자(4)보다 높게 설정 */
 }
 
 /* 문 번호 스타일 */
