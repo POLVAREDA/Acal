@@ -1,22 +1,18 @@
-/* =========================================
-         [CSS] 디자인 설정 - 와이어프레임 기반 (겹침 문제 해결)
-         ========================================= */
-
-/* 폰트 임포트: Lora와 Noto Sans KR */
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Sans+KR:wght@100..900&display=swap");
 
 body {
   font-family: "Noto Sans KR", sans-serif; /* 기본 한글 폰트 */
   background-color: #f8f8f8; /* 밝은 배경색 */
-  background-repeat: repeat-x;
-  background-position: top center;
-  background-size: auto 200px; /* 패턴 높이 조정 */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 상단부터 시작 */
+  justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  padding: 20px 0;
+  box-sizing: border-box;
+  color: white;
+  overflow-x: hidden;
   padding: 0; /* 전체 패딩 제거 */
   box-sizing: border-box;
   color: #333; /* 어두운 글자색 */
@@ -32,16 +28,6 @@ h1 {
   color: #8c6a5a; /* 로고와 어울리는 색 */
   text-shadow: none; /* 그림자 제거 */
   letter-spacing: 0;
-  z-index: 1;
-}
-
-h1 + p {
-  /* H1 아래 부제목 */
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 40px;
-  text-align: center;
   z-index: 1;
 }
 
@@ -64,17 +50,6 @@ h1 + p {
   position: relative;
   /* 기본 겹침 순서 */
   z-index: 1;
-}
-
-/* --- 열린 문이 겹치지 않도록 z-index를 높입니다. --- */
-.door.open {
-  z-index: 5;
-}
-/* ---------------------------------------------------- */
-
-/* 호버 시 z-index를 높여 가장 위에 오도록 처리 */
-.door:not(.missed):hover {
-  z-index: 10;
 }
 
 .door-inner {
@@ -113,7 +88,7 @@ h1 + p {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 뒷면 기본 그림자 유지 */
   overflow: hidden;
 }
 
@@ -130,29 +105,35 @@ h1 + p {
   border: none;
   text-shadow: none;
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-top: 0;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+  /* --- 규격외 현상 수정: 그림자 번짐을 줄여 이웃 영역 침범 방지 --- */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
 }
 
 .door:not(.missed):hover .door-front {
   transform: translateY(-8px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  /* --- 규격외 현상 수정: 호버 시 그림자 번짐을 줄여 이웃 영역 침범 방지 --- */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
-/* 자물쇠 아이콘 추가 */
+/* 자물쇠 아이콘 추가 (Font Awesome 사용) */
 .door:not(.open) .door-front::after {
-  content: "";
+  /* --- Font Awesome을 사용하기 위한 핵심 코드 --- */
+  content: "\f023"; /* 자물쇠 아이콘의 유니코드 (Solid Lock) */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900; /* Solid 아이콘을 위해 필수 */
+  font-size: 28px; /* 아이콘 크기 */
+  color: #8c6a5a; /* 아이콘 색상 (숫자와 동일) */
+  background-image: none; /* 기존 이미지 제거 */
+  /* ----------------------------------------------- */
+
   position: absolute;
-  width: 35px;
-  height: 35px;
-  background-image: url("https://i.ibb.co/S6w6j6F/lock-icon.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  width: auto; /* 아이콘 폰트는 width/height가 필요 없음 */
+  height: auto;
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
@@ -206,8 +187,8 @@ h1 + p {
 .door-back::after {
   display: none;
 }
-
 /* 팝업 스타일 */
+
 .modal {
   position: fixed;
   top: 0;
@@ -229,6 +210,7 @@ h1 + p {
   opacity: 1;
   visibility: visible;
 }
+
 .modal-content {
   background: #ffffff;
   padding: 30px;
@@ -247,17 +229,19 @@ h1 + p {
 .modal.active .modal-content {
   transform: scale(1);
 }
+
 .close-btn {
   position: absolute;
+
   top: 15px;
-  right: 15px;
-  font-size: 28px;
+
+  right: 20px;
+
+  font-size: 30px;
+
   cursor: pointer;
+
   color: #aaa;
-  transition: color 0.2s;
-}
-.close-btn:hover {
-  color: #888;
 }
 
 #modal-date {
