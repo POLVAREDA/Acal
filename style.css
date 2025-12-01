@@ -1,37 +1,57 @@
 /* =========================================
-         [CSS] 디자인 설정
+         [CSS] 디자인 설정 - 와이어프레임 기반 (겹침 문제 해결)
          ========================================= */
+
+/* 폰트 임포트: Lora와 Noto Sans KR */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Sans+KR:wght@100..900&display=swap");
+
 body {
-  font-family: "Pretendard", "Malgun Gothic", sans-serif;
-  background-color: #0f1f4c;
+  font-family: "Noto Sans KR", sans-serif; /* 기본 한글 폰트 */
+  background-color: #f8f8f8; /* 밝은 배경색 */
+  background-repeat: repeat-x;
+  background-position: top center;
+  background-size: auto 200px; /* 패턴 높이 조정 */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* 상단부터 시작 */
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  padding: 20px 0;
+  padding: 0; /* 전체 패딩 제거 */
   box-sizing: border-box;
-  color: white;
+  color: #333; /* 어두운 글자색 */
   overflow-x: hidden;
 }
 
 h1 {
-  margin: 0 0 40px 0;
+  font-family: "Lora", serif; /* 특별한 영문 폰트 */
   font-size: 2.8rem;
+  font-weight: 500;
   text-align: center;
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  margin: 60px 0 20px 0; /* 상단 여백 증가 */
+  color: #8c6a5a; /* 로고와 어울리는 색 */
+  text-shadow: none; /* 그림자 제거 */
+  letter-spacing: 0;
   z-index: 1;
-  letter-spacing: 2px;
+}
+
+h1 + p {
+  /* H1 아래 부제목 */
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 40px;
+  text-align: center;
+  z-index: 1;
 }
 
 .calendar-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* 2열 배치 */
   gap: 20px;
-  max-width: 900px;
+  max-width: 380px; /* 전체 컨테이너 폭 조절 */
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 60px auto; /* 하단 여백 추가 */
   z-index: 1;
 }
 
@@ -41,6 +61,20 @@ h1 {
   aspect-ratio: 1 / 1;
   perspective: 1000px;
   cursor: pointer;
+  position: relative;
+  /* 기본 겹침 순서 */
+  z-index: 1;
+}
+
+/* --- 열린 문이 겹치지 않도록 z-index를 높입니다. --- */
+.door.open {
+  z-index: 5;
+}
+/* ---------------------------------------------------- */
+
+/* 호버 시 z-index를 높여 가장 위에 오도록 처리 */
+.door:not(.missed):hover {
+  z-index: 10;
 }
 
 .door-inner {
@@ -59,12 +93,13 @@ h1 {
 /* 놓친 날짜 스타일 */
 .door.missed {
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 .door.missed .door-front {
-  background: rgba(100, 100, 100, 0.5);
-  border-color: #555;
-  color: #ccc;
+  background: #e0e0e0;
+  border-color: #ccc;
+  color: #a0a0a0;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .door-front,
@@ -77,43 +112,99 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
+/* --- 열리기 전 (선물 상자) --- */
 .door-front {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  color: #fff;
-  font-size: 2.5rem;
-  font-weight: 800;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  transition: background 0.3s, transform 0.3s;
+  background: linear-gradient(
+    135deg,
+    #fad7cc 0%,
+    #f5c6ba 100%
+  ); /* 분홍빛 그라데이션 */
+  color: #8c6a5a; /* 숫자 색상 */
+  font-size: 2rem;
+  font-weight: bold;
+  border: none;
+  text-shadow: none;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .door:not(.missed):hover .door-front {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
 }
 
+/* 자물쇠 아이콘 추가 */
+.door:not(.open) .door-front::after {
+  content: "";
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background-image: url("https://i.ibb.co/S6w6j6F/lock-icon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.8;
+  z-index: 3;
+}
+
+/* 문 번호 스타일 */
+.door-front span {
+  position: relative;
+  z-index: 4;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* --- 열린 후 (사진/메시지) --- */
 .door-back {
-  background-color: #165c18; /* 초록색 */
-  background-image: linear-gradient(135deg, #165c18 0%, #24d455 100%);
-  color: #fff;
+  background-color: #ffffff;
+  color: #555;
   transform: rotateY(180deg);
-  border: 2px solid #fff;
+  border: 1px solid #e0e0e0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-.door-back img,
-.door-back p {
-  display: none;
+.door-back img {
+  width: 90%;
+  height: auto;
+  max-height: 70%;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: block;
 }
+
+.door-back p {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-align: center;
+  word-break: keep-all;
+  margin: 0;
+  display: block;
+}
+
 .door-back::after {
-  content: "🎄";
-  font-size: 3rem;
+  display: none;
 }
 
 /* 팝업 스타일 */
@@ -123,7 +214,7 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,7 +222,7 @@ h1 {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
 }
 
 .modal.active {
@@ -139,16 +230,19 @@ h1 {
   visibility: visible;
 }
 .modal-content {
-  background: white;
-  padding: 40px;
-  border-radius: 20px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
   text-align: center;
-  max-width: 450px;
+  max-width: 400px;
   width: 85%;
   position: relative;
   transform: scale(0.8);
   transition: transform 0.3s;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .modal.active .modal-content {
   transform: scale(1);
@@ -156,54 +250,91 @@ h1 {
 .close-btn {
   position: absolute;
   top: 15px;
-  right: 20px;
-  font-size: 30px;
+  right: 15px;
+  font-size: 28px;
   cursor: pointer;
   color: #aaa;
+  transition: color 0.2s;
 }
+.close-btn:hover {
+  color: #888;
+}
+
 #modal-date {
-  color: #d42424;
+  font-family: "Lora", serif;
+  color: #8c6a5a;
   margin-top: 0;
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 20px;
 }
 #modal-image {
-  width: 100%;
-  height: 250px;
+  width: 95%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 12px;
-  margin: 20px 0;
+  border-radius: 10px;
+  margin: 0 0 20px 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 #modal-message {
-  color: #333;
-  font-size: 1.2rem;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #444;
+  font-size: 1rem;
   line-height: 1.6;
   word-break: keep-all;
   margin-bottom: 0;
 }
 
-@media (max-width: 600px) {
+/* 미디어 쿼리 (모바일 반응형) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.2rem;
+    margin-top: 40px;
+  }
+  h1 + p {
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+  }
   .calendar-container {
     grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 320px;
   }
-  h1 {
-    font-size: 2rem;
+  .door-front {
+    font-size: 1.8rem;
+  }
+  .door-front::after {
+    width: 30px;
+    height: 30px;
+    bottom: 10px;
+  }
+  .door-front span {
+    font-size: 1.8rem;
+  }
+  .door-back p {
+    font-size: 0.75rem;
   }
   .modal-content {
     padding: 25px;
   }
+  #modal-date {
+    font-size: 1.5rem;
+  }
   #modal-image {
-    height: 180px;
+    height: 160px;
+    margin-bottom: 15px;
+  }
+  #modal-message {
+    font-size: 0.9rem;
   }
 }
 
-
-/* [추가] 컨패티 애니메이션 스타일 */
+/* Lottie Player (컨패티) 스타일 */
 dotlottie-player {
   position: fixed;
   width: 400px;
   height: 400px;
-  z-index: 2001; /* 모달(2000)보다 높아야 위에 보입니다 */
+  z-index: 2001;
   transform: translate(-50%, -50%);
-  pointer-events: none; /* 애니메이션이 클릭을 막지 않도록 설정 */
+  pointer-events: none;
 }

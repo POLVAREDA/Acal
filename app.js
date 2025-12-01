@@ -95,8 +95,8 @@ class LottiUI {
   constructor(x, y) {
     const div = document.createElement("dotlottie-player");
     div.setAttribute(
-        "src",
-        "https://lottie.host/824cb754-a11a-4458-bba0-1f5129c3ed76/NuLW5jGi8g.lottie"
+      "src",
+      "https://lottie.host/824cb754-a11a-4458-bba0-1f5129c3ed76/NuLW5jGi8g.lottie"
     );
     div.setAttribute("background", "transparent");
     div.setAttribute("speed", "1");
@@ -157,14 +157,13 @@ daysData.forEach((data) => {
   }
 
   door.innerHTML = `
-      <div class="door-inner">
-          <div class="door-front">${data.day}</div>
-          <div class="door-back">
-              <img src="${data.image}" alt="Day ${data.day}">
-              <p>${data.message}</p>
-          </div>
-      </div>
-  `;
+    <div class="door-inner">
+        <div class="door-front"><span>${data.day}</span></div> <div class="door-back">
+            <img src="${data.image}" alt="Day ${data.day}">
+            <p>${data.message}</p>
+        </div>
+    </div>
+`;
 
   // 클릭 이벤트
   door.addEventListener("click", () => {
@@ -177,7 +176,7 @@ daysData.forEach((data) => {
     // 2. 지난 날짜 (퀴즈)
     if (isPast && !isDebugMode) {
       const userAnswer = prompt(
-          `[퀴즈] ${data.quiz}\n정답을 입력하면 문이 열려요!`
+        `[퀴즈] ${data.quiz}\n정답을 입력하면 문이 열려요!`
       );
       if (userAnswer && userAnswer.trim() === data.answer) {
         alert("정답입니다! 문이 열립니다 🎉");
@@ -190,8 +189,8 @@ daysData.forEach((data) => {
 
     // 3. 미래의 문
     if (
-        currentMonth < targetMonth ||
-        (currentMonth === targetMonth && currentDay < data.day)
+      currentMonth < targetMonth ||
+      (currentMonth === targetMonth && currentDay < data.day)
     ) {
       if (!isDebugMode) {
         alert(`아직 12월 ${data.day}일이 되지 않았어요! 조금만 기다려주세요.`);
