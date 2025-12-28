@@ -3,36 +3,309 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy New Year Calendar</title>
-    <!-- 스타일 시트 연결 -->
-    <link rel="stylesheet" href="style.css" />
+    <title>2026 HAPPY POONGRAE-DAY</title>
     <link
+      href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
+
+    <style>
+      :root {
+        --primary-color: #ff8e53; /* 카드 주황색 */
+        --bg-color: #fafafa;
+        --text-color: #333;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Gaegu", cursive, sans-serif; /* 귀여운 폰트 적용 */
+        background-color: var(--bg-color);
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      /* 모바일 화면처럼 중앙 정렬되는 컨테이너 */
+      .container {
+        width: 100%;
+        max-width: 420px; /* 모바일 폭 제한 */
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+        position: relative;
+        text-align: center;
+      }
+
+      /* 상단 헤더 (링크, 아이콘) */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        font-size: 14px;
+        color: #888;
+      }
+      .link-btn {
+        background: #fff;
+        border: 1px solid #eee;
+        padding: 5px 10px;
+        border-radius: 15px;
+        text-decoration: none;
+        color: #ff5e00;
+        font-weight: bold;
+        font-size: 12px;
+      }
+      .header-icons span {
+        margin-left: 10px;
+        cursor: pointer;
+        font-size: 18px;
+      }
+
+      /* 타이틀 영역 */
+      .title-area h1 {
+        font-family: cursive; /* 필기체 느낌 */
+        color: #ff5e00;
+        font-size: 32px;
+        line-height: 1.2;
+        margin: 10px 0;
+      }
+      .title-area p {
+        font-size: 12px;
+        font-weight: bold;
+        color: #555;
+        letter-spacing: 1px;
+        margin-bottom: 30px;
+      }
+
+      /* 그리드 레이아웃 (2열) */
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 1:1 비율 2개 */
+        gap: 15px; /* 카드 사이 간격 */
+        padding: 10px;
+      }
+
+      /* 개별 카드 스타일 */
+      .card {
+        background-color: var(--primary-color);
+        border-radius: 15px;
+        aspect-ratio: 1 / 1.2; /* 세로가 살짝 긴 비율 */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.2s;
+        color: white;
+        position: relative;
+      }
+
+      .card:hover {
+        transform: scale(1.03); /* 마우스 올렸을 때 살짝 커짐 */
+      }
+
+      .card-num {
+        position: absolute;
+        top: 15px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .card-icon {
+        font-size: 50px; /* 이모지 크기 */
+        margin-top: 20px;
+      }
+
+      /* 이미지로 넣을 경우를 위한 스타일 */
+      .card-icon img {
+        width: 60px;
+        height: auto;
+      }
+
+      /* 푸터 */
+      footer {
+        margin-top: 40px;
+        font-size: 12px;
+        color: var(--primary-color);
+        text-decoration: underline;
+        cursor: pointer;
+        padding-bottom: 20px;
+      }
+
+      /* --- 팝업 및 애니메이션 스타일 --- */
+      dotlottie-player {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+      }
+
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 300px;
+        background: white;
+        padding: 30px 20px;
+        border-radius: 20px;
+        text-align: center;
+        z-index: 1001;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal h2 {
+        margin-top: 0;
+        color: var(--primary-color);
+      }
+      .close-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
-    <h1>Happily Ever After</h1>
-    <p>2026 HAPPY POONGRAE-DAY Calendar</p>
-    <div class="calendar-container" id="calendar"></div>
+    <div class="container">
+      <header>
+        <a href="#" class="link-btn">★ 이벤트 계정 바로 가기</a>
+        <div class="header-icons">
+          <span>❔</span>
+          <span>⬆️</span>
+        </div>
+      </header>
 
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h2 id="modal-date">Dec 1</h2>
-        <img id="modal-image" src="" alt="Popup Image" />
-        <p id="modal-message">메시지</p>
+      <div class="title-area">
+        <h1>Once Upon<br />A Forever</h1>
+        <p>2026 HAPPY POONGRAE-DAY CALENDAR</p>
       </div>
+
+      <div class="calendar-grid">
+        <div class="card" onclick="openPopup(1)">
+          <span class="card-num">1</span>
+          <div class="card-icon">🎄</div>
+        </div>
+        <div class="card" onclick="openPopup(2)">
+          <span class="card-num">2</span>
+          <div class="card-icon">👓</div>
+        </div>
+        <div class="card" onclick="openPopup(3)">
+          <span class="card-num">3</span>
+          <div class="card-icon">🎤</div>
+        </div>
+        <div class="card" onclick="openPopup(4)">
+          <span class="card-num">4</span>
+          <div class="card-icon">🧢</div>
+        </div>
+        <div class="card" onclick="openPopup(5)">
+          <span class="card-num">5</span>
+          <div class="card-icon">🪦</div>
+        </div>
+        <div class="card" onclick="openPopup(6)">
+          <span class="card-num">6</span>
+          <div class="card-icon">🪶</div>
+        </div>
+        <div class="card" onclick="openPopup(7)">
+          <span class="card-num">7</span>
+          <div class="card-icon">💎</div>
+        </div>
+        <div class="card" onclick="openPopup(8)">
+          <span class="card-num">8</span>
+          <div class="card-icon">🎵</div>
+        </div>
+        <div class="card" onclick="openPopup(9)">
+          <span class="card-num">9</span>
+          <div class="card-icon">🏆</div>
+        </div>
+        <div class="card" onclick="openPopup(10)">
+          <span class="card-num">10</span>
+          <div class="card-icon">🎂</div>
+        </div>
+      </div>
+
+      <footer>@OnceUponA4ever</footer>
     </div>
 
-    <!-- 자바스크립트 연결 (body 닫기 직전) -->
-    <script src="app.js"></script>
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+    <div class="modal" id="myModal">
+      <h2 id="modal-title">Title</h2>
+      <p id="modal-desc">퀴즈 내용이 여기에 들어갑니다.</p>
+      <button class="close-btn" onclick="closePopup()">닫기</button>
+    </div>
+
     <script
       src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
       type="module"
     ></script>
+
+    <script>
+      /* --- 컨패티 애니메이션 클래스 (이전 코드 재사용) --- */
+      class LottiUI {
+        constructor(x, y) {
+          const div = document.createElement("dotlottie-player");
+          div.setAttribute(
+            "src",
+            "https://lottie.host/824cb754-a11a-4458-bba0-1f5129c3ed76/NuLW5jGi8g.lottie"
+          );
+          div.setAttribute("background", "transparent");
+          div.setAttribute("speed", "1");
+          div.setAttribute("autoplay", true);
+          div.setAttribute("loop", false);
+          div.style.cssText = `top: ${y}px; left: ${x}px;`;
+          document.body.append(div);
+          setTimeout(() => {
+            div.remove();
+          }, 3000);
+        }
+      }
+
+      function triggerConfetti() {
+        const x = window.innerWidth / 2;
+        const y = window.innerHeight / 2;
+        new LottiUI(x, y);
+      }
+
+      /* --- 팝업 제어 로직 --- */
+      function openPopup(day) {
+        const modal = document.getElementById("myModal");
+        const title = document.getElementById("modal-title");
+        const desc = document.getElementById("modal-desc");
+
+        // 클릭한 날짜에 따라 내용 변경 (예시)
+        title.innerText = `Day ${day} 오픈!`;
+        desc.innerText = `${day}번째 퀴즈를 풀어보세요!`;
+
+        document.getElementById("overlay").style.display = "block";
+        modal.style.display = "block";
+
+        // ★ 팝업 열릴 때 팡! 터지기
+        triggerConfetti();
+      }
+
+      function closePopup() {
+        document.getElementById("overlay").style.display = "none";
+        document.getElementById("myModal").style.display = "none";
+      }
+    </script>
   </body>
 </html>
