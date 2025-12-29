@@ -36,7 +36,7 @@
       header {
         width: 100%;
         max-width: 420px;
-        padding: 20px;
+        /* padding: 20px; */
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -45,40 +45,47 @@
       }
 
       .top-nav {
-        width: 100%;
+        width: 90%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-top: 68px;
+        margin-bottom: 32px;
       }
 
       .event-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
-        background: white;
+        padding: 8px 10px 8px 6px;
+        gap: 2px;
+        border-radius: 27px;
+        background: #fff; /* var(--Whitte, #FFF) 대응 */
+        box-shadow: 0 2px 8px 0 rgba(163, 73, 27, 0.15);
         border: none;
-        box-shadow: 0px 2px 8px rgba(163, 73, 27, 0.15);
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: bold;
-        color: var(--primary-color);
+        color: var(--Primary-Text, #ff763b);
+        text-align: center;
+        /* SB-14 */
+        font-family: Pretendard;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.28px;
         cursor: pointer;
         text-decoration: none;
-        width: 155px;
-        height: 33px;
         box-sizing: border-box;
+        white-space: nowrap; /* 텍스트 줄바꿈 방지 */
       }
 
       .btn-icon {
-        width: 14px;
-        height: 14px;
+        width: 18px;
+        height: 18px;
         object-fit: contain;
       }
       .nav-icons {
         display: flex;
-        gap: 15px;
+        gap: 14px;
         align-items: center;
       }
       .nav-icon {
@@ -91,7 +98,6 @@
       /* --- 타이틀 --- */
       .logo-area {
         text-align: center;
-        margin-bottom: 5px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -103,17 +109,19 @@
         height: 96px;
         object-fit: contain;
         display: block;
-        margin-bottom: 10px;
         max-width: 100%;
       }
 
       .sub-title {
+        color: var(--BrownBlack, #564343);
+        text-align: center;
+        /* SB-15 */
+        font-family: Pretendard;
         font-size: 15px;
+        font-style: normal;
         font-weight: 600;
-        color: #564343;
-        letter-spacing: -0.5px;
-        margin: 0;
-        text-transform: uppercase;
+        line-height: normal;
+        letter-spacing: -0.3px;
       }
 
       /* --- 캘린더 그리드 --- */
@@ -121,7 +129,7 @@
         display: grid;
         grid-template-columns: repeat(2, 130px);
         justify-content: center;
-        gap: 15px;
+        gap: 24px;
         width: 100%;
         max-width: 380px;
         margin-bottom: 40px;
@@ -134,6 +142,22 @@
         perspective: 1000px;
         cursor: pointer;
         position: relative;
+      }
+
+      /* 오늘 날짜 둥둥 떠다니는 애니메이션 */
+      @keyframes bobbing {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(5px);
+        }
+      }
+
+      .door.is-today {
+        animation: bobbing 2s infinite ease-in-out;
+        z-index: 5;
       }
 
       .door-inner {
@@ -167,10 +191,11 @@
         padding: 15px;
       }
 
-      /* --- [State 1] 오픈 전 (Front) --- */
       .door-front {
         background-color: var(--primary-color);
         color: white;
+        /* [수정] 호버 애니메이션을 위한 부드러운 전환 효과 추가 */
+        transition: transform 0.3s ease;
       }
 
       .door-front .door-num {
@@ -196,7 +221,6 @@
         filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
       }
 
-      /* --- [State 2] 오픈 후 (Back) --- */
       .door-back {
         background-color: var(--card-bg);
         transform: rotateY(180deg);
@@ -225,7 +249,6 @@
         margin-top: 5px;
       }
 
-      /* --- [State 3] 잠김 상태 (Overlay) --- */
       .door.missed .door-front {
         background-color: var(--primary-color);
       }
@@ -246,12 +269,11 @@
         opacity: 0.3;
       }
 
+      /* [수정] 호버 시 위로 5px 올라가는 애니메이션 (missed가 아닌 경우) */
       .door:not(.missed):hover .door-front {
         transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
       }
 
-      /* Day 10 별 아이콘 처리 [수정: 중앙 정렬] */
       .door-num-10-wrapper {
         position: relative;
         display: flex;
@@ -265,7 +287,6 @@
         width: 30px;
         height: 30px;
         position: absolute;
-        /* [수정] 별 아이콘 중앙 정렬 */
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -275,15 +296,12 @@
         z-index: 1;
         font-size: 0.8rem;
         font-weight: 600;
-        /* [수정] 중앙 정렬을 위해 margin-top 제거 및 padding 미세 조정 */
         margin: 0;
         padding-top: 1px;
       }
-      /* 앞면: 주황색 숫자 */
       .door-front .door-num-10-wrapper span {
         color: var(--primary-color);
       }
-      /* 뒷면: 흰색 숫자 */
       .door-back .door-num-10-wrapper span {
         color: white;
       }
@@ -294,12 +312,16 @@
         z-index: 10;
       }
       .footer-link {
-        color: var(--primary-color);
-        text-decoration: underline;
-        font-size: 0.9rem;
-        font-weight: 500;
-        text-underline-offset: 4px;
-        cursor: pointer;
+        color: var(--Primary-Text, #ff763b);
+        text-align: center;
+
+        /* R-14 */
+        font-family: Pretendard;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
       }
 
       .modal {
@@ -323,6 +345,61 @@
         visibility: visible;
       }
 
+      /* --- [NEW] 모달 애니메이션 (Open/Close) --- */
+
+      /* 1. 열릴 때 (Bounce In) */
+      @keyframes bounceIn {
+        0% {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.05);
+          opacity: 1;
+        }
+        80% {
+          transform: scale(0.95);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* 2. 닫힐 때 (Bounce Out) - 살짝 커졌다가 작아지며 사라짐 */
+      @keyframes bounceOut {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        30% {
+          transform: scale(1.05);
+          opacity: 1;
+        } /* 살짝 튀어오름 */
+        100% {
+          transform: scale(0.8);
+          opacity: 0;
+        } /* 쏙 사라짐 */
+      }
+
+      /* 버튼 클릭 시 (Bounce Click) */
+      @keyframes bounceClick {
+        0% {
+          transform: scale(1);
+        }
+        30% {
+          transform: scale(0.9);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .animate-bounce {
+        animation: bounceClick 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
       .modal-content.daily-modal {
         background: var(--primary-color);
         padding: 20px;
@@ -332,7 +409,6 @@
         height: 422px;
         position: relative;
         transform: scale(0.9);
-        transition: transform 0.3s;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         color: white;
         box-sizing: border-box;
@@ -340,8 +416,20 @@
         flex-direction: column;
         justify-content: space-between;
       }
+
+      /* 모달 활성화 시 */
       .modal.active .modal-content {
-        transform: scale(1);
+        animation: bounceIn 0.4s ease-out forwards;
+      }
+
+      /* [NEW] 모달 닫힘(closing) 클래스 추가 시 */
+      .modal.closing .modal-content {
+        animation: bounceOut 0.3s ease-in forwards;
+      }
+      /* 닫힐 때 배경도 부드럽게 사라지도록 */
+      .modal.closing {
+        opacity: 0;
+        transition: opacity 0.3s;
       }
 
       .modal-header {
@@ -386,7 +474,6 @@
         background-color: white;
         display: block;
       }
-      /* [추가] 10일차 연력 이미지 전용 스타일 (175x247) */
       #modal-image.vertical {
         width: 175px;
         height: 247px;
@@ -773,12 +860,18 @@
       const helpCloseBtn = document.getElementById("help-close-btn");
 
       const today = new Date();
-      const currentMonth = today.getMonth() + 1;
-      const currentDay = today.getDate();
-      const targetMonth = 12;
+      today.setHours(0, 0, 0, 0);
+
+      // [테스트 설정] 10일차가 31일이 되도록 수정 (1일차 = 12월 22일)
+      const startYear = 2025;
+      const startMonth = 12; // 12월
+      const startDay = 22; // 22일
+      const startDate = new Date(startYear, startMonth - 1, startDay);
+
       const isDebugMode = false;
 
-      let openedDays = JSON.parse(localStorage.getItem("openedDays_Dec")) || [];
+      let openedDays =
+        JSON.parse(localStorage.getItem("openedDays_Test")) || [];
       let currentImageUrl = "";
 
       class LottiUI {
@@ -802,9 +895,10 @@
       function openDoor(data, doorElement) {
         doorElement.classList.add("open");
         doorElement.classList.remove("missed");
+        doorElement.classList.remove("is-today");
         if (!openedDays.includes(data.day)) {
           openedDays.push(data.day);
-          localStorage.setItem("openedDays_Dec", JSON.stringify(openedDays));
+          localStorage.setItem("openedDays_Test", JSON.stringify(openedDays));
         }
         showModal(data);
       }
@@ -813,10 +907,18 @@
         const door = document.createElement("div");
         door.classList.add("door");
 
+        const doorDate = new Date(startDate);
+        doorDate.setDate(startDate.getDate() + (data.day - 1));
+
+        const isPast = today > doorDate;
+        const isFuture = today < doorDate;
+        const isToday = today.getTime() === doorDate.getTime();
+
+        if (isToday) {
+          door.classList.add("is-today");
+        }
+
         const isOpened = openedDays.includes(data.day);
-        let isPast =
-          currentMonth > targetMonth ||
-          (currentMonth === targetMonth && currentDay > data.day);
 
         if (isOpened) door.classList.add("open");
         else if (isPast && !isDebugMode) door.classList.add("missed");
@@ -869,6 +971,7 @@
             showModal(data);
             return;
           }
+
           if (isPast && !isDebugMode) {
             const userAnswer = prompt(`[퀴즈] ${data.quiz}`);
             if (userAnswer && userAnswer.trim() === data.answer) {
@@ -879,15 +982,18 @@
             }
             return;
           }
-          if (
-            currentMonth < targetMonth ||
-            (currentMonth === targetMonth && currentDay < data.day)
-          ) {
+
+          if (isFuture) {
             if (!isDebugMode) {
-              alert(`아직 12월 ${data.day}일이 아닙니다!`);
+              const openMonth = doorDate.getMonth() + 1;
+              const openDay = doorDate.getDate();
+              alert(
+                `아직 오픈되지 않았습니다!\n(오픈 예정일: ${openMonth}월 ${openDay}일)`
+              );
               return;
             }
           }
+
           openDoor(data, door);
         });
 
@@ -903,19 +1009,15 @@
         modal.classList.add("active");
         new LottiUI(window.innerWidth / 2, window.innerHeight / 2);
 
-        // [변경] 10일차일 때만 버튼 텍스트 변경 및 이미지 사이즈 클래스 추가
         if (data.day === 10) {
           saveBtn.textContent = "연력 받기";
-          modalImage.classList.add("vertical"); // 175x247 클래스 추가
+          modalImage.classList.add("vertical");
         } else {
           saveBtn.textContent = "저장하기";
-          modalImage.classList.remove("vertical"); // 클래스 제거
+          modalImage.classList.remove("vertical");
         }
       }
 
-      function closeModal() {
-        modal.classList.remove("active");
-      }
       function downloadImage() {
         if (!currentImageUrl) return;
         const link = document.createElement("a");
@@ -927,9 +1029,26 @@
         document.body.removeChild(link);
       }
 
-      closeBtn.addEventListener("click", closeModal);
+      /* [NEW] 모달 닫기 로직 (일일 캘린더) */
+      function closeModal() {
+        // 1. closing 클래스 추가 (Bounce Out 애니메이션 시작)
+        modal.classList.add("closing");
 
-      // [변경] 버튼 클릭 이벤트 (10일차 = 링크 이동, 나머지 = 다운로드)
+        // 2. 애니메이션 시간(0.3s)만큼 기다렸다가 active 제거
+        setTimeout(() => {
+          modal.classList.remove("active");
+          modal.classList.remove("closing");
+        }, 300);
+      }
+
+      closeBtn.addEventListener("click", () => {
+        closeBtn.classList.add("animate-bounce");
+        setTimeout(() => {
+          closeBtn.classList.remove("animate-bounce");
+          closeModal();
+        }, 400);
+      });
+
       saveBtn.addEventListener("click", () => {
         if (modalDayTitle.textContent === "10일차") {
           window.open("https://twitter.com/OnceUponA4ever", "_blank");
@@ -938,14 +1057,29 @@
         }
       });
 
+      /* 도움말 모달 */
       function openHelpModal() {
         helpModal.classList.add("active");
       }
+
+      /* [NEW] 모달 닫기 로직 (도움말) */
       function closeHelpModal() {
-        helpModal.classList.remove("active");
+        helpModal.classList.add("closing");
+        setTimeout(() => {
+          helpModal.classList.remove("active");
+          helpModal.classList.remove("closing");
+        }, 300);
       }
+
       helpIcon.addEventListener("click", openHelpModal);
-      helpCloseBtn.addEventListener("click", closeHelpModal);
+
+      helpCloseBtn.addEventListener("click", () => {
+        helpCloseBtn.classList.add("animate-bounce");
+        setTimeout(() => {
+          helpCloseBtn.classList.remove("animate-bounce");
+          closeHelpModal();
+        }, 400);
+      });
 
       shareIcon.addEventListener("click", async () => {
         try {
