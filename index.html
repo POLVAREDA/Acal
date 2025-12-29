@@ -3,254 +3,626 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2025 HAPPY POONGRAE-DAY</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-
+    <title>Happy Poongrae-Day Calendar</title>
     <style>
+      @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
       :root {
-        --primary-color: #ff8e53; /* 카드 주황색 */
-        --bg-color: #fafafa;
-        --text-color: #333;
+        --primary-color: #ff8f56; /* 진한 오렌지 (오픈 전 배경) */
+        --card-bg: #ffece1; /* 연한 살구색 (오픈 후 배경) */
+        --text-color: #ff763b; /* 텍스트컬러 */
       }
 
       body {
-        margin: 0;
-        padding: 0;
-        font-family: "Gaegu", cursive, sans-serif; /* 귀여운 폰트 적용 */
-        background-color: var(--bg-color);
-        display: flex;
-        justify-content: center;
-        min-height: 100vh;
-      }
-
-      /* 모바일 화면처럼 중앙 정렬되는 컨테이너 */
-      .container {
-        width: 100%;
-        max-width: 420px; /* 모바일 폭 제한 */
-        background-color: #fff;
-        padding: 20px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-        position: relative;
-        text-align: center;
-      }
-
-      /* 상단 헤더 (링크, 아이콘) */
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-        font-size: 14px;
-        color: #888;
-      }
-      .link-btn {
-        background: #fff;
-        border: 1px solid #eee;
-        padding: 5px 10px;
-        border-radius: 15px;
-        text-decoration: none;
-        color: #ff5e00;
-        font-weight: bold;
-        font-size: 12px;
-      }
-      .header-icons span {
-        margin-left: 10px;
-        cursor: pointer;
-        font-size: 18px;
-      }
-
-      /* 타이틀 영역 */
-      .title-area h1 {
-        font-family: cursive; /* 필기체 느낌 */
-        color: #ff5e00;
-        font-size: 32px;
-        line-height: 1.2;
-        margin: 10px 0;
-      }
-      .title-area p {
-        font-size: 12px;
-        font-weight: bold;
-        color: #555;
-        letter-spacing: 1px;
-        margin-bottom: 30px;
-      }
-
-      /* 그리드 레이아웃 (2열) */
-      .calendar-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* 1:1 비율 2개 */
-        gap: 15px; /* 카드 사이 간격 */
-        padding: 10px;
-      }
-
-      /* 개별 카드 스타일 */
-      .card {
-        background-color: var(--primary-color);
-        border-radius: 15px;
-        aspect-ratio: 1 / 1.2; /* 세로가 살짝 긴 비율 */
+        font-family: "Pretendard", "Noto Sans KR", sans-serif;
+        background-image: url("https://res.cloudinary.com/dkqqxjsek/image/upload/v1767002360/Frame_84_bh88ll.png");
+        background-size: cover;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-color: #fcfcfc;
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* --- 헤더 --- */
+      header {
+        width: 100%;
+        max-width: 420px;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+      }
+
+      .top-nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .event-btn {
+        display: flex;
+        align-items: center;
         justify-content: center;
+        gap: 6px;
+        background: white;
+        border: none;
+        box-shadow: 0px 2px 8px rgba(163, 73, 27, 0.15);
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: var(--primary-color);
         cursor: pointer;
-        transition: transform 0.2s;
-        color: white;
+        text-decoration: none;
+        width: 155px;
+        height: 33px;
+        box-sizing: border-box;
+      }
+
+      .btn-icon {
+        width: 14px;
+        height: 14px;
+        object-fit: contain;
+      }
+      .nav-icons {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+      .nav-icon {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        cursor: pointer;
+      }
+
+      /* --- 타이틀 --- */
+      .logo-area {
+        text-align: center;
+        margin-bottom: 5px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .title-image {
+        width: 145px;
+        height: 96px;
+        object-fit: contain;
+        display: block;
+        margin-bottom: 10px;
+        max-width: 100%;
+      }
+
+      .sub-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #564343;
+        letter-spacing: -0.5px;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      /* --- 캘린더 그리드 --- */
+      .calendar-container {
+        display: grid;
+        grid-template-columns: repeat(2, 130px);
+        justify-content: center;
+        gap: 15px;
+        width: 100%;
+        max-width: 380px;
+        margin-bottom: 40px;
+        z-index: 1;
+      }
+
+      .door {
+        width: 100%;
+        height: 150px;
+        perspective: 1000px;
+        cursor: pointer;
         position: relative;
       }
 
-      .card:hover {
-        transform: scale(1.03); /* 마우스 올렸을 때 살짝 커짐 */
+      .door-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
       }
 
-      .card-num {
+      .door.open .door-inner {
+        transform: rotateY(180deg);
+      }
+
+      /* --- 카드 앞/뒤 공통 --- */
+      .door-front,
+      .door-back {
         position: absolute;
-        top: 15px;
-        font-size: 18px;
-        font-weight: bold;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        border-radius: 12px;
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: 15px;
       }
 
-      .card-icon {
-        font-size: 50px; /* 이모지 크기 */
-        margin-top: 20px;
+      /* --- [State 1] 오픈 전 (Front) --- */
+      .door-front {
+        background-color: var(--primary-color);
+        color: white;
       }
 
-      /* 이미지로 넣을 경우를 위한 스타일 */
-      .card-icon img {
-        width: 60px;
+      .door-front .door-num {
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+        margin-bottom: 5px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        padding-top: 3px;
+        box-sizing: border-box;
+      }
+
+      .cover-image {
+        width: 80%;
         height: auto;
+        object-fit: contain;
+        align-self: center;
+        margin-top: 10px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
       }
 
-      /* 푸터 */
+      /* --- [State 2] 오픈 후 (Back) --- */
+      .door-back {
+        background-color: var(--card-bg);
+        transform: rotateY(180deg);
+        border: none;
+      }
+
+      .door-back .door-num {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 5px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        padding-top: 3px;
+        box-sizing: border-box;
+      }
+
+      .puzzle-image {
+        width: 70%;
+        height: auto;
+        object-fit: contain;
+        align-self: center;
+        margin-top: 5px;
+      }
+
+      /* --- [State 3] 잠김 상태 (Overlay) --- */
+      .door.missed .door-front {
+        background-color: var(--primary-color);
+      }
+
+      .lock-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 24px;
+        height: 28px;
+        z-index: 10;
+        opacity: 0.9;
+        object-fit: contain;
+      }
+
+      .door.missed .cover-image {
+        opacity: 0.3;
+      }
+
+      .door:not(.missed):hover .door-front {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Day 10 별 아이콘 처리 [수정: 중앙 정렬] */
+      .door-num-10-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 30px;
+        margin-bottom: 5px;
+      }
+      .star-icon {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        /* [수정] 별 아이콘 중앙 정렬 */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .door-num-10-wrapper span {
+        position: relative;
+        z-index: 1;
+        font-size: 0.8rem;
+        font-weight: 600;
+        /* [수정] 중앙 정렬을 위해 margin-top 제거 및 padding 미세 조정 */
+        margin: 0;
+        padding-top: 1px;
+      }
+      /* 앞면: 주황색 숫자 */
+      .door-front .door-num-10-wrapper span {
+        color: var(--primary-color);
+      }
+      /* 뒷면: 흰색 숫자 */
+      .door-back .door-num-10-wrapper span {
+        color: white;
+      }
+
+      /* --- 푸터 & 모달 CSS --- */
       footer {
-        margin-top: 40px;
-        font-size: 12px;
+        margin-bottom: 40px;
+        z-index: 10;
+      }
+      .footer-link {
         color: var(--primary-color);
         text-decoration: underline;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-underline-offset: 4px;
         cursor: pointer;
-        padding-bottom: 20px;
       }
 
-      /* --- 팝업 및 애니메이션 스타일 --- */
-      dotlottie-player {
-        position: fixed;
-        width: 600px;
-        height: 600px;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-      }
-
-      .overlay {
-        display: none;
+      .modal {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s;
+        backdrop-filter: blur(2px);
+      }
+      .modal.active {
+        opacity: 1;
+        visibility: visible;
       }
 
-      .modal {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80%;
-        max-width: 300px;
-        background: white;
-        padding: 30px 20px;
-        border-radius: 20px;
-        text-align: center;
-        z-index: 1001;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      .modal-content.daily-modal {
+        background: var(--primary-color);
+        padding: 20px;
+        border-radius: 12px;
+        text-align: left;
+        width: 295px;
+        height: 422px;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        color: white;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .modal.active .modal-content {
+        transform: scale(1);
       }
 
-      .modal h2 {
-        margin-top: 0;
+      .modal-header {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 0;
+        gap: 12px;
+      }
+      .modal-profile-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        padding: 5px;
+        box-sizing: border-box;
+        object-fit: contain;
+      }
+      .modal-text-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .modal-day-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        line-height: 1.2;
+      }
+      .modal-subtext {
+        font-size: 14px;
+        font-weight: 400;
+        opacity: 0.9;
+        margin: 5px 0 0 0;
+        word-break: keep-all;
+      }
+
+      #modal-image {
+        width: 247px;
+        height: 247px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin: 12px auto;
+        background-color: white;
+        display: block;
+      }
+
+      .modal-btn-group {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+      .modal-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border-radius: 50px;
+        border: none;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.1s;
+        font-family: "Pretendard", sans-serif;
+      }
+      .modal-btn:active {
+        transform: scale(0.96);
+      }
+
+      .btn-save {
+        width: 133px;
+        height: 47px;
+        background-color: white;
         color: var(--primary-color);
       }
-      .close-btn {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background: var(--primary-color);
-        color: white;
-        border: none;
+      .btn-close {
+        width: 106px;
+        height: 47px;
+        background-color: white;
+        color: #333;
+      }
+
+      /* 도움말 모달 */
+      .modal-content.help-modal {
+        background-color: white;
+        color: #333;
+        padding: 30px 25px;
+        text-align: center;
+        width: 85%;
+        max-width: 320px;
         border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.3s;
+        box-sizing: border-box;
+      }
+      .help-title {
+        font-size: 1.2rem;
+        font-weight: 800;
+        margin: 0 0 5px 0;
+        color: #333;
+      }
+      .help-subtitle {
+        font-size: 0.85rem;
+        color: #888;
+        margin-bottom: 25px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .help-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 30px 0;
+        text-align: left;
+      }
+      .help-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+        line-height: 1.5;
+        color: #555;
+        word-break: keep-all;
+      }
+      .help-bullet-icon {
+        width: 13px;
+        height: 13px;
+        margin-top: 4px;
+        flex-shrink: 0;
+        object-fit: contain;
+      }
+      .small-text {
+        font-size: 0.75rem;
+        color: #777;
+      }
+      .help-close-btn {
+        background-color: #ffece5;
+        color: var(--primary-color);
+        border: none;
+        padding: 14px 0;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.95rem;
         cursor: pointer;
+        width: 100%;
+        font-family: "Pretendard", sans-serif;
+      }
+
+      dotlottie-player {
+        position: fixed;
+        width: 1000px;
+        height: 1000px;
+        z-index: 2001;
+        transform: translate(-50%, -70%);
+        pointer-events: none;
       }
     </style>
   </head>
+
   <body>
-    <div class="container">
-      <header>
-        <a href="#" class="link-btn">★ 이벤트 계정 바로 가기</a>
-        <div class="header-icons">
-          <span>❔</span>
-          <span>⬆️</span>
+    <header>
+      <nav class="top-nav">
+        <a
+          href="https://twitter.com/OnceUponA4ever"
+          target="_blank"
+          class="event-btn"
+        >
+          <img
+            src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/ic-star_fnjm1p.png"
+            alt="Event"
+            class="btn-icon"
+          />
+          이벤트 계정 바로 가기
+        </a>
+        <div class="nav-icons">
+          <img
+            src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/Property_1_Default_lo56fi.png"
+            alt="Help"
+            class="nav-icon"
+            id="help-icon"
+          />
+          <img
+            src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/Property_1_Default_1_qapac6.png"
+            alt="Share"
+            class="nav-icon"
+            id="share-icon"
+          />
         </div>
-      </header>
-
-      <div class="title-area">
-        <h1>Once Upon<br />A Forever</h1>
-        <p>2026 HAPPY POONGRAE-DAY CALENDAR</p>
+      </nav>
+      <div class="logo-area">
+        <img
+          src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/Logo_ip8hy8.png"
+          alt="Title"
+          class="title-image"
+        />
+        <p class="sub-title">2026 HAPPY POONGRAE-DAY CALENDAR</p>
       </div>
+    </header>
 
-      <div class="calendar-grid">
-        <div class="card" onclick="openPopup(1)">
-          <span class="card-num">1</span>
-          <div class="card-icon">🎄</div>
+    <div class="calendar-container" id="calendar"></div>
+
+    <footer>
+      <a
+        href="https://twitter.com/OnceUponA4ever"
+        target="_blank"
+        class="footer-link"
+        >@OnceUponA4ever</a
+      >
+    </footer>
+
+    <div id="modal" class="modal">
+      <div class="modal-content daily-modal">
+        <div class="modal-header">
+          <img
+            src=""
+            id="modal-header-icon"
+            class="modal-profile-icon"
+            alt="icon"
+          />
+          <div class="modal-text-group">
+            <h2 id="modal-day-title" class="modal-day-title">1일차</h2>
+            <p id="modal-subtext" class="modal-subtext">메시지 내용</p>
+          </div>
         </div>
-        <div class="card" onclick="openPopup(2)">
-          <span class="card-num">2</span>
-          <div class="card-icon">👓</div>
-        </div>
-        <div class="card" onclick="openPopup(3)">
-          <span class="card-num">3</span>
-          <div class="card-icon">🎤</div>
-        </div>
-        <div class="card" onclick="openPopup(4)">
-          <span class="card-num">4</span>
-          <div class="card-icon">🧢</div>
-        </div>
-        <div class="card" onclick="openPopup(5)">
-          <span class="card-num">5</span>
-          <div class="card-icon">🪦</div>
-        </div>
-        <div class="card" onclick="openPopup(6)">
-          <span class="card-num">6</span>
-          <div class="card-icon">🪶</div>
-        </div>
-        <div class="card" onclick="openPopup(7)">
-          <span class="card-num">7</span>
-          <div class="card-icon">💎</div>
-        </div>
-        <div class="card" onclick="openPopup(8)">
-          <span class="card-num">8</span>
-          <div class="card-icon">🎵</div>
-        </div>
-        <div class="card" onclick="openPopup(9)">
-          <span class="card-num">9</span>
-          <div class="card-icon">🏆</div>
-        </div>
-        <div class="card" onclick="openPopup(10)">
-          <span class="card-num">10</span>
-          <div class="card-icon">🎂</div>
+        <img id="modal-image" src="" alt="Popup Image" />
+        <div class="modal-btn-group">
+          <button class="modal-btn btn-save" id="save-btn">저장하기</button>
+          <button class="modal-btn btn-close" id="close-modal-btn">닫기</button>
         </div>
       </div>
-
-      <footer>@OnceUponA4ever</footer>
     </div>
 
-    <div class="overlay" id="overlay" onclick="closePopup()"></div>
-    <div class="modal" id="myModal">
-      <h2 id="modal-title">Title</h2>
-      <p id="modal-desc">퀴즈 내용이 여기에 들어갑니다.</p>
-      <button class="close-btn" onclick="closePopup()">닫기</button>
+    <div id="help-modal" class="modal">
+      <div class="modal-content help-modal">
+        <h3 class="help-title">'풍드벤트 캘린더'란?</h3>
+        <p class="help-subtitle">@OnceUponA4ever</p>
+        <ul class="help-list">
+          <li>
+            <img
+              src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/ic-star_fnjm1p.png"
+              class="help-bullet-icon"
+              alt="*"
+            /><span
+              >조풍래 배우의 생일을 카운트다운 하는 어드벤트 캘린더 형식의
+              이벤트예요.</span
+            >
+          </li>
+          <li>
+            <img
+              src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/ic-star_fnjm1p.png"
+              class="help-bullet-icon"
+              alt="*"
+            /><span
+              >2026년 1월 1일부터 10일까지 매일 해당 날짜의 캘린더가
+              오픈돼요.</span
+            >
+          </li>
+          <li>
+            <img
+              src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/ic-star_fnjm1p.png"
+              class="help-bullet-icon"
+              alt="*"
+            /><span>지난 날짜의 캘린더는 '퀴즈'를 맞히면 열 수 있어요.</span>
+          </li>
+          <li>
+            <img
+              src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/ic-star_fnjm1p.png"
+              class="help-bullet-icon"
+              alt="*"
+            /><span
+              >10일의 캘린더를 모두 열어본 분들에게 '스페셜 특전'을 드려요.
+              <br /><span class="small-text"
+                >(수령 방법은 이벤트 계정을 참고해 주세요.)</span
+              ></span
+            >
+          </li>
+        </ul>
+        <button class="help-close-btn" id="help-close-btn">
+          캘린더 확인하러 가기
+        </button>
+      </div>
     </div>
 
     <script
@@ -259,53 +631,317 @@
     ></script>
 
     <script>
-      /* --- 컨패티 애니메이션 클래스 (이전 코드 재사용) --- */
+      const daysData = [
+        {
+          day: 1,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767014489/Frame_25_2_dxybk5.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001377/year01_aru1od.png",
+          message: "고깔모자 풍과 퍼즐 한 조각",
+          quiz: "배우 조풍래의 출생 연도는?",
+          answer: "1983",
+        },
+        {
+          day: 2,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003522/Frame_25_1_um7u0h.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001377/year02_uctqqs.png",
+          message: "두 번째 퍼즐 조각",
+          quiz: "조풍래 배우의 이수자 종목은?",
+          answer: "봉산탈춤",
+        },
+        {
+          day: 3,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003524/Frame_25_xupqul.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year03_wtxyog.png",
+          message: "세 번째 퍼즐 조각",
+          quiz: "레드북 배역 이름은?",
+          answer: "로렐라이",
+        },
+        {
+          day: 4,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003524/Frame_25_xupqul.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year04_nrkhpp.png",
+          message: "네 번째 퍼즐 조각",
+          quiz: "에드몬드 역을 맡은 뮤지컬은?",
+          answer: "플레임즈",
+        },
+        {
+          day: 5,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003524/Frame_25_xupqul.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year05_kbvzl7.png",
+          message: "다섯 번째 퍼즐 조각",
+          quiz: "MBTI 유형은?",
+          answer: "ISFJ",
+        },
+        {
+          day: 6,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003524/Frame_25_xupqul.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year06_mrk9py.png",
+          message: "여섯 번째 퍼즐 조각",
+          quiz: "2010년 입단한 극단은?",
+          answer: "서울예술단",
+        },
+        {
+          day: 7,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003524/Frame_25_xupqul.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year07_rsivuj.png",
+          message: "일곱 번째 퍼즐 조각",
+          quiz: "가장 약한 게임은?",
+          answer: "가위바위보",
+        },
+        {
+          day: 8,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003524/Frame_25_xupqul.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year08_okburr.png",
+          message: "여덟 번째 퍼즐 조각",
+          quiz: "팬카페 클짱은?",
+          answer: "조풍래",
+        },
+        {
+          day: 9,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003524/Frame_25_xupqul.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001379/year09_iptilo.png",
+          message: "아홉 번째 퍼즐 조각",
+          quiz: "응원하는 야구팀은?",
+          answer: "롯데",
+        },
+        {
+          day: 10,
+          coverImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003524/Frame_25_xupqul.png",
+          puzzleImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-gift_ceawqi.png",
+          contentImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003389/year_qotw6w.png",
+          message: "D-Day 기념 카드",
+          quiz: "가장 웃긴 사람 주장 주체는?",
+          answer: "본인",
+        },
+      ];
+
+      const calendarContainer = document.getElementById("calendar");
+      const modal = document.getElementById("modal");
+      const modalDayTitle = document.getElementById("modal-day-title");
+      const modalSubtext = document.getElementById("modal-subtext");
+      const modalImage = document.getElementById("modal-image");
+      const modalHeaderIcon = document.getElementById("modal-header-icon");
+      const saveBtn = document.getElementById("save-btn");
+      const closeBtn = document.getElementById("close-modal-btn");
+      const helpIcon = document.getElementById("help-icon");
+      const shareIcon = document.getElementById("share-icon");
+      const helpModal = document.getElementById("help-modal");
+      const helpCloseBtn = document.getElementById("help-close-btn");
+
+      const today = new Date();
+      const currentMonth = today.getMonth() + 1;
+      const currentDay = today.getDate();
+      const targetMonth = 12;
+      const isDebugMode = false;
+
+      let openedDays = JSON.parse(localStorage.getItem("openedDays_Dec")) || [];
+      let currentImageUrl = "";
+
       class LottiUI {
         constructor(x, y) {
           const div = document.createElement("dotlottie-player");
           div.setAttribute(
             "src",
-            "https://lottie.host/824cb754-a11a-4458-bba0-1f5129c3ed76/NuLW5jGi8g.lottie"
+            "https://lottie.host/dcb52f92-c4c4-413f-b932-8ae17a2b2970/I4W37TF2zG.lottie"
           );
           div.setAttribute("background", "transparent");
           div.setAttribute("speed", "1");
-          div.setAttribute("autoplay", true);
-          div.setAttribute("loop", false);
-          div.style.cssText = `top: ${y}px; left: ${x}px;`;
+          div.setAttribute("loop", "false");
+          div.setAttribute("autoplay", "true");
+          div.style.left = x + "px";
+          div.style.top = y + "px";
           document.body.append(div);
-          setTimeout(() => {
-            div.remove();
-          }, 3000);
+          setTimeout(() => div.remove(), 3000);
         }
       }
 
-      function triggerConfetti() {
-        const x = window.innerWidth / 2;
-        const y = window.innerHeight / 2;
-        new LottiUI(x, y);
+      function openDoor(data, doorElement) {
+        doorElement.classList.add("open");
+        doorElement.classList.remove("missed");
+        if (!openedDays.includes(data.day)) {
+          openedDays.push(data.day);
+          localStorage.setItem("openedDays_Dec", JSON.stringify(openedDays));
+        }
+        showModal(data);
       }
 
-      /* --- 팝업 제어 로직 --- */
-      function openPopup(day) {
-        const modal = document.getElementById("myModal");
-        const title = document.getElementById("modal-title");
-        const desc = document.getElementById("modal-desc");
+      daysData.forEach((data) => {
+        const door = document.createElement("div");
+        door.classList.add("door");
 
-        // 클릭한 날짜에 따라 내용 변경 (예시)
-        title.innerText = `Day ${day} 오픈!`;
-        desc.innerText = `${day}번째 퀴즈를 풀어보세요!`;
+        const isOpened = openedDays.includes(data.day);
+        let isPast =
+          currentMonth > targetMonth ||
+          (currentMonth === targetMonth && currentDay > data.day);
 
-        document.getElementById("overlay").style.display = "block";
-        modal.style.display = "block";
+        if (isOpened) door.classList.add("open");
+        else if (isPast && !isDebugMode) door.classList.add("missed");
 
-        // ★ 팝업 열릴 때 팡! 터지기
-        triggerConfetti();
+        let numHTML = `<span class="door-num">${data.day}</span>`;
+        let starHTML_front = "";
+        let starHTML_back = "";
+
+        if (data.day === 10) {
+          // [유지] 앞면: 흰색 별 + 주황색 숫자
+          starHTML_front = `
+            <div class="door-num-10-wrapper">
+                <img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767016729/Star_1_bnmba7.png" class="star-icon" alt="star"> 
+                <span>${data.day}</span>
+            </div>`;
+
+          // [유지] 뒷면: 주황색 별 + 흰색 숫자
+          starHTML_back = `
+            <div class="door-num-10-wrapper">
+                <img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767016760/Star_1_1_elho32.png" class="star-icon" alt="star">
+                <span>${data.day}</span>
+            </div>`;
+        } else {
+          starHTML_front = numHTML;
+          starHTML_back = numHTML;
+        }
+
+        door.innerHTML = `
+        <div class="door-inner">
+            <div class="door-front">
+                ${starHTML_front}
+                <img src="${data.coverImage}" class="cover-image" alt="Day ${
+          data.day
+        }">
+                ${
+                  isPast && !isOpened && !isDebugMode
+                    ? `<img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/ic-lock_ggf1vm.png" class="lock-overlay" alt="Locked">`
+                    : ""
+                }
+            </div> 
+            <div class="door-back">
+                ${starHTML_back}
+                <img src="${
+                  data.puzzleImage
+                }" class="puzzle-image" alt="Puzzle">
+            </div>
+        </div>
+        `;
+
+        door.addEventListener("click", () => {
+          if (openedDays.includes(data.day)) {
+            showModal(data);
+            return;
+          }
+          if (isPast && !isDebugMode) {
+            const userAnswer = prompt(`[퀴즈] ${data.quiz}`);
+            if (userAnswer && userAnswer.trim() === data.answer) {
+              alert("정답! 🎉");
+              openDoor(data, door);
+            } else if (userAnswer !== null) {
+              alert("땡! 다시 시도해보세요.");
+            }
+            return;
+          }
+          if (
+            currentMonth < targetMonth ||
+            (currentMonth === targetMonth && currentDay < data.day)
+          ) {
+            if (!isDebugMode) {
+              alert(`아직 12월 ${data.day}일이 아닙니다!`);
+              return;
+            }
+          }
+          openDoor(data, door);
+        });
+
+        calendarContainer.appendChild(door);
+      });
+
+      function showModal(data) {
+        modalDayTitle.textContent = `${data.day}일차`;
+        modalSubtext.textContent = data.message;
+        modalImage.src = data.contentImage;
+        modalHeaderIcon.src = data.coverImage;
+        currentImageUrl = data.contentImage;
+        modal.classList.add("active");
+        new LottiUI(window.innerWidth / 2, window.innerHeight / 2);
       }
 
-      function closePopup() {
-        document.getElementById("overlay").style.display = "none";
-        document.getElementById("myModal").style.display = "none";
+      function closeModal() {
+        modal.classList.remove("active");
       }
+      function downloadImage() {
+        if (!currentImageUrl) return;
+        const link = document.createElement("a");
+        link.href = currentImageUrl;
+        link.download = `Day_${modalDayTitle.textContent}_Image`;
+        link.target = "_blank";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      closeBtn.addEventListener("click", closeModal);
+      saveBtn.addEventListener("click", downloadImage);
+
+      function openHelpModal() {
+        helpModal.classList.add("active");
+      }
+      function closeHelpModal() {
+        helpModal.classList.remove("active");
+      }
+      helpIcon.addEventListener("click", openHelpModal);
+      helpCloseBtn.addEventListener("click", closeHelpModal);
+
+      shareIcon.addEventListener("click", async () => {
+        try {
+          const currentUrl = window.location.href;
+          await navigator.clipboard.writeText(currentUrl);
+          alert("주소가 복사되었습니다!");
+        } catch (err) {
+          console.error("복사 실패:", err);
+          alert("주소 복사에 실패했습니다.");
+        }
+      });
+
+      window.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+        if (e.target === helpModal) closeHelpModal();
+      });
     </script>
   </body>
 </html>
