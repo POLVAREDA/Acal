@@ -36,7 +36,7 @@
       header {
         width: 100%;
         max-width: 420px;
-        /* padding: 20px; */
+        padding: 20px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -45,12 +45,12 @@
       }
 
       .top-nav {
-        width: 90%;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 68px;
-        margin-bottom: 32px;
+        margin-top: 30px;
+        margin-bottom: 20px;
       }
 
       .event-btn {
@@ -60,12 +60,11 @@
         padding: 8px 10px 8px 6px;
         gap: 2px;
         border-radius: 27px;
-        background: #fff; /* var(--Whitte, #FFF) 대응 */
+        background: #fff;
         box-shadow: 0 2px 8px 0 rgba(163, 73, 27, 0.15);
         border: none;
         color: var(--Primary-Text, #ff763b);
         text-align: center;
-        /* SB-14 */
         font-family: Pretendard;
         font-size: 14px;
         font-style: normal;
@@ -75,7 +74,7 @@
         cursor: pointer;
         text-decoration: none;
         box-sizing: border-box;
-        white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        white-space: nowrap;
       }
 
       .btn-icon {
@@ -85,7 +84,7 @@
       }
       .nav-icons {
         display: flex;
-        gap: 14px;
+        gap: 15px;
         align-items: center;
       }
       .nav-icon {
@@ -98,6 +97,7 @@
       /* --- 타이틀 --- */
       .logo-area {
         text-align: center;
+        margin-bottom: 5px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -109,13 +109,13 @@
         height: 96px;
         object-fit: contain;
         display: block;
+        margin-bottom: 10px;
         max-width: 100%;
       }
 
       .sub-title {
         color: var(--BrownBlack, #564343);
         text-align: center;
-        /* SB-15 */
         font-family: Pretendard;
         font-size: 15px;
         font-style: normal;
@@ -129,7 +129,7 @@
         display: grid;
         grid-template-columns: repeat(2, 130px);
         justify-content: center;
-        gap: 24px;
+        gap: 15px;
         width: 100%;
         max-width: 380px;
         margin-bottom: 40px;
@@ -144,8 +144,21 @@
         position: relative;
       }
 
-      /* 오늘 날짜 둥둥 떠다니는 애니메이션 */
-      @keyframes bobbing {
+      /* --- 애니메이션 정의 --- */
+
+      /* 1. 호버 시: 위로 5px 둥둥 (Happy Bounce) */
+      @keyframes hoverBob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      /* 2. 오늘 날짜 기본 상태: 아래로 5px 둥둥 (Today Bounce) */
+      @keyframes todayBob {
         0%,
         100% {
           transform: translateY(0);
@@ -155,8 +168,13 @@
         }
       }
 
-      .door.is-today {
-        animation: bobbing 2s infinite ease-in-out;
+      .door:hover {
+        animation: hoverBob 1s ease-in-out !important;
+        z-index: 20;
+      }
+
+      .door.is-today:not(.open) {
+        animation: todayBob 2s ease-in-out infinite;
         z-index: 5;
       }
 
@@ -194,8 +212,6 @@
       .door-front {
         background-color: var(--primary-color);
         color: white;
-        /* [수정] 호버 애니메이션을 위한 부드러운 전환 효과 추가 */
-        transition: transform 0.3s ease;
       }
 
       .door-front .door-num {
@@ -269,11 +285,6 @@
         opacity: 0.3;
       }
 
-      /* [수정] 호버 시 위로 5px 올라가는 애니메이션 (missed가 아닌 경우) */
-      .door:not(.missed):hover .door-front {
-        transform: translateY(-5px);
-      }
-
       .door-num-10-wrapper {
         position: relative;
         display: flex;
@@ -312,16 +323,19 @@
         z-index: 10;
       }
       .footer-link {
-        color: var(--Primary-Text, #ff763b);
-        text-align: center;
-
-        /* R-14 */
-        font-family: Pretendard;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 20px; /* 142.857% */
-        letter-spacing: -0.28px;
+        color: var(--primary-color);
+        text-decoration: underline;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-underline-offset: 4px;
+        cursor: pointer;
+      }
+      .footer-wrapper {
+        margin-top: 80px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        z-index: 10;
       }
 
       .modal {
@@ -345,9 +359,7 @@
         visibility: visible;
       }
 
-      /* --- [NEW] 모달 애니메이션 (Open/Close) --- */
-
-      /* 1. 열릴 때 (Bounce In) */
+      /* 모달 애니메이션 */
       @keyframes bounceIn {
         0% {
           transform: scale(0.8);
@@ -364,8 +376,6 @@
           transform: scale(1);
         }
       }
-
-      /* 2. 닫힐 때 (Bounce Out) - 살짝 커졌다가 작아지며 사라짐 */
       @keyframes bounceOut {
         0% {
           transform: scale(1);
@@ -374,14 +384,12 @@
         30% {
           transform: scale(1.05);
           opacity: 1;
-        } /* 살짝 튀어오름 */
+        }
         100% {
           transform: scale(0.8);
           opacity: 0;
-        } /* 쏙 사라짐 */
+        }
       }
-
-      /* 버튼 클릭 시 (Bounce Click) */
       @keyframes bounceClick {
         0% {
           transform: scale(1);
@@ -417,16 +425,12 @@
         justify-content: space-between;
       }
 
-      /* 모달 활성화 시 */
       .modal.active .modal-content {
         animation: bounceIn 0.4s ease-out forwards;
       }
-
-      /* [NEW] 모달 닫힘(closing) 클래스 추가 시 */
       .modal.closing .modal-content {
         animation: bounceOut 0.3s ease-in forwards;
       }
-      /* 닫힐 때 배경도 부드럽게 사라지도록 */
       .modal.closing {
         opacity: 0;
         transition: opacity 0.3s;
@@ -582,6 +586,7 @@
         font-family: "Pretendard", sans-serif;
       }
 
+      /* 클릭 효과(폭죽)용 스타일은 유지 */
       dotlottie-player {
         position: fixed;
         width: 1000px;
@@ -635,14 +640,16 @@
 
     <div class="calendar-container" id="calendar"></div>
 
-    <footer>
-      <a
-        href="https://twitter.com/OnceUponA4ever"
-        target="_blank"
-        class="footer-link"
-        >@OnceUponA4ever</a
-      >
-    </footer>
+    <div class="footer-wrapper">
+      <footer>
+        <a
+          href="https://twitter.com/OnceUponA4ever"
+          target="_blank"
+          class="footer-link"
+          >@OnceUponA4ever</a
+        >
+      </footer>
+    </div>
 
     <div id="modal" class="modal">
       <div class="modal-content daily-modal">
@@ -895,6 +902,7 @@
       function openDoor(data, doorElement) {
         doorElement.classList.add("open");
         doorElement.classList.remove("missed");
+        // [핵심] 열릴 때 is-today 제거하여 둥둥 애니메이션 중지
         doorElement.classList.remove("is-today");
         if (!openedDays.includes(data.day)) {
           openedDays.push(data.day);
@@ -914,11 +922,12 @@
         const isFuture = today < doorDate;
         const isToday = today.getTime() === doorDate.getTime();
 
-        if (isToday) {
+        const isOpened = openedDays.includes(data.day);
+
+        // [수정] 오늘 날짜이고, 아직 안 열렸을 때만 is-today 클래스 추가
+        if (isToday && !isOpened) {
           door.classList.add("is-today");
         }
-
-        const isOpened = openedDays.includes(data.day);
 
         if (isOpened) door.classList.add("open");
         else if (isPast && !isDebugMode) door.classList.add("missed");
@@ -973,7 +982,7 @@
           }
 
           if (isPast && !isDebugMode) {
-            const userAnswer = prompt(`[퀴즈] ${data.quiz}`);
+            const userAnswer = prompt(`Q. ${data.quiz}`);
             if (userAnswer && userAnswer.trim() === data.answer) {
               alert("정답! 🎉");
               openDoor(data, door);
