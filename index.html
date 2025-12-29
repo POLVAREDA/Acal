@@ -129,7 +129,7 @@
         display: grid;
         grid-template-columns: repeat(2, 130px);
         justify-content: center;
-        gap: 15px;
+        gap: 24px;
         width: 100%;
         max-width: 380px;
         margin-bottom: 40px;
@@ -203,7 +203,7 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        border-radius: 12px;
+        border-radius: 8px;
         overflow: hidden;
         box-sizing: border-box;
         padding: 15px;
@@ -215,8 +215,12 @@
       }
 
       .door-front .door-num {
+        font-family: Pretendard;
         font-size: 16px;
-        font-weight: 600;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.32px;
         color: white;
         margin-bottom: 5px;
         width: 100%;
@@ -244,8 +248,12 @@
       }
 
       .door-back .door-num {
+        font-family: Pretendard;
         font-size: 16px;
-        font-weight: 600;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.32px;
         color: var(--primary-color);
         margin-bottom: 5px;
         width: 100%;
@@ -423,6 +431,26 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        /* [수정] 이미지가 튀어나와도 잘리지 않게 설정 */
+        overflow: visible;
+        /* [수정] 상단 이미지가 화면 밖으로 잘리지 않도록 여백 확보 */
+        margin-top: 60px;
+      }
+
+      /* [신규 추가] 상단 장식 이미지 스타일 */
+      .modal-top-deco {
+        position: absolute;
+        top: auto;
+        bottom: 102.5%;
+        left: 50%;
+        transform: translateX(-50%); /* 가로 중앙 정렬 */
+        width: 94px;
+        height: auto;
+        z-index: 25;
+        object-fit: contain;
+        pointer-events: none;
+        margin-bottom: -12px;
       }
 
       .modal.active .modal-content {
@@ -456,14 +484,23 @@
       }
 
       .modal-day-title {
+        font-family: Pretendard;
         font-size: 18px;
+        font-style: normal;
         font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.36px;
         margin: 0;
         line-height: 1.2;
       }
       .modal-subtext {
+        /* R-14 */
+        font-family: Pretendard;
         font-size: 14px;
+        font-style: normal;
         font-weight: 400;
+        line-height: 20px; /* 142.857% */
+        letter-spacing: -0.28px;
         opacity: 0.9;
         margin: 5px 0 0 0;
         word-break: keep-all;
@@ -541,9 +578,9 @@
       }
       .help-subtitle {
         font-size: 0.85rem;
+        font-weight: 500;
         color: #888;
         margin-bottom: 25px;
-        font-weight: 500;
         text-decoration: none;
       }
       .help-list {
@@ -652,6 +689,8 @@
 
     <div id="modal" class="modal">
       <div class="modal-content daily-modal">
+        <img src="" id="modal-top-deco" class="modal-top-deco" alt="deco" />
+
         <div class="modal-header">
           <img
             src=""
@@ -741,6 +780,8 @@
           message: "고깔모자 풍과 퍼즐 한 조각",
           quiz: "배우 조풍래의 출생 연도는?",
           answer: "1983",
+          decoImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042654/_%EB%A0%88%EC%9D%B4%EC%96%B4_2_prhn0y.svg",
         },
         {
           day: 2,
@@ -750,9 +791,11 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
           contentImage:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001377/year02_uctqqs.png",
-          message: "두 번째 퍼즐 조각",
+          message: "풍놀장!-선글라스풍과 퍼즐 한 조각",
           quiz: "조풍래 배우의 이수자 종목은?",
           answer: "봉산탈춤",
+          decoImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
         },
         {
           day: 3,
@@ -762,7 +805,7 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
           contentImage:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year03_wtxyog.png",
-          message: "세 번째 퍼즐 조각",
+          message: "유메토모풍과 퍼즐 한 조각",
           quiz: "레드북 배역 이름은?",
           answer: "로렐라이",
         },
@@ -774,7 +817,7 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
           contentImage:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year04_nrkhpp.png",
-          message: "네 번째 퍼즐 조각",
+          message: "풍더그와 퍼즐 한 조각",
           quiz: "에드몬드 역을 맡은 뮤지컬은?",
           answer: "플레임즈",
         },
@@ -786,7 +829,7 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
           contentImage:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year05_kbvzl7.png",
-          message: "다섯 번째 퍼즐 조각",
+          message: "풍드몬드와 퍼즐 한 조각",
           quiz: "MBTI 유형은?",
           answer: "ISFJ",
         },
@@ -798,7 +841,7 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
           contentImage:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year06_mrk9py.png",
-          message: "여섯 번째 퍼즐 조각",
+          message: "풍렐라이와 퍼즐 한 조각",
           quiz: "2010년 입단한 극단은?",
           answer: "서울예술단",
         },
@@ -810,7 +853,7 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
           contentImage:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year07_rsivuj.png",
-          message: "일곱 번째 퍼즐 조각",
+          message: "풍빅과 퍼즐 한 조각",
           quiz: "가장 약한 게임은?",
           answer: "가위바위보",
         },
@@ -822,7 +865,7 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
           contentImage:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year08_okburr.png",
-          message: "여덟 번째 퍼즐 조각",
+          message: "토니-리딩풍과 퍼즐 한 조각",
           quiz: "팬카페 클짱은?",
           answer: "조풍래",
         },
@@ -834,7 +877,7 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-puzzle_vgalnp.png",
           contentImage:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001379/year09_iptilo.png",
-          message: "아홉 번째 퍼즐 조각",
+          message: "YKA풍과 퍼즐 한 조각",
           quiz: "응원하는 야구팀은?",
           answer: "롯데",
         },
@@ -846,7 +889,7 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1766951941/G-gift_ceawqi.png",
           contentImage:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767003389/year_qotw6w.png",
-          message: "D-Day 기념 카드",
+          message: "연력 포스터",
           quiz: "가장 웃긴 사람 주장 주체는?",
           answer: "본인",
         },
@@ -864,6 +907,9 @@
       const shareIcon = document.getElementById("share-icon");
       const helpModal = document.getElementById("help-modal");
       const helpCloseBtn = document.getElementById("help-close-btn");
+
+      // [신규 추가] 상단 장식 이미지 엘리먼트
+      const modalTopDeco = document.getElementById("modal-top-deco");
 
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -1013,6 +1059,16 @@
         modalSubtext.textContent = data.message;
         modalImage.src = data.contentImage;
         modalHeaderIcon.src = data.coverImage;
+
+        // [신규 추가] 상단 데코 이미지 로직
+        // decoImage 데이터가 있으면 보여주고, 없으면 숨김
+        if (data.decoImage) {
+          modalTopDeco.src = data.decoImage;
+          modalTopDeco.style.display = "block";
+        } else {
+          modalTopDeco.style.display = "none";
+        }
+
         currentImageUrl = data.contentImage;
         modal.classList.add("active");
         new LottiUI(window.innerWidth / 2, window.innerHeight / 2);
