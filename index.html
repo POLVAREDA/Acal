@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    \
     <title>Happy Poongrae-Day Calendar</title>
+
     <link
       href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
       rel="stylesheet"
     />
+
     <style>
       @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
@@ -150,8 +151,6 @@
       }
 
       /* --- 애니메이션 정의 --- */
-
-      /* 1. 호버 시: 위로 5px 둥둥 (Happy Bounce) */
       @keyframes hoverBob {
         0%,
         100% {
@@ -162,7 +161,6 @@
         }
       }
 
-      /* 2. 오늘 날짜 기본 상태: 아래로 5px 둥둥 (Today Bounce) */
       @keyframes todayBob {
         0%,
         100% {
@@ -437,13 +435,13 @@
         flex-direction: column;
         justify-content: space-between;
 
-        /* [수정] 이미지가 튀어나와도 잘리지 않게 설정 */
+        /* 이미지가 튀어나와도 잘리지 않게 설정 */
         overflow: visible;
-        /* [수정] 상단 이미지가 화면 밖으로 잘리지 않도록 여백 확보 */
+        /* 상단 이미지가 화면 밖으로 잘리지 않도록 여백 확보 */
         margin-top: 60px;
       }
 
-      /* [신규 추가] 상단 장식 이미지 스타일 */
+      /* 상단 장식 이미지 스타일 */
       .modal-top-deco {
         position: absolute;
         top: auto;
@@ -499,12 +497,11 @@
         line-height: 1.2;
       }
       .modal-subtext {
-        /* R-14 */
         font-family: Pretendard;
         font-size: 14px;
         font-style: normal;
         font-weight: 400;
-        line-height: 20px; /* 142.857% */
+        line-height: 20px;
         letter-spacing: -0.28px;
         opacity: 0.9;
         margin: 5px 0 0 0;
@@ -636,6 +633,7 @@
         transform: translate(-50%, -70%);
         pointer-events: none;
       }
+
       /* SweetAlert 커스텀 스타일 */
       .swal2-popup {
         font-family: "Pretendard", sans-serif !important;
@@ -785,6 +783,8 @@
       type="module"
     ></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
       const daysData = [
         {
@@ -924,6 +924,8 @@
           message: "연력 포스터",
           quiz: "가장 웃긴 사람 주장 주체는?",
           answer: "본인",
+          decoImage:
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
         },
       ];
 
@@ -939,14 +941,12 @@
       const shareIcon = document.getElementById("share-icon");
       const helpModal = document.getElementById("help-modal");
       const helpCloseBtn = document.getElementById("help-close-btn");
-
-      // [신규 추가] 상단 장식 이미지 엘리먼트
       const modalTopDeco = document.getElementById("modal-top-deco");
 
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
-      // [테스트 설정] 10일차가 31일이 되도록 수정 (1일차 = 12월 22일)
+      // [테스트 설정]
       const startYear = 2025;
       const startMonth = 12; // 12월
       const startDay = 22; // 22일
@@ -979,7 +979,6 @@
       function openDoor(data, doorElement) {
         doorElement.classList.add("open");
         doorElement.classList.remove("missed");
-        // [핵심] 열릴 때 is-today 제거하여 둥둥 애니메이션 중지
         doorElement.classList.remove("is-today");
         if (!openedDays.includes(data.day)) {
           openedDays.push(data.day);
@@ -1001,7 +1000,6 @@
 
         const isOpened = openedDays.includes(data.day);
 
-        // [수정] 오늘 날짜이고, 아직 안 열렸을 때만 is-today 클래스 추가
         if (isToday && !isOpened) {
           door.classList.add("is-today");
         }
@@ -1059,13 +1057,40 @@
           }
 
           if (isPast && !isDebugMode) {
-            const userAnswer = prompt(`Q. ${data.quiz}`);
-            if (userAnswer && userAnswer.trim() === data.answer) {
-              alert("정답! 🎉");
-              openDoor(data, door);
-            } else if (userAnswer !== null) {
-              alert("땡! 다시 시도해보세요.");
-            }
+            // [수정] SweetAlert2 퀴즈 입력창으로 변경
+            Swal.fire({
+              title: "퀴즈!",
+              text: `Q. ${data.quiz}`,
+              input: "text",
+              inputPlaceholder: "정답을 입력하세요",
+              showCancelButton: true,
+              confirmButtonText: "확인",
+              cancelButtonText: "취소",
+              confirmButtonColor: "#ff8f56",
+              cancelButtonColor: "#999",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                const userAnswer = result.value;
+                if (userAnswer && userAnswer.trim() === data.answer) {
+                  Swal.fire({
+                    title: "정답입니다! 🎉",
+                    icon: "success",
+                    confirmButtonText: "확인",
+                    confirmButtonColor: "#ff8f56",
+                  }).then(() => {
+                    openDoor(data, door);
+                  });
+                } else {
+                  Swal.fire({
+                    title: "땡!",
+                    text: "다시 시도해보세요.",
+                    icon: "error",
+                    confirmButtonText: "확인",
+                    confirmButtonColor: "#ff8f56",
+                  });
+                }
+              }
+            });
             return;
           }
 
@@ -1073,9 +1098,14 @@
             if (!isDebugMode) {
               const openMonth = doorDate.getMonth() + 1;
               const openDay = doorDate.getDate();
-              alert(
-                `아직 오픈되지 않았습니다!\n(오픈 예정일: ${openMonth}월 ${openDay}일)`
-              );
+              // [수정] SweetAlert2 알림창으로 변경
+              Swal.fire({
+                title: "아직 오픈되지 않았어요!",
+                text: `오픈 예정일: ${openMonth}월 ${openDay}일`,
+                icon: "warning",
+                confirmButtonText: "확인",
+                confirmButtonColor: "#ff8f56",
+              });
               return;
             }
           }
@@ -1092,8 +1122,6 @@
         modalImage.src = data.contentImage;
         modalHeaderIcon.src = data.coverImage;
 
-        // [신규 추가] 상단 데코 이미지 로직
-        // decoImage 데이터가 있으면 보여주고, 없으면 숨김
         if (data.decoImage) {
           modalTopDeco.src = data.decoImage;
           modalTopDeco.style.display = "block";
@@ -1125,12 +1153,8 @@
         document.body.removeChild(link);
       }
 
-      /* [NEW] 모달 닫기 로직 (일일 캘린더) */
       function closeModal() {
-        // 1. closing 클래스 추가 (Bounce Out 애니메이션 시작)
         modal.classList.add("closing");
-
-        // 2. 애니메이션 시간(0.3s)만큼 기다렸다가 active 제거
         setTimeout(() => {
           modal.classList.remove("active");
           modal.classList.remove("closing");
@@ -1153,12 +1177,10 @@
         }
       });
 
-      /* 도움말 모달 */
       function openHelpModal() {
         helpModal.classList.add("active");
       }
 
-      /* [NEW] 모달 닫기 로직 (도움말) */
       function closeHelpModal() {
         helpModal.classList.add("closing");
         setTimeout(() => {
@@ -1181,10 +1203,22 @@
         try {
           const currentUrl = window.location.href;
           await navigator.clipboard.writeText(currentUrl);
-          alert("주소가 복사되었습니다!");
+          Swal.fire({
+            title: "주소가 복사되었습니다!",
+            icon: "success",
+            confirmButtonText: "확인",
+            confirmButtonColor: "#ff8f56",
+            timer: 1500,
+            showConfirmButton: false,
+          });
         } catch (err) {
           console.error("복사 실패:", err);
-          alert("주소 복사에 실패했습니다.");
+          Swal.fire({
+            title: "복사 실패",
+            text: "주소를 수동으로 복사해주세요.",
+            icon: "error",
+            confirmButtonColor: "#ff8f56",
+          });
         }
       });
 
