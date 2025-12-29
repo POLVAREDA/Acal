@@ -386,6 +386,11 @@
         background-color: white;
         display: block;
       }
+      /* [추가] 10일차 연력 이미지 전용 스타일 (175x247) */
+      #modal-image.vertical {
+        width: 175px;
+        height: 247px;
+      }
 
       .modal-btn-group {
         display: flex;
@@ -821,14 +826,12 @@
         let starHTML_back = "";
 
         if (data.day === 10) {
-          // [유지] 앞면: 흰색 별 + 주황색 숫자
           starHTML_front = `
             <div class="door-num-10-wrapper">
                 <img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767016729/Star_1_bnmba7.png" class="star-icon" alt="star"> 
                 <span>${data.day}</span>
             </div>`;
 
-          // [유지] 뒷면: 주황색 별 + 흰색 숫자
           starHTML_back = `
             <div class="door-num-10-wrapper">
                 <img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767016760/Star_1_1_elho32.png" class="star-icon" alt="star">
@@ -899,6 +902,15 @@
         currentImageUrl = data.contentImage;
         modal.classList.add("active");
         new LottiUI(window.innerWidth / 2, window.innerHeight / 2);
+
+        // [변경] 10일차일 때만 버튼 텍스트 변경 및 이미지 사이즈 클래스 추가
+        if (data.day === 10) {
+          saveBtn.textContent = "연력 받기";
+          modalImage.classList.add("vertical"); // 175x247 클래스 추가
+        } else {
+          saveBtn.textContent = "저장하기";
+          modalImage.classList.remove("vertical"); // 클래스 제거
+        }
       }
 
       function closeModal() {
@@ -916,7 +928,15 @@
       }
 
       closeBtn.addEventListener("click", closeModal);
-      saveBtn.addEventListener("click", downloadImage);
+
+      // [변경] 버튼 클릭 이벤트 (10일차 = 링크 이동, 나머지 = 다운로드)
+      saveBtn.addEventListener("click", () => {
+        if (modalDayTitle.textContent === "10일차") {
+          window.open("https://twitter.com/OnceUponA4ever", "_blank");
+        } else {
+          downloadImage();
+        }
+      });
 
       function openHelpModal() {
         helpModal.classList.add("active");
