@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happy Poongrae-Day Calendar</title>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
-      rel="stylesheet"
-    />
-
     <style>
       @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
@@ -204,7 +199,7 @@
         backface-visibility: hidden;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         justify-content: flex-start;
         border-radius: 8px;
         overflow: hidden;
@@ -233,14 +228,17 @@
         height: 30px;
         padding-top: 3px;
         box-sizing: border-box;
+        flex-shrink: 0;
       }
 
       .cover-image {
         width: 100%;
         height: auto;
+        max-height: calc(100% - 35px);
         object-fit: contain;
         align-self: center;
-        margin-top: 0px;
+        margin-top: auto;
+        margin-bottom: auto;
         filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
       }
 
@@ -266,14 +264,17 @@
         height: 30px;
         padding-top: 3px;
         box-sizing: border-box;
+        flex-shrink: 0;
       }
 
       .puzzle-image {
-        width: 70%;
+        width: 80%;
         height: auto;
+        max-height: calc(100% - 35px);
         object-fit: contain;
         align-self: center;
-        margin-top: 5px;
+        margin-top: auto;
+        margin-bottom: auto;
       }
 
       .door.missed .door-front {
@@ -304,6 +305,7 @@
         width: 100%;
         height: 30px;
         margin-bottom: 5px;
+        flex-shrink: 0;
       }
       .star-icon {
         width: 30px;
@@ -434,20 +436,16 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
-        /* 이미지가 튀어나와도 잘리지 않게 설정 */
         overflow: visible;
-        /* 상단 이미지가 화면 밖으로 잘리지 않도록 여백 확보 */
         margin-top: 60px;
       }
 
-      /* 상단 장식 이미지 스타일 */
       .modal-top-deco {
         position: absolute;
         top: auto;
         bottom: 102.5%;
         left: 50%;
-        transform: translateX(-50%); /* 가로 중앙 정렬 */
+        transform: translateX(-50%);
         width: 94px;
         height: auto;
         z-index: 25;
@@ -471,11 +469,14 @@
         display: flex;
         align-items: flex-start;
         margin-bottom: 0;
-        gap: 12px;
+        gap: 5px;
       }
       .modal-profile-icon {
-        width: 48px;
-        height: 48px;
+        width: 50px;
+        height: 50px;
+
+        box-sizing: border-box;
+        object-fit: contain;
       }
       .modal-text-group {
         display: flex;
@@ -621,6 +622,92 @@
         font-family: "Pretendard", sans-serif;
       }
 
+      /* --- 커스텀 순수 알럿 디자인 (아이콘 영역 포함) --- */
+      .custom-alert-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 3000;
+        backdrop-filter: blur(2px);
+      }
+      .custom-alert-box {
+        background: white;
+        padding: 30px 25px;
+        border-radius: 20px;
+        width: 280px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        animation: bounceIn 0.4s ease-out forwards;
+      }
+      .alert-icon-area {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto 15px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .alert-icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .alert-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #333;
+      }
+      .alert-text {
+        font-size: 0.95rem;
+        color: #666;
+        margin-bottom: 15px;
+        word-break: keep-all;
+        line-height: 1.4;
+      }
+      .alert-input {
+        width: 100%;
+        padding: 12px;
+        border: 1.5px solid #eee;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        outline: none;
+        font-size: 1rem;
+        text-align: center;
+      }
+      .alert-input:focus {
+        border-color: var(--primary-color);
+      }
+      .alert-btn-group {
+        display: flex;
+        gap: 10px;
+      }
+      .alert-btn {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 25px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-family: inherit;
+      }
+      .alert-btn-confirm {
+        background: var(--primary-color);
+        color: white;
+      }
+      .alert-btn-cancel {
+        background: #f5f5f5;
+        color: #888;
+      }
+
       dotlottie-player {
         position: fixed;
         width: 1000px;
@@ -628,20 +715,6 @@
         z-index: 2001;
         transform: translate(-50%, -70%);
         pointer-events: none;
-      }
-
-      /* SweetAlert 커스텀 스타일 */
-      .swal2-popup {
-        font-family: "Pretendard", sans-serif !important;
-        border-radius: 15px !important;
-      }
-      .swal2-title {
-        font-size: 1.2rem !important;
-        color: #333 !important;
-      }
-      .swal2-confirm {
-        background-color: var(--primary-color) !important;
-        border-radius: 20px !important;
       }
     </style>
   </head>
@@ -699,10 +772,33 @@
       </footer>
     </div>
 
+    <div id="custom-alert-overlay" class="custom-alert-overlay">
+      <div class="custom-alert-box">
+        <div class="alert-icon-area">
+          <img id="alert-icon" class="alert-icon-img" src="" alt="icon" />
+        </div>
+        <div id="alert-title" class="alert-title"></div>
+        <div id="alert-text" class="alert-text"></div>
+        <input
+          type="text"
+          id="alert-input"
+          class="alert-input"
+          placeholder="정답을 입력하세요"
+        />
+        <div class="alert-btn-group">
+          <button id="alert-cancel" class="alert-btn alert-btn-cancel">
+            취소
+          </button>
+          <button id="alert-confirm" class="alert-btn alert-btn-confirm">
+            확인
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div id="modal" class="modal">
       <div class="modal-content daily-modal">
         <img src="" id="modal-top-deco" class="modal-top-deco" alt="deco" />
-
         <div class="modal-header">
           <img
             src=""
@@ -733,10 +829,7 @@
               src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045798/ic-star_sjx807.svg"
               class="help-bullet-icon"
               alt="*"
-            /><span
-              >조풍래 배우의 생일을 카운트다운 하는 어드벤트 캘린더 형식의
-              이벤트예요.</span
-            >
+            /><span>조풍래 배우의 생일을 카운트다운 하는 이벤트예요.</span>
           </li>
           <li>
             <img
@@ -761,8 +854,8 @@
               class="help-bullet-icon"
               alt="*"
             /><span
-              >10일의 캘린더를 모두 열어본 분들에게 '스페셜 특전'을 드려요.
-              <br /><span class="small-text"
+              >10일의 캘린더를 모두 열어본 분들에게 '스페셜 특전'을 드려요.<br /><span
+                class="small-text"
                 >(수령 방법은 이벤트 계정을 참고해 주세요.)</span
               ></span
             >
@@ -778,8 +871,6 @@
       src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
       type="module"
     ></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
       const daysData = [
@@ -927,32 +1018,75 @@
 
       const calendarContainer = document.getElementById("calendar");
       const modal = document.getElementById("modal");
-      const modalDayTitle = document.getElementById("modal-day-title");
-      const modalSubtext = document.getElementById("modal-subtext");
-      const modalImage = document.getElementById("modal-image");
-      const modalHeaderIcon = document.getElementById("modal-header-icon");
-      const saveBtn = document.getElementById("save-btn");
-      const closeBtn = document.getElementById("close-modal-btn");
-      const helpIcon = document.getElementById("help-icon");
-      const shareIcon = document.getElementById("share-icon");
-      const helpModal = document.getElementById("help-modal");
-      const helpCloseBtn = document.getElementById("help-close-btn");
-      const modalTopDeco = document.getElementById("modal-top-deco");
+      const alertOverlay = document.getElementById("custom-alert-overlay");
+      const alertInput = document.getElementById("alert-input");
+      const alertIcon = document.getElementById("alert-icon");
 
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-
-      // [테스트 설정]
-      const startYear = 2025;
-      const startMonth = 12; // 12월
-      const startDay = 22; // 22일
-      const startDate = new Date(startYear, startMonth - 1, startDay);
-
+      const startDate = new Date(2025, 11, 22);
       const isDebugMode = false;
-
       let openedDays =
         JSON.parse(localStorage.getItem("openedDays_Test")) || [];
       let currentImageUrl = "";
+
+      // 상황별 아이콘 설정
+      const ICONS = {
+        quiz: "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767115408/%EC%97%B4%EC%87%A0_auczcb.svg",
+        success:
+          "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767115408/Group_366_ltgvug.svg",
+        error:
+          "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767115408/Frame_93_g5lgvw.svg",
+        warning:
+          "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045799/Property_1_Default_rzryfx.svg",
+      };
+
+      /* --- 순수 알럿 함수 (버튼 애니메이션 추가) --- */
+      function showMyAlert({
+        title,
+        text,
+        iconType = "success",
+        input = false,
+        cancel = false,
+      }) {
+        return new Promise((resolve) => {
+          document.getElementById("alert-title").textContent = title;
+          document.getElementById("alert-text").textContent = text;
+          alertIcon.src = ICONS[iconType] || ICONS.success;
+          alertInput.style.display = input ? "block" : "none";
+          alertInput.value = "";
+          const cancelBtn = document.getElementById("alert-cancel");
+          cancelBtn.style.display = cancel ? "block" : "none";
+          alertOverlay.style.display = "flex";
+
+          const confirmBtn = document.getElementById("alert-confirm");
+
+          const onConfirm = () => {
+            confirmBtn.classList.add("animate-bounce");
+            setTimeout(() => {
+              confirmBtn.classList.remove("animate-bounce");
+              alertOverlay.style.display = "none";
+              confirmBtn.removeEventListener("click", onConfirm);
+              cancelBtn.removeEventListener("click", onCancel);
+              resolve({ isConfirmed: true, value: alertInput.value });
+            }, 400);
+          };
+
+          const onCancel = () => {
+            cancelBtn.classList.add("animate-bounce");
+            setTimeout(() => {
+              cancelBtn.classList.remove("animate-bounce");
+              alertOverlay.style.display = "none";
+              confirmBtn.removeEventListener("click", onConfirm);
+              cancelBtn.removeEventListener("click", onCancel);
+              resolve({ isConfirmed: false });
+            }, 400);
+          };
+
+          confirmBtn.addEventListener("click", onConfirm);
+          if (cancel) cancelBtn.addEventListener("click", onCancel);
+        });
+      }
 
       class LottiUI {
         constructor(x, y) {
@@ -974,8 +1108,7 @@
 
       function openDoor(data, doorElement) {
         doorElement.classList.add("open");
-        doorElement.classList.remove("missed");
-        doorElement.classList.remove("is-today");
+        doorElement.classList.remove("missed", "is-today");
         if (!openedDays.includes(data.day)) {
           openedDays.push(data.day);
           localStorage.setItem("openedDays_Test", JSON.stringify(openedDays));
@@ -986,149 +1119,103 @@
       daysData.forEach((data) => {
         const door = document.createElement("div");
         door.classList.add("door");
-
         const doorDate = new Date(startDate);
         doorDate.setDate(startDate.getDate() + (data.day - 1));
-
         const isPast = today > doorDate;
         const isFuture = today < doorDate;
         const isToday = today.getTime() === doorDate.getTime();
-
         const isOpened = openedDays.includes(data.day);
 
-        if (isToday && !isOpened) {
-          door.classList.add("is-today");
-        }
-
+        if (isToday && !isOpened) door.classList.add("is-today");
         if (isOpened) door.classList.add("open");
         else if (isPast && !isDebugMode) door.classList.add("missed");
 
-        let numHTML = `<span class="door-num">${data.day}</span>`;
-        let starHTML_front = "";
-        let starHTML_back = "";
-
-        if (data.day === 10) {
-          starHTML_front = `
-            <div class="door-num-10-wrapper">
-                <img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045800/Star_1_wwryei.svg" class="star-icon" alt="star">
-                <span>${data.day}</span>
-            </div>`;
-
-          starHTML_back = `
-            <div class="door-num-10-wrapper">
-                <img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045799/Star_1_1_l9m5ho.svg" class="star-icon" alt="star">
-                <span>${data.day}</span>
-            </div>`;
-        } else {
-          starHTML_front = numHTML;
-          starHTML_back = numHTML;
-        }
+        let starHTML_front =
+          data.day === 10
+            ? `<div class="door-num-10-wrapper"><img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045800/Star_1_wwryei.svg" class="star-icon"><span>10</span></div>`
+            : `<span class="door-num">${data.day}</span>`;
+        let starHTML_back =
+          data.day === 10
+            ? `<div class="door-num-10-wrapper"><img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045799/Star_1_1_l9m5ho.svg" class="star-icon"><span>10</span></div>`
+            : `<span class="door-num">${data.day}</span>`;
 
         door.innerHTML = `
-        <div class="door-inner">
+          <div class="door-inner">
             <div class="door-front">
-                ${starHTML_front}
-                <img src="${data.coverImage}" class="cover-image" alt="Day ${
-          data.day
-        }">
-                ${
-                  isPast && !isOpened && !isDebugMode
-                    ? `<img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045797/Group_295_tzz6bu.svg" class="lock-overlay" alt="Locked">`
-                    : ""
-                }
+              ${starHTML_front}
+              <img src="${data.coverImage}" class="cover-image">
+              ${
+                isPast && !isOpened && !isDebugMode
+                  ? `<img src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045797/Group_295_tzz6bu.svg" class="lock-overlay">`
+                  : ""
+              }
             </div>
             <div class="door-back">
-                ${starHTML_back}
-                <img src="${
-                  data.puzzleImage
-                }" class="puzzle-image" alt="Puzzle">
+              ${starHTML_back}
+              <img src="${data.puzzleImage}" class="puzzle-image">
             </div>
-        </div>
-        `;
+          </div>`;
 
-        door.addEventListener("click", () => {
+        door.addEventListener("click", async () => {
           if (openedDays.includes(data.day)) {
             showModal(data);
             return;
           }
-
           if (isPast && !isDebugMode) {
-            // [수정] SweetAlert2 퀴즈 입력창으로 변경
-            Swal.fire({
-              title: "퀴즈!",
+            const res = await showMyAlert({
+              title: "",
               text: `Q. ${data.quiz}`,
-              input: "text",
-              inputPlaceholder: "정답을 입력하세요",
-              showCancelButton: true,
-              confirmButtonText: "확인",
-              cancelButtonText: "취소",
-              confirmButtonColor: "#ff8f56",
-              cancelButtonColor: "#999",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                const userAnswer = result.value;
-                if (userAnswer && userAnswer.trim() === data.answer) {
-                  Swal.fire({
-                    title: "정답입니다! 🎉",
-                    icon: "success",
-                    confirmButtonText: "확인",
-                    confirmButtonColor: "#ff8f56",
-                  }).then(() => {
-                    openDoor(data, door);
-                  });
-                } else {
-                  Swal.fire({
-                    title: "땡!",
-                    text: "다시 시도해보세요.",
-                    icon: "error",
-                    confirmButtonText: "확인",
-                    confirmButtonColor: "#ff8f56",
-                  });
-                }
+              iconType: "quiz",
+              input: true,
+              cancel: true,
+            });
+            if (res.isConfirmed) {
+              if (res.value && res.value.trim() === data.answer) {
+                await showMyAlert({
+                  title: "정답입니다! 🎉",
+                  text: "캘린더가 열립니다.",
+                  iconType: "success",
+                });
+                openDoor(data, door);
+              } else {
+                await showMyAlert({
+                  title: "땡!",
+                  text: "다시 시도해보세요.",
+                  iconType: "error",
+                });
               }
+            }
+            return;
+          }
+          if (isFuture && !isDebugMode) {
+            showMyAlert({
+              title: "아직 오픈되지 않았어요!",
+              text: `오픈 예정일: ${
+                doorDate.getMonth() + 1
+              }월 ${doorDate.getDate()}일`,
+              iconType: "warning",
             });
             return;
           }
-
-          if (isFuture) {
-            if (!isDebugMode) {
-              const openMonth = doorDate.getMonth() + 1;
-              const openDay = doorDate.getDate();
-              // [수정] SweetAlert2 알림창으로 변경
-              Swal.fire({
-                title: "아직 오픈되지 않았어요!",
-                text: `오픈 예정일: ${openMonth}월 ${openDay}일`,
-                icon: "warning",
-                confirmButtonText: "확인",
-                confirmButtonColor: "#ff8f56",
-              });
-              return;
-            }
-          }
-
           openDoor(data, door);
         });
-
         calendarContainer.appendChild(door);
       });
 
       function showModal(data) {
+        const modalDayTitle = document.getElementById("modal-day-title");
+        const modalImage = document.getElementById("modal-image");
         modalDayTitle.textContent = `${data.day}일차`;
-        modalSubtext.textContent = data.message;
+        document.getElementById("modal-subtext").textContent = data.message;
         modalImage.src = data.contentImage;
-        modalHeaderIcon.src = data.coverImage;
-
-        if (data.decoImage) {
-          modalTopDeco.src = data.decoImage;
-          modalTopDeco.style.display = "block";
-        } else {
-          modalTopDeco.style.display = "none";
-        }
-
+        document.getElementById("modal-header-icon").src = data.coverImage;
+        const deco = document.getElementById("modal-top-deco");
+        deco.src = data.decoImage || "";
+        deco.style.display = data.decoImage ? "block" : "none";
         currentImageUrl = data.contentImage;
         modal.classList.add("active");
         new LottiUI(window.innerWidth / 2, window.innerHeight / 2);
-
+        const saveBtn = document.getElementById("save-btn");
         if (data.day === 10) {
           saveBtn.textContent = "연력 받기";
           modalImage.classList.add("vertical");
@@ -1142,86 +1229,74 @@
         if (!currentImageUrl) return;
         const link = document.createElement("a");
         link.href = currentImageUrl;
-        link.download = `Day_${modalDayTitle.textContent}_Image`;
+        link.download = `Day_Image`;
         link.target = "_blank";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       }
 
-      function closeModal() {
+      const closeModal = () => {
         modal.classList.add("closing");
         setTimeout(() => {
-          modal.classList.remove("active");
-          modal.classList.remove("closing");
+          modal.classList.remove("active", "closing");
         }, 300);
-      }
+      };
 
-      closeBtn.addEventListener("click", () => {
-        closeBtn.classList.add("animate-bounce");
+      document
+        .getElementById("close-modal-btn")
+        .addEventListener("click", () => {
+          const btn = document.getElementById("close-modal-btn");
+          btn.classList.add("animate-bounce");
+          setTimeout(() => {
+            btn.classList.remove("animate-bounce");
+            closeModal();
+          }, 400);
+        });
+
+      document.getElementById("save-btn").addEventListener("click", () => {
+        const btn = document.getElementById("save-btn");
+        btn.classList.add("animate-bounce");
         setTimeout(() => {
-          closeBtn.classList.remove("animate-bounce");
-          closeModal();
+          btn.classList.remove("animate-bounce");
+          if (
+            document.getElementById("modal-day-title").textContent === "10일차"
+          )
+            window.open("https://twitter.com/OnceUponA4ever", "_blank");
+          else downloadImage();
         }, 400);
       });
 
-      saveBtn.addEventListener("click", () => {
-        if (modalDayTitle.textContent === "10일차") {
-          window.open("https://twitter.com/OnceUponA4ever", "_blank");
-        } else {
-          downloadImage();
-        }
+      document
+        .getElementById("help-icon")
+        .addEventListener("click", () =>
+          document.getElementById("help-modal").classList.add("active")
+        );
+      document
+        .getElementById("help-close-btn")
+        .addEventListener("click", () => {
+          const btn = document.getElementById("help-close-btn");
+          btn.classList.add("animate-bounce");
+          setTimeout(() => {
+            btn.classList.remove("animate-bounce");
+            document.getElementById("help-modal").classList.remove("active");
+          }, 400);
+        });
+
+      document.getElementById("share-icon").addEventListener("click", () => {
+        navigator.clipboard.writeText(window.location.href);
+        showMyAlert({
+          title: "주소가 복사되었습니다!",
+          text: "친구들에게 공유해보세요!",
+          iconType: "success",
+        });
       });
 
-      function openHelpModal() {
-        helpModal.classList.add("active");
-      }
-
-      function closeHelpModal() {
-        helpModal.classList.add("closing");
-        setTimeout(() => {
-          helpModal.classList.remove("active");
-          helpModal.classList.remove("closing");
-        }, 300);
-      }
-
-      helpIcon.addEventListener("click", openHelpModal);
-
-      helpCloseBtn.addEventListener("click", () => {
-        helpCloseBtn.classList.add("animate-bounce");
-        setTimeout(() => {
-          helpCloseBtn.classList.remove("animate-bounce");
-          closeHelpModal();
-        }, 400);
-      });
-
-      shareIcon.addEventListener("click", async () => {
-        try {
-          const currentUrl = window.location.href;
-          await navigator.clipboard.writeText(currentUrl);
-          Swal.fire({
-            title: "주소가 복사되었습니다!",
-            icon: "success",
-            confirmButtonText: "확인",
-            confirmButtonColor: "#ff8f56",
-            timer: 1500,
-            showConfirmButton: false,
-          });
-        } catch (err) {
-          console.error("복사 실패:", err);
-          Swal.fire({
-            title: "복사 실패",
-            text: "주소를 수동으로 복사해주세요.",
-            icon: "error",
-            confirmButtonColor: "#ff8f56",
-          });
-        }
-      });
-
-      window.addEventListener("click", (e) => {
+      window.onclick = (e) => {
         if (e.target === modal) closeModal();
-        if (e.target === helpModal) closeHelpModal();
-      });
+        if (e.target === document.getElementById("help-modal"))
+          document.getElementById("help-modal").classList.remove("active");
+      };
     </script>
   </body>
 </html>
