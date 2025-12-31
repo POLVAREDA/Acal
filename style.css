@@ -1,55 +1,171 @@
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Sans+KR:wght@100..900&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+:root {
+  --primary-color: #ff8f56; /* 진한 오렌지 (오픈 전 배경) */
+  --card-bg: #ffece1; /* 연한 살구색 (오픈 후 배경) */
+  --text-color: #ff763b; /* 텍스트컬러 */
+}
 
 body {
-  font-family: "Noto Sans KR", sans-serif; /* 기본 한글 폰트 */
-  background-color: #f8f8f8; /* 밝은 배경색 */
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  background-image: url("https://res.cloudinary.com/dkqqxjsek/image/upload/v1767002360/Frame_84_bh88ll.png");
+  background-size: auto;
+  background-position: center top;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-color: #fcfcfc;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  padding: 20px 0;
+  padding: 0;
   box-sizing: border-box;
-  color: white;
-  overflow-x: hidden;
-  padding: 0; /* 전체 패딩 제거 */
-  box-sizing: border-box;
-  color: #333; /* 어두운 글자색 */
+  color: #333;
   overflow-x: hidden;
 }
 
-h1 {
-  font-family: "Lora", serif; /* 특별한 영문 폰트 */
-  font-size: 2.8rem;
-  font-weight: 500;
+/* --- 헤더 --- */
+header {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.top-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 40px;
+}
+
+.event-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px 8px 6px;
+  gap: 2px;
+  border-radius: 27px;
+  background: #fff;
+  box-shadow: 0 2px 8px 0 rgba(163, 73, 27, 0.15);
+  border: none;
+  color: var(--Primary-Text, #ff763b);
   text-align: center;
-  margin: 60px 0 20px 0; /* 상단 여백 증가 */
-  color: #8c6a5a; /* 로고와 어울리는 색 */
-  text-shadow: none; /* 그림자 제거 */
-  letter-spacing: 0;
-  z-index: 1;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  cursor: pointer;
+  text-decoration: none;
+  box-sizing: border-box;
+  white-space: nowrap;
 }
 
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+.nav-icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+/* --- 타이틀 --- */
+.logo-area {
+  text-align: center;
+  margin-bottom: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-image {
+  width: 145px;
+  height: 96px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 10px;
+  max-width: 100%;
+}
+
+.sub-title {
+  color: var(--BrownBlack, #564343);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.3px;
+}
+
+/* --- 캘린더 그리드 --- */
 .calendar-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2열 배치 */
-  gap: 20px;
-  max-width: 380px; /* 전체 컨테이너 폭 조절 */
-  width: 90%;
-  margin: 0 auto 60px auto; /* 하단 여백 추가 */
+  grid-template-columns: repeat(2, 130px);
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 380px;
+  margin-bottom: 40px;
   z-index: 1;
 }
 
 .door {
-  background-color: transparent;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 150px;
   perspective: 1000px;
   cursor: pointer;
   position: relative;
-  /* 기본 겹침 순서 */
-  z-index: 1;
+}
+
+/* --- 애니메이션 정의 --- */
+@keyframes hoverBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes todayBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+.door:hover {
+  animation: hoverBob 1s ease-in-out !important;
+  z-index: 20;
+}
+
+.door.is-today:not(.open) {
+  animation: todayBob 2s ease-in-out infinite;
+  z-index: 5;
 }
 
 .door-inner {
@@ -65,18 +181,7 @@ h1 {
   transform: rotateY(180deg);
 }
 
-/* 놓친 날짜 스타일 */
-.door.missed {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-.door.missed .door-front {
-  background: #e0e0e0;
-  border-color: #ccc;
-  color: #a0a0a0;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
+/* --- 카드 앞/뒤 공통 --- */
 .door-front,
 .door-back {
   position: absolute;
@@ -85,113 +190,158 @@ h1 {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 뒷면 기본 그림자 유지 */
-  overflow: hidden;
-}
-
-/* --- 열리기 전 (선물 상자) --- */
-.door-front {
-  background: linear-gradient(
-    135deg,
-    #fad7cc 0%,
-    #f5c6ba 100%
-  ); /* 분홍빛 그라데이션 */
-  color: #8c6a5a; /* 숫자 색상 */
-  font-size: 2rem;
-  font-weight: bold;
-  border: none;
-  text-shadow: none;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-top: 0;
-
-  /* --- 규격외 현상 수정: 그림자 번짐을 줄여 이웃 영역 침범 방지 --- */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-}
-
-.door:not(.missed):hover .door-front {
-  transform: translateY(-8px);
-  /* --- 규격외 현상 수정: 호버 시 그림자 번짐을 줄여 이웃 영역 침범 방지 --- */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-}
-
-/* 자물쇠 아이콘 추가 (Font Awesome 사용) */
-.door:not(.open) .door-front::after {
-  /* --- Font Awesome을 사용하기 위한 핵심 코드 --- */
-  content: "\f023"; /* 자물쇠 아이콘의 유니코드 (Solid Lock) */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  font-size: 20px; /* 크기를 코너에 맞게 조정 */
-  color: #8c6a5a;
-  background-image: none;
-
-  position: absolute;
-  width: auto;
-  height: auto;
-
-  /* --- 오른쪽 상단으로 위치 수정 --- */
-  top: 10px;
-  right: 10px;
-  left: auto; /* 기존 left 속성 무시 */
-  transform: none; /* 기존 transform 속성 무시 */
-  /* ---------------------------------- */
-
-  opacity: 0.8;
-  z-index: 5; /* 숫자(4)보다 높게 설정 */
-}
-
-/* 문 번호 스타일 */
-.door-front span {
-  position: relative;
-  z-index: 4;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-/* --- 열린 후 (사진/메시지) --- */
-.door-back {
-  background-color: #ffffff;
-  color: #555;
-  transform: rotateY(180deg);
-  border: 1px solid #e0e0e0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.door-back img {
-  width: 90%;
-  height: auto;
-  max-height: 70%;
-  object-fit: cover;
+  justify-content: flex-start;
   border-radius: 8px;
-  margin-bottom: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  display: block;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 15px;
 }
 
-.door-back p {
-  font-size: 0.85rem;
-  line-height: 1.4;
-  text-align: center;
-  word-break: keep-all;
+.door-front {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.door-front .door-num {
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  color: white;
+  margin-bottom: 5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding-top: 3px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.cover-image {
+  width: 100%;
+  height: auto;
+  max-height: calc(100% - 35px);
+  object-fit: contain;
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  /*filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));*/
+}
+
+.door-back {
+  background-color: var(--card-bg);
+  transform: rotateY(180deg);
+  border: none;
+}
+
+.door-back .door-num {
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  padding-top: 3px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.puzzle-image {
+  width: 80%;
+  height: auto;
+  max-height: calc(100% - 35px);
+  object-fit: contain;
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.door.missed .door-front {
+  background-color: var(--primary-color);
+}
+
+.lock-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 28px;
+  z-index: 10;
+  opacity: 0.9;
+  object-fit: contain;
+}
+
+.door.missed .cover-image {
+  opacity: 0.3;
+}
+
+.door-num-10-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 5px;
+  flex-shrink: 0;
+}
+.star-icon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.door-num-10-wrapper span {
+  position: relative;
+  z-index: 1;
+  font-size: 0.8rem;
+  font-weight: 600;
   margin: 0;
-  display: block;
+  padding-top: 1px;
+}
+.door-front .door-num-10-wrapper span {
+  color: var(--primary-color);
+}
+.door-back .door-num-10-wrapper span {
+  color: white;
 }
 
-.door-back::after {
-  display: none;
+/* --- 푸터 & 모달 CSS --- */
+footer {
+  margin-bottom: 40px;
+  z-index: 10;
 }
-/* 팝업 스타일 */
+.footer-link {
+  color: var(--primary-color);
+  text-decoration: underline;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+.footer-wrapper {
+  margin-top: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
 
 .modal {
   position: fixed;
@@ -199,130 +349,362 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.3s;
   backdrop-filter: blur(2px);
 }
-
 .modal.active {
   opacity: 1;
   visibility: visible;
 }
 
-.modal-content {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 15px;
-  text-align: center;
-  max-width: 400px;
-  width: 85%;
+/* 모달 애니메이션 */
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bounceOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+@keyframes bounceClick {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-bounce {
+  animation: bounceClick 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-content.daily-modal {
+  background: var(--primary-color);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: left;
+  width: 295px;
+  height: 422px;
   position: relative;
-  transform: scale(0.8);
-  transition: transform 0.3s;
+  transform: scale(0.9);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  color: white;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-.modal.active .modal-content {
-  transform: scale(1);
+  justify-content: space-between;
+  overflow: visible;
+  margin-top: 60px;
 }
 
-.close-btn {
+.modal-top-deco {
   position: absolute;
-
-  top: 15px;
-
-  right: 20px;
-
-  font-size: 30px;
-
-  cursor: pointer;
-
-  color: #aaa;
+  top: auto;
+  bottom: 102.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 94px;
+  height: auto;
+  z-index: 25;
+  object-fit: contain;
+  pointer-events: none;
+  margin-bottom: -12px;
 }
 
-#modal-date {
-  font-family: "Lora", serif;
-  color: #8c6a5a;
-  margin-top: 0;
-  font-size: 1.8rem;
-  font-weight: 500;
-  margin-bottom: 20px;
+.modal.active .modal-content {
+  animation: bounceIn 0.4s ease-out forwards;
 }
-#modal-image {
-  width: 95%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin: 0 0 20px 0;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+.modal.closing .modal-content {
+  animation: bounceOut 0.3s ease-in forwards;
 }
-#modal-message {
-  font-family: "Noto Sans KR", sans-serif;
-  color: #444;
-  font-size: 1rem;
-  line-height: 1.6;
-  word-break: keep-all;
+.modal.closing {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
   margin-bottom: 0;
+  gap: 5px;
+}
+.modal-profile-icon {
+  width: 50px;
+  height: 50px;
+
+  box-sizing: border-box;
+  object-fit: contain;
+}
+.modal-text-group {
+  display: flex;
+  flex-direction: column;
 }
 
-/* 미디어 쿼리 (모바일 반응형) */
-@media (max-width: 480px) {
-  h1 {
-    font-size: 2.2rem;
-    margin-top: 40px;
-  }
-  h1 + p {
-    font-size: 0.9rem;
-    margin-bottom: 30px;
-  }
-  .calendar-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    max-width: 320px;
-  }
-  .door-front {
-    font-size: 1.8rem;
-  }
-  .door-front::after {
-    width: 30px;
-    height: 30px;
-    bottom: 10px;
-  }
-  .door-front span {
-    font-size: 1.8rem;
-  }
-  .door-back p {
-    font-size: 0.75rem;
-  }
-  .modal-content {
-    padding: 25px;
-  }
-  #modal-date {
-    font-size: 1.5rem;
-  }
-  #modal-image {
-    height: 160px;
-    margin-bottom: 15px;
-  }
-  #modal-message {
-    font-size: 0.9rem;
-  }
+.modal-day-title {
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.36px;
+  margin: 0;
+  line-height: 1.2;
+}
+.modal-subtext {
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.28px;
+  opacity: 0.9;
+  margin: 5px 0 0 0;
+  word-break: keep-all;
 }
 
-/* Lottie Player (컨패티) 스타일 */
+#modal-image {
+  width: 247px;
+  height: 247px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 12px auto;
+  background-color: white;
+  display: block;
+}
+#modal-image.vertical {
+  width: 175px;
+  height: 247px;
+}
+
+.modal-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 50px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s;
+  font-family: "Pretendard", sans-serif;
+}
+.modal-btn:active {
+  transform: scale(0.96);
+}
+
+.btn-save {
+  width: 133px;
+  height: 47px;
+  background-color: white;
+  color: var(--primary-color);
+}
+.btn-close {
+  width: 106px;
+  height: 47px;
+  background-color: white;
+  color: #333;
+}
+
+/* 도움말 모달 */
+.modal-content.help-modal {
+  background-color: white;
+  color: #333;
+  padding: 30px 25px;
+  text-align: center;
+  width: 85%;
+  max-width: 320px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s;
+  box-sizing: border-box;
+}
+.help-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 5px 0;
+  color: #333;
+}
+.help-subtitle {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #888;
+  margin-bottom: 25px;
+  text-decoration: none;
+}
+.help-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  text-align: left;
+}
+.help-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  color: #555;
+  word-break: keep-all;
+}
+.help-bullet-icon {
+  width: 13px;
+  height: 13px;
+  margin-top: 4px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.small-text {
+  font-size: 0.75rem;
+  color: #777;
+}
+.help-close-btn {
+  background-color: #ffece5;
+  color: var(--primary-color);
+  border: none;
+  padding: 14px 0;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  width: 100%;
+  font-family: "Pretendard", sans-serif;
+}
+
+/* --- 커스텀 순수 알럿 디자인 (아이콘 영역 포함) --- */
+.custom-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  backdrop-filter: blur(2px);
+}
+.custom-alert-box {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 20px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: bounceIn 0.4s ease-out forwards;
+}
+.alert-icon-area {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 15px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.alert-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.alert-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #333;
+}
+.alert-text {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 15px;
+  word-break: keep-all;
+  line-height: 1.4;
+}
+.alert-input {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #eee;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  outline: none;
+  font-size: 1rem;
+  text-align: center;
+}
+.alert-input:focus {
+  border-color: var(--primary-color);
+}
+.alert-btn-group {
+  display: flex;
+  gap: 10px;
+}
+.alert-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+.alert-btn-confirm {
+  background: var(--primary-color);
+  color: white;
+}
+.alert-btn-cancel {
+  background: #f5f5f5;
+  color: #888;
+}
+
 dotlottie-player {
   position: fixed;
-  width: 400px;
-  height: 400px;
+  width: 1000px;
+  height: 1000px;
   z-index: 2001;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -70%);
   pointer-events: none;
 }
