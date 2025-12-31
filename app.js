@@ -39,7 +39,7 @@ const daysData = [
     quiz: "목동에서 코인노래방 갔다가 트위터리안에게 들킨 배우는?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767199686/Group_404_a6ts1l.svg",
   },
   {
     day: 4,
@@ -53,7 +53,7 @@ const daysData = [
     quiz: "라이브 방송에서 평소에 여러분 보고 싶은 것을 제일 참는다고 한 배우는?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767199686/Group_414_pdxuol.svg",
   },
   {
     day: 5,
@@ -67,7 +67,7 @@ const daysData = [
     quiz: "자신의 패션을 끝내준다고 한 사람은?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767199685/Group_314_khu5mq.svg",
   },
   {
     day: 6,
@@ -81,7 +81,7 @@ const daysData = [
     quiz: "배우 기세중이 살면서 걸러야 하는 성씨 1위로 태그한 사람은?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767199687/Group_415_gkswuc.svg",
   },
   {
     day: 7,
@@ -95,7 +95,7 @@ const daysData = [
     quiz: "팬에게 자신이 뭉툭하게 생겼다고 해서 어이없게 만든 배우는?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767199685/Group_381_hzspp7.svg",
   },
   {
     day: 8,
@@ -123,7 +123,7 @@ const daysData = [
     quiz: "배우 조풍래를 대학로에서 가장 웃긴 사람 TOP3에 든다고 한 사람은?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767199685/Group_372_fj7jun.svg",
   },
   {
     day: 10,
@@ -137,7 +137,7 @@ const daysData = [
     quiz: "‘YKA FESTA’에서 뮤지컬 부문에서 수상한 사람은?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767199685/Group_403_nvxfag.svg",
   },
 ];
 
