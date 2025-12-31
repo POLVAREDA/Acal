@@ -67,7 +67,7 @@ const daysData = [
     quiz: "자신의 패션을 끝내준다고 한 사람은?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767199685/Group_314_khu5mq.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767202497/Frame_58_sqjj4d.svg",
   },
   {
     day: 6,
@@ -95,7 +95,7 @@ const daysData = [
     quiz: "팬에게 자신이 뭉툭하게 생겼다고 해서 어이없게 만든 배우는?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767199685/Group_381_hzspp7.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767202876/Group_381_1_f6mxcc.svg",
   },
   {
     day: 8,
@@ -109,7 +109,7 @@ const daysData = [
     quiz: "풍라이와 놀장~!의 클짱은?",
     answer: "조풍래",
     decoImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767042826/_%EB%A0%88%EC%9D%B4%EC%96%B4_3_plrck6.svg",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767203155/Frame_61_1_gpuel7.svg",
   },
   {
     day: 9,
@@ -338,6 +338,13 @@ function showModal(data) {
   document.getElementById("modal-header-icon").src = data.coverImage;
   const deco = document.getElementById("modal-top-deco");
   deco.src = data.decoImage || "";
+
+  // [수정 포인트] 날짜별 개별 클래스 부여 로직 삽입
+  deco.className = "modal-top-deco";
+  if (data.day) {
+    deco.classList.add(`deco-day-${data.day}`);
+  }
+
   deco.style.display = data.decoImage ? "block" : "none";
   currentImageUrl = data.contentImage;
   modal.classList.add("active");
@@ -390,11 +397,10 @@ document.getElementById("save-btn").addEventListener("click", () => {
   }, 400);
 });
 
-document
-  .getElementById("help-icon")
-  .addEventListener("click", () =>
-    document.getElementById("help-modal").classList.add("active")
-  );
+document.getElementById("help-icon").addEventListener("click", () => {
+  document.getElementById("help-modal").classList.add("active");
+});
+
 document.getElementById("help-close-btn").addEventListener("click", () => {
   const btn = document.getElementById("help-close-btn");
   btn.classList.add("animate-bounce");
@@ -411,6 +417,14 @@ document.getElementById("share-icon").addEventListener("click", () => {
     text: "친구들에게 공유해보세요!",
     iconType: "success",
   });
+});
+
+// [추가 포인트] 정답 입력창 엔터 키 새로고침 방지 로직
+alertInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    document.getElementById("alert-confirm").click();
+  }
 });
 
 window.onclick = (e) => {
