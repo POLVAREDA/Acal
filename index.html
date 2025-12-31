@@ -1172,15 +1172,15 @@
             if (res.isConfirmed) {
               if (res.value && res.value.trim() === data.answer) {
                 await showMyAlert({
-                  title: "정답입니다! 🎉",
-                  text: "캘린더가 열립니다.",
+                  title: "정답입니다!",
+                  text: "캘린더를 열람할 수 있어요.",
                   iconType: "success",
                 });
                 openDoor(data, door);
               } else {
                 await showMyAlert({
                   title: "땡!",
-                  text: "다시 시도해보세요.",
+                  text: "다시 시도해 보세요.",
                   iconType: "error",
                 });
               }
