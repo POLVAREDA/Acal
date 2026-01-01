@@ -312,7 +312,7 @@ header {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  backface-visibility: hidden;
+
 
 }
 .door-num-10-wrapper span {
