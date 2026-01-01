@@ -290,6 +290,8 @@ daysData.forEach((data) => {
       showModal(data);
       return;
     }
+    openDoor(data, door);
+  });
 
     if (isPast && !isDebugMode) {
       const res = await showMyAlert({
