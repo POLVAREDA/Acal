@@ -283,8 +283,9 @@ daysData.forEach((data) => {
             </div>
           </div>`;
 
-  door.addEventListener("click", async () => {
-
+  door.addEventListener("click", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (openedDays.includes(data.day)) {
       showModal(data);
       return;
