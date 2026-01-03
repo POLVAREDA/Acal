@@ -6,7 +6,7 @@ const daysData = [
     puzzleImage:
       "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045796/G-puzzle_hwtgap.svg",
     contentImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001377/year01_aru1od.png",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767453154/year01_dikt3h.jpg",
     message: "고깔모자 풍과 퍼즐 한 조각",
     quiz: "뮤지컬 배우 중, 1983년 1월 10일에 태어난 사람은?",
     answer: "조풍래",
@@ -20,7 +20,7 @@ const daysData = [
     puzzleImage:
       "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045796/G-puzzle_hwtgap.svg",
     contentImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001377/year02_uctqqs.png",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767453154/year02_yxm8rp.jpg",
     message: "풍놀장!-선글라스풍과 퍼즐 한 조각",
     quiz: '칸쵸에 본인 이름이 "당연히 없다"는 발언에 긁힌 배우는?',
     answer: "조풍래",
@@ -34,7 +34,7 @@ const daysData = [
     puzzleImage:
       "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045796/G-puzzle_hwtgap.svg",
     contentImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year03_wtxyog.png",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767453155/year03_bok6m5.jpg",
     message: "유메토모풍과 퍼즐 한 조각",
     quiz: "목동에서 코인노래방 갔다가 트위터리안에게 들킨 배우는?",
     answer: "조풍래",
@@ -48,7 +48,7 @@ const daysData = [
     puzzleImage:
       "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045796/G-puzzle_hwtgap.svg",
     contentImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year04_nrkhpp.png",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767453155/year04_kiedcb.jpg",
     message: "풍더그와 퍼즐 한 조각",
     quiz: "라이브 방송에서 평소에 여러분 보고 싶은 것을 제일 참는다고 한 배우는?",
     answer: "조풍래",
@@ -62,7 +62,7 @@ const daysData = [
     puzzleImage:
       "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045796/G-puzzle_hwtgap.svg",
     contentImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year05_kbvzl7.png",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767453155/year05_f2plzl.jpg",
     message: "풍드몬드와 퍼즐 한 조각",
     quiz: "자신의 패션을 끝내준다고 한 사람은?",
     answer: "조풍래",
@@ -76,7 +76,7 @@ const daysData = [
     puzzleImage:
       "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045796/G-puzzle_hwtgap.svg",
     contentImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year06_mrk9py.png",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767453155/year06_id0hnq.jpg",
     message: "풍렐라이와 퍼즐 한 조각",
     quiz: "배우 기세중이 살면서 걸러야 하는 성씨 1위로 태그한 사람은?",
     answer: "조풍래",
@@ -90,7 +90,7 @@ const daysData = [
     puzzleImage:
       "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045796/G-puzzle_hwtgap.svg",
     contentImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year07_rsivuj.png",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767453156/year07_zmdpwj.jpg",
     message: "풍빅과 퍼즐 한 조각",
     quiz: "팬에게 자신이 뭉툭하게 생겼다고 해서 어이없게 만든 배우는?",
     answer: "조풍래",
@@ -104,7 +104,7 @@ const daysData = [
     puzzleImage:
       "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045796/G-puzzle_hwtgap.svg",
     contentImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001378/year08_okburr.png",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767453154/year08_qxmbuv.jpg",
     message: "토니-리딩풍과 퍼즐 한 조각",
     quiz: "풍라이와 놀장~!의 클짱은?",
     answer: "조풍래",
@@ -118,7 +118,7 @@ const daysData = [
     puzzleImage:
       "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767045796/G-puzzle_hwtgap.svg",
     contentImage:
-      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767001379/year09_iptilo.png",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1767453155/year09_ojovrl.jpg",
     message: "YKA풍과 퍼즐 한 조각",
     quiz: "배우 조풍래를 대학로에서 가장 웃긴 사람 TOP3에 든다고 한 사람은?",
     answer: "조풍래",
