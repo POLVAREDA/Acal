@@ -142,6 +142,8 @@ function renderDogCards() {
     });
 }
 
+// ... 상단 dogs 데이터 및 renderDogCards 함수는 동일 ...
+
 // 3. 모달 기능
 const modal = document.getElementById("dogModal");
 const closeModal = document.querySelector(".close-modal");
@@ -162,44 +164,39 @@ function openModal(dog) {
                 "${dog.desc}"
             </p>
             <p style="margin-top:10px; font-size:0.85rem; color:#666;">
-                현재 새로운 가족의 따뜻한 사랑을 기다리고 있습니다. 모든 입양 절차는 상담을 통해 진행됩니다.
+                현재 새로운 가족의 따뜻한 사랑을 기다리고 있습니다.
+            </p>
+            <!-- 스크롤 테스트를 위한 긴 텍스트 (필요시 삭제) -->
+            <p style="margin-top:10px; font-size:0.85rem; color:#999; line-height:1.6;">
+                입양은 한 생명을 끝까지 책임지는 소중한 약속입니다. 아이의 성격과 특징을 잘 살펴주시고, 
+                신중한 결정을 부탁드립니다. 궁금한 점은 언제든 문의해 주세요.
             </p>
         </div>
     `;
 
-    // 모달 표시 및 배경 스크롤 차단
-    modal.classList.add("show");
-    document.body.classList.add("no-scroll");
+    // [수정] 모달 표시 및 배경 스크롤 방지
+    modal.style.display = "block";
+    document.body.style.overflow = "hidden"; // 메인 페이지 스크롤 방지
 
-    // 모달을 열 때마다 스크롤을 맨 위로 초기화
-    document.querySelector('.modal-content').scrollTop = 0;
+    // [추가] 모달 내부 스크롤을 항상 맨 위로 초기화
+    const modalContent = document.querySelector(".modal-content");
+    if (modalContent) modalContent.scrollTop = 0;
 }
 
-// 모달 닫기 함수 공통화
-function closeDogModal() {
-    modal.classList.remove("show");
-    document.body.classList.remove("no-scroll");
+// [수정] 닫기 기능을 함수로 통합
+function closeModalWindow() {
+    modal.style.display = "none";
+    document.body.style.overflow = "auto"; // 메인 페이지 스크롤 다시 허용
 }
 
-// 닫기 버튼 이벤트
 if(closeModal) {
-    closeModal.onclick = closeDogModal;
+    closeModal.onclick = closeModalWindow;
 }
 
-// 외부 클릭 시 닫기
 window.onclick = (event) => {
     if (event.target == modal) {
-        closeDogModal();
+        closeModalWindow();
     }
-};
-
-// 닫기 기능
-if(closeModal) {
-    closeModal.onclick = () => (modal.style.display = "none");
-}
-
-window.onclick = (event) => {
-    if (event.target == modal) modal.style.display = "none";
 };
 
 // 초기화
