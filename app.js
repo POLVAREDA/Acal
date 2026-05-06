@@ -8,7 +8,7 @@ const dogs = [
     weight: 2.3,
     tags: ["활발해요", "사람좋아"],
     image:
-      "",
+      "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778076935/Gemini_Generated_Image_m591hlm591hlm591_gaadio.png",
   },
   {
     id: 2,
