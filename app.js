@@ -192,5 +192,15 @@ window.onclick = (event) => {
         closeDogModal();
     }
 };
+
+// 닫기 기능
+if(closeModal) {
+    closeModal.onclick = () => (modal.style.display = "none");
+}
+
+window.onclick = (event) => {
+    if (event.target == modal) modal.style.display = "none";
+};
+
 // 초기화
 document.addEventListener("DOMContentLoaded", renderDogCards);
