@@ -154,7 +154,7 @@ function openModal(dog) {
         <img src="${dog.image}" class="modal-img" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
         <h2 style="margin-bottom:10px">${dog.name} (${genderText})</h2>
         <p style="color:#666; margin-bottom:15px">나이: ${dog.age}개월 | 몸무게: ${dog.weight}kg</p>
-        <div class="tag-container" style="display:flex; gap:5px;">
+        <div class="tag-container" style="display:flex; gap:5px; flex-wrap:wrap;">
             ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
         </div>
         <div class="modal-desc" style="margin-top:20px; padding:15px; background:#f9f9f9; border-radius:10px;">
@@ -162,21 +162,35 @@ function openModal(dog) {
                 "${dog.desc}"
             </p>
             <p style="margin-top:10px; font-size:0.85rem; color:#666;">
-                현재 새로운 가족의 따뜻한 사랑을 기다리고 있습니다.
+                현재 새로운 가족의 따뜻한 사랑을 기다리고 있습니다. 모든 입양 절차는 상담을 통해 진행됩니다.
             </p>
         </div>
     `;
-    modal.style.display = "block";
+
+    // 모달 표시 및 배경 스크롤 차단
+    modal.classList.add("show");
+    document.body.classList.add("no-scroll");
+
+    // 모달을 열 때마다 스크롤을 맨 위로 초기화
+    document.querySelector('.modal-content').scrollTop = 0;
 }
 
-// 닫기 기능
+// 모달 닫기 함수 공통화
+function closeDogModal() {
+    modal.classList.remove("show");
+    document.body.classList.remove("no-scroll");
+}
+
+// 닫기 버튼 이벤트
 if(closeModal) {
-    closeModal.onclick = () => (modal.style.display = "none");
+    closeModal.onclick = closeDogModal;
 }
 
+// 외부 클릭 시 닫기
 window.onclick = (event) => {
-    if (event.target == modal) modal.style.display = "none";
+    if (event.target == modal) {
+        closeDogModal();
+    }
 };
-
 // 초기화
 document.addEventListener("DOMContentLoaded", renderDogCards);

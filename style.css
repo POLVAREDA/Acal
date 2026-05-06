@@ -235,17 +235,31 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
+  /* 모달 위치 중앙 정렬을 위한 flex 설정 */
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-content {
   background-color: white;
-  margin: 15% auto;
   padding: 20px;
-  width: 85%;
-  max-width: 400px;
+  width: 90%;
+  max-width: 450px;
   border-radius: 15px;
   position: relative;
+
+  /* [핵심] 내부 스크롤 설정 */
+  max-height: 85vh; /* 화면 높이의 85%까지만 커짐 */
+  overflow-y: auto; /* 내용이 많으면 세로 스크롤 생성 */
+  -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
+}
+
+/* 모달이 열렸을 때 뒷 배경 스크롤 방지용 클래스 */
+body.no-scroll {
+  overflow: hidden;
+  height: 100%;
 }
 
 .close-modal {
