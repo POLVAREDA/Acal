@@ -1,4 +1,4 @@
-// 1. 강아지 데이터 정의 (이미지 경로 수정 및 보완)
+// 1. 강아지 데이터 정의 (상세 설명 문구 desc 추가)
 const dogs = [
     {
         id: 1,
@@ -7,7 +7,8 @@ const dogs = [
         age: 2,
         weight: 2.3,
         tags: ["활발해요", "사람좋아"],
-        image: "",
+        desc: "에너지가 넘치는 호두는 처음 보는 사람에게도 꼬리를 흔들며 다가가는 사교성 끝판왕이에요.",
+        image: "https://images.unsplash.com/photo-1591160674255-fc8b858cf5ad?q=80&w=300",
     },
     {
         id: 2,
@@ -16,7 +17,8 @@ const dogs = [
         age: 3,
         weight: 3.5,
         tags: ["영리해요", "장난꾸러기"],
-        image: "",
+        desc: "여름이는 상황 판단이 빠르고 영리해서 금방 새로운 환경에 적응할 준비가 되어 있답니다.",
+        image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=300",
     },
     {
         id: 3,
@@ -25,6 +27,7 @@ const dogs = [
         age: 4,
         weight: 3.2,
         tags: ["조용해요", "애교많아요"],
+        desc: "차분하게 곁을 지켜주는 햇님이는 은근한 애교로 집안의 분위기를 따뜻하게 만들어줄 거예요.",
         image: "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778076935/Gemini_Generated_Image_m591hlm591hlm591_gaadio.png",
     },
     {
@@ -34,7 +37,8 @@ const dogs = [
         age: 5,
         weight: 4.8,
         tags: ["용감해요", "충성스러워요"],
-        image: "",
+        desc: "든든한 수호천사 쭈쭈! 주인만을 바라보는 일편단심 충성심을 가진 용감한 친구입니다.",
+        image: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=300",
     },
     {
         id: 5,
@@ -43,7 +47,8 @@ const dogs = [
         age: 6,
         weight: 5.1,
         tags: ["온순해요", "사람좋아"],
-        image: "",
+        desc: "공격성이 전혀 없는 온순한 성격의 마마는 어린 아이가 있는 가정에도 아주 잘 어울려요.",
+        image: "https://images.unsplash.com/photo-1544568100-847a948585b9?q=80&w=300",
     },
     {
         id: 6,
@@ -52,7 +57,8 @@ const dogs = [
         age: 4,
         weight: 4.0,
         tags: ["밝아요", "식탐있어요"],
-        image: "",
+        desc: "먹는 것만큼이나 뛰어노는 것도 좋아하는 알밤이는 긍정적인 에너지를 전파하는 활력소예요.",
+        image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?q=80&w=300",
     },
     {
         id: 7,
@@ -61,7 +67,8 @@ const dogs = [
         age: 3,
         weight: 2.7,
         tags: ["소심해요", "따뜻해요"],
-        image: "",
+        desc: "장군이는 처음엔 낯을 가릴 수 있지만, 한 번 마음을 열면 누구보다 깊은 애정을 주는 아이입니다.",
+        image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=300",
     },
     {
         id: 8,
@@ -70,7 +77,8 @@ const dogs = [
         age: 5,
         weight: 6.0,
         tags: ["똑똑해요", "활발해요"],
-        image: "",
+        desc: "훈련 습득 능력이 뛰어난 똑똑이 순돌이와 함께라면 즐거운 산책과 놀이 시간이 보장됩니다.",
+        image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=300",
     },
     {
         id: 9,
@@ -79,7 +87,8 @@ const dogs = [
         age: 4,
         weight: 3.6,
         tags: ["애교많아요", "장난꾸러기"],
-        image: "",
+        desc: "탄밤이는 애교 섞인 장난으로 웃음을 주는 타입이에요. 심심할 틈이 없는 일상을 선물할게요.",
+        image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=300",
     },
     {
         id: 10,
@@ -88,7 +97,8 @@ const dogs = [
         age: 7,
         weight: 5.4,
         tags: ["조용해요", "차분해요"],
-        image: "",
+        desc: "우아하고 차분한 달님이는 조용한 환경을 좋아하며 집사님 옆에서 평온하게 쉬는 걸 즐겨요.",
+        image: "https://images.unsplash.com/photo-1510771463146-e89e6e86560e?q=80&w=300",
     },
     {
         id: 11,
@@ -97,14 +107,15 @@ const dogs = [
         age: 3,
         weight: 3.0,
         tags: ["사람좋아", "애교많아요"],
-        image: "",
+        desc: "별이는 눈만 마주쳐도 배를 뒤집는 애교쟁이예요. 사랑을 줄 수록 더 밝게 빛나는 아이랍니다.",
+        image: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=300",
     },
 ];
 
 // 2. 리스트 렌더링 함수
 function renderDogCards() {
     const grid = document.getElementById("dogGrid");
-    if(!grid) return; // 그리드 엘리먼트 확인
+    if(!grid) return;
 
     dogs.forEach((dog) => {
         const genderIcon =
@@ -146,15 +157,19 @@ function openModal(dog) {
         <div class="tag-container" style="display:flex; gap:5px;">
             ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
         </div>
-        <p style="margin-top:20px; font-size:0.9rem; line-height:1.6;">
-            이 아이는 매우 ${dog.tags[0]} 성격이며, ${dog.tags[1]} 면이 매력적입니다. 
-            현재 새로운 가족의 사랑을 간절히 기다리고 있습니다.
-        </p>
+        <div class="modal-desc" style="margin-top:20px; padding:15px; background:#f9f9f9; border-radius:10px;">
+            <p style="font-size:0.95rem; line-height:1.6; color:#333; font-weight:500;">
+                "${dog.desc}"
+            </p>
+            <p style="margin-top:10px; font-size:0.85rem; color:#666;">
+                현재 새로운 가족의 따뜻한 사랑을 기다리고 있습니다.
+            </p>
+        </div>
     `;
     modal.style.display = "block";
 }
 
-// 닫기 버튼 및 외부 클릭 시 닫기
+// 닫기 기능
 if(closeModal) {
     closeModal.onclick = () => (modal.style.display = "none");
 }
