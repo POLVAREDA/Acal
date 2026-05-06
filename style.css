@@ -1,0 +1,288 @@
+/* 기본 설정 */
+:root {
+  --primary-color: #6db33f;
+  --bg-color: #fafaf6;
+  --white: #ffffff;
+  --text-main: #333333;
+  --text-sub: #666666;
+  --card-radius: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    "Pretendard",
+    -apple-system,
+    sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* 헤더 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+/* 히어로 섹션 */
+.hero {
+  display: flex;
+  padding: 30px 20px;
+  background-color: #f3f6ee;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-content {
+  flex: 1;
+}
+
+.hero-subline {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+}
+
+.hero-title {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+.highlight {
+  color: var(--primary-color);
+}
+
+.hero-desc {
+  font-size: 0.9rem;
+  color: var(--text-sub);
+}
+
+.hero-image {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-image img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 필터 영역 */
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.dropbtn {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.total-count {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+}
+
+/* 강아지 리스트 그리드 */
+.dog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 모바일 2열 */
+  gap: 15px;
+  padding: 0 20px 30px 20px;
+}
+
+.dog-card {
+  background: var(--white);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.dog-card:active {
+  transform: scale(0.98);
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--primary-color);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.dog-card img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.dog-info {
+  padding: 12px;
+}
+
+.dog-name {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.gender-m {
+  color: #2196f3;
+}
+.gender-f {
+  color: #f44336;
+}
+
+.dog-meta {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  margin-bottom: 10px;
+}
+
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  background: #f0f7eb;
+  color: var(--primary-color);
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+/* CTA 카드 */
+.cta-section {
+  padding: 0 20px 30px 20px;
+}
+
+.cta-card {
+  background: #f9fdf6;
+  border: 1px solid #eef5e8;
+  border-radius: var(--card-radius);
+  padding: 30px;
+  text-align: center;
+}
+
+.cta-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+.cta-card h3 {
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+.cta-card p {
+  font-size: 0.9rem;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* 모달 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  width: 85%;
+  max-width: 400px;
+  border-radius: 15px;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.modal-img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+/* 하단 안내 */
+.info-footer {
+  padding: 20px;
+  border-top: 1px solid #eee;
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
+
+/* 반응형 (태블릿 이상) */
+@media (min-width: 768px) {
+  .dog-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .hero {
+    padding: 50px 10%;
+  }
+}
