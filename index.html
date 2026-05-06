@@ -1,18 +1,14 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>복댕이네 쉼터 - 입양 프로젝트</title>
-    <link rel="stylesheet" href="style.css" />
-    <!-- Font Awesome for icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-  </head>
-
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>복댕이네 쉼터 - 입양 프로젝트</title>
+  <!-- Font Awesome for icons -->
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
   <style>
     /* 기본 설정 */
     @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css");
@@ -32,10 +28,7 @@
     }
 
     body {
-      font-family:
-              "Pretendard",
-              -apple-system,
-              sans-serif;
+      font-family: "Pretendard", -apple-system, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-main);
       line-height: 1.5;
@@ -113,15 +106,6 @@
       padding: 20px;
     }
 
-    .dropbtn {
-      background: white;
-      border: 1px solid #ddd;
-      padding: 8px 15px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
     .total-count {
       font-size: 0.85rem;
       color: var(--text-sub);
@@ -130,7 +114,7 @@
     /* 강아지 리스트 그리드 */
     .dog-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 모바일 2열 */
+      grid-template-columns: repeat(2, 1fr);
       gap: 15px;
       padding: 0 20px 30px 20px;
     }
@@ -177,12 +161,8 @@
       margin-bottom: 4px;
     }
 
-    .gender-m {
-      color: #2196f3;
-    }
-    .gender-f {
-      color: #f44336;
-    }
+    .gender-m { color: #2196f3; }
+    .gender-f { color: #f44336; }
 
     .dog-meta {
       font-size: 0.8rem;
@@ -205,10 +185,7 @@
     }
 
     /* CTA 카드 */
-    .cta-section {
-      padding: 0 20px 30px 20px;
-    }
-
+    .cta-section { padding: 0 20px 30px 20px; }
     .cta-card {
       background: #f9fdf6;
       border: 1px solid #eef5e8;
@@ -216,21 +193,9 @@
       padding: 30px;
       text-align: center;
     }
-
-    .cta-icon {
-      font-size: 2rem;
-      margin-bottom: 10px;
-    }
-    .cta-card h3 {
-      margin-bottom: 10px;
-      color: var(--primary-color);
-    }
-    .cta-card p {
-      font-size: 0.9rem;
-      color: var(--text-sub);
-      margin-bottom: 20px;
-    }
-
+    .cta-icon { font-size: 2rem; margin-bottom: 10px; }
+    .cta-card h3 { margin-bottom: 10px; color: var(--primary-color); }
+    .cta-card p { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 20px; }
     .cta-button {
       background: var(--primary-color);
       color: white;
@@ -242,9 +207,9 @@
       cursor: pointer;
     }
 
-    /* 모달 */
+    /* 모달 [중앙 정렬 수정] */
     .modal {
-      display: none; /* 초기 상태 */
+      display: none; /* 초기값 */
       position: fixed;
       z-index: 1000;
       left: 0;
@@ -253,12 +218,12 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.6);
 
-      /* [수정] 중앙 정렬을 위한 설정 */
+      /* 중앙 정렬 핵심 속성 */
       align-items: center;
       justify-content: center;
     }
 
-    /* [추가] 자바스크립트에서 이 클래스를 붙여서 띄웁니다 */
+    /* JS에서 'show' 클래스를 붙였을 때만 보임 */
     .modal.show {
       display: flex;
     }
@@ -271,17 +236,14 @@
       border-radius: 15px;
       position: relative;
 
-      /* [스크롤 유지] */
-      max-height: 80vh;
+      /* 내부 스크롤 허용 */
+      max-height: 85vh;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
 
-
-    /* 모달이 열렸을 때 뒷 배경 스크롤 방지용 클래스 */
     body.no-scroll {
       overflow: hidden;
-      height: 100%;
     }
 
     .close-modal {
@@ -290,6 +252,7 @@
       top: 10px;
       font-size: 28px;
       cursor: pointer;
+      z-index: 10;
     }
 
     .modal-img {
@@ -299,240 +262,195 @@
     }
 
     /* 하단 안내 */
-    .info-footer {
-      padding: 20px;
-      border-top: 1px solid #eee;
-    }
+    .info-footer { padding: 20px; border-top: 1px solid #eee; }
+    .info-box { display: flex; align-items: center; gap: 10px; font-size: 0.75rem; color: var(--text-sub); }
 
-    .info-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.75rem;
-      color: var(--text-sub);
-    }
-
-    /* 반응형 (태블릿 이상) */
+    /* 반응형 */
     @media (min-width: 768px) {
-      .dog-grid {
-        grid-template-columns: repeat(3, 1fr);
-        max-width: 900px;
-        margin: 0 auto;
-      }
-      .hero {
-        padding: 50px 10%;
-      }
+      .dog-grid { grid-template-columns: repeat(3, 1fr); max-width: 900px; margin: 0 auto; }
+      .hero { padding: 50px 10%; }
     }
-
   </style>
-    <!-- 헤더 -->
-    <header class="header">
-      <!--      <i class="fa-solid fa-bars menu-icon"></i>-->
-      <h1 class="logo">🐾복댕이네 쉼터</h1>
-      <!--      <i class="fa-regular fa-heart heart-icon"></i>-->
-    </header>
+</head>
 
-    <main>
-      <!-- 히어로 섹션 -->
-      <section class="hero">
-        <div class="hero-content">
-          <p class="hero-subline">평생의 가족을 기다려요💚</p>
-          <h2 class="hero-title">
-            11마리의 아이들이<br /><span class="highlight">새로운 가족</span>을
-            기다립니다
-          </h2>
-          <p class="hero-desc">사랑으로 안아주세요,<br />기적이 시작됩니다.</p>
-        </div>
-        <div class="hero-image">
-          <img
-            src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=500"
-            alt="메인 강아지"
-          />
-        </div>
-      </section>
+<body>
+<header class="header">
+  <h1 class="logo">🐾복댕이네 쉼터</h1>
+</header>
 
-      <!-- 필터 영역 -->
-      <section class="filter-container">
-        <div class="dropdown">
-          <!-- <button class="dropbtn">
-            <i class="fa-solid fa-sliders"></i> 전체 보기
-            <i class="fa-solid fa-chevron-down"></i>
-          </button> -->
-        </div>
-        <span class="total-count">총 11마리</span>
-      </section>
-
-      <!-- 강아지 리스트 (JS에서 동적 생성) -->
-      <section class="dog-grid" id="dogGrid">
-        <!-- 카드가 여기에 삽입됩니다 -->
-      </section>
-
-      <!-- 하단 CTA 카드 -->
-      <section class="cta-section">
-        <div class="cta-card">
-          <div class="cta-icon">🏠</div>
-          <h3>입양은 사랑입니다</h3>
-          <p>끝까지 책임질 수 있는<br />따뜻한 가족이 되어주세요.</p>
-          <button
-            class="cta-button"
-            onclick="alert('입양 절차 안내 페이지로 이동합니다')"
-          >
-            입양 절차 안내 <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-      </section>
-
-      <!-- 하단 안내 문구 -->
-      <footer class="info-footer">
-        <div class="info-box">
-          <i class="fa-solid fa-shield-dog"></i>
-          <p>
-            모든 아이들은 건강검진과 예방접종을 완료했어요.<br />입양 전 충분한
-            상담을 통해 신중히 결정해주세요.
-          </p>
-        </div>
-      </footer>
-    </main>
-
-    <!-- 모달 팝업 -->
-    <div id="dogModal" class="modal">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <div id="modalBody">
-          <!-- 상세 정보가 여기에 삽입됩니다 -->
-        </div>
-      </div>
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-subline">평생의 가족을 기다려요💚</p>
+      <h2 class="hero-title">
+        11마리의 아이들이<br /><span class="highlight">새로운 가족</span>을 기다립니다
+      </h2>
+      <p class="hero-desc">사랑으로 안아주세요,<br />기적이 시작됩니다.</p>
     </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=500" alt="메인 강아지" />
+    </div>
+  </section>
 
-    <script>
-      // 1. 강아지 데이터 정의 (상세 설명 문구 desc 추가)
-      const dogs = [
-        {
-          id: 1,
-          name: "호두",
-          gender: "M",
-          age: 2,
-          weight: 2.3,
-          tags: ["활발해요", "사람좋아"],
-          desc: "에너지가 넘치는 호두는 처음 보는 사람에게도 꼬리를 흔들며 다가가는 사교성 끝판왕이에요.",
-          image: "https://images.unsplash.com/photo-1591160674255-fc8b858cf5ad?q=80&w=300",
-        },
-        {
-          id: 2,
-          name: "여름이",
-          gender: "M",
-          age: 3,
-          weight: 3.5,
-          tags: ["영리해요", "장난꾸러기"],
-          desc: "여름이는 상황 판단이 빠르고 영리해서 금방 새로운 환경에 적응할 준비가 되어 있답니다.",
-          image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=300",
-        },
-        {
-          id: 3,
-          name: "햇님이",
-          gender: "F",
-          age: 4,
-          weight: 3.2,
-          tags: ["조용해요", "애교많아요"],
-          desc: "차분하게 곁을 지켜주는 햇님이는 은근한 애교로 집안의 분위기를 따뜻하게 만들어줄 거예요.",
-          image: "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778076935/Gemini_Generated_Image_m591hlm591hlm591_gaadio.png",
-        },
-        {
-          id: 4,
-          name: "쭈쭈",
-          gender: "M",
-          age: 5,
-          weight: 4.8,
-          tags: ["용감해요", "충성스러워요"],
-          desc: "든든한 수호천사 쭈쭈! 주인만을 바라보는 일편단심 충성심을 가진 용감한 친구입니다.",
-          image: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=300",
-        },
-        {
-          id: 5,
-          name: "마마",
-          gender: "F",
-          age: 6,
-          weight: 5.1,
-          tags: ["온순해요", "사람좋아"],
-          desc: "공격성이 전혀 없는 온순한 성격의 마마는 어린 아이가 있는 가정에도 아주 잘 어울려요.",
-          image: "https://images.unsplash.com/photo-1544568100-847a948585b9?q=80&w=300",
-        },
-        {
-          id: 6,
-          name: "알밤",
-          gender: "M",
-          age: 4,
-          weight: 4.0,
-          tags: ["밝아요", "식탐있어요"],
-          desc: "먹는 것만큼이나 뛰어노는 것도 좋아하는 알밤이는 긍정적인 에너지를 전파하는 활력소예요.",
-          image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?q=80&w=300",
-        },
-        {
-          id: 7,
-          name: "장군이",
-          gender: "F",
-          age: 3,
-          weight: 2.7,
-          tags: ["소심해요", "따뜻해요"],
-          desc: "장군이는 처음엔 낯을 가릴 수 있지만, 한 번 마음을 열면 누구보다 깊은 애정을 주는 아이입니다.",
-          image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=300",
-        },
-        {
-          id: 8,
-          name: "순돌이",
-          gender: "M",
-          age: 5,
-          weight: 6.0,
-          tags: ["똑똑해요", "활발해요"],
-          desc: "훈련 습득 능력이 뛰어난 똑똑이 순돌이와 함께라면 즐거운 산책과 놀이 시간이 보장됩니다.",
-          image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=300",
-        },
-        {
-          id: 9,
-          name: "탄밤",
-          gender: "F",
-          age: 4,
-          weight: 3.6,
-          tags: ["애교많아요", "장난꾸러기"],
-          desc: "탄밤이는 애교 섞인 장난으로 웃음을 주는 타입이에요. 심심할 틈이 없는 일상을 선물할게요.",
-          image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=300",
-        },
-        {
-          id: 10,
-          name: "달님이",
-          gender: "F",
-          age: 7,
-          weight: 5.4,
-          tags: ["조용해요", "차분해요"],
-          desc: "우아하고 차분한 달님이는 조용한 환경을 좋아하며 집사님 옆에서 평온하게 쉬는 걸 즐겨요.",
-          image: "https://images.unsplash.com/photo-1510771463146-e89e6e86560e?q=80&w=300",
-        },
-        {
-          id: 11,
-          name: "별이",
-          gender: "M",
-          age: 3,
-          weight: 3.0,
-          tags: ["사람좋아", "애교많아요"],
-          desc: "별이는 눈만 마주쳐도 배를 뒤집는 애교쟁이예요. 사랑을 줄 수록 더 밝게 빛나는 아이랍니다.",
-          image: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=300",
-        },
-      ];
+  <section class="filter-container">
+    <div class="dropdown"></div>
+    <span class="total-count">총 11마리</span>
+  </section>
 
-      // 2. 리스트 렌더링 함수
-      function renderDogCards() {
-        const grid = document.getElementById("dogGrid");
-        if(!grid) return;
+  <section class="dog-grid" id="dogGrid"></section>
 
-        dogs.forEach((dog) => {
-          const genderIcon =
-                  dog.gender === "M"
-                          ? '<i class="fa-solid fa-mars gender-m"></i>'
-                          : '<i class="fa-solid fa-venus gender-f"></i>';
+  <section class="cta-section">
+    <div class="cta-card">
+      <div class="cta-icon">🏠</div>
+      <h3>입양은 사랑입니다</h3>
+      <p>끝까지 책임질 수 있는<br />따뜻한 가족이 되어주세요.</p>
+      <button class="cta-button" onclick="alert('입양 절차 안내 페이지로 이동합니다')">
+        입양 절차 안내 <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </section>
 
-          const card = document.createElement("div");
-          card.className = "dog-card";
-          card.innerHTML = `
+  <footer class="info-footer">
+    <div class="info-box">
+      <i class="fa-solid fa-shield-dog"></i>
+      <p>모든 아이들은 건강검진과 예방접종을 완료했어요.<br />입양 전 충분한 상담을 통해 신중히 결정해주세요.</p>
+    </div>
+  </footer>
+</main>
+
+<div id="dogModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  const dogs = [
+    {
+      id: 1,
+      name: "호두",
+      gender: "M",
+      age: 2,
+      weight: 2.3,
+      tags: ["활발해요", "사람좋아"],
+      desc: "에너지가 넘치는 호두는 처음 보는 사람에게도 꼬리를 흔들며 다가가는 사교성 끝판왕이에요.",
+      image: "https://images.unsplash.com/photo-1591160674255-fc8b858cf5ad?q=80&w=300",
+    },
+    {
+      id: 2,
+      name: "여름이",
+      gender: "M",
+      age: 3,
+      weight: 3.5,
+      tags: ["영리해요", "장난꾸러기"],
+      desc: "여름이는 상황 판단이 빠르고 영리해서 금방 새로운 환경에 적응할 준비가 되어 있답니다.",
+      image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=300",
+    },
+    {
+      id: 3,
+      name: "햇님이",
+      gender: "F",
+      age: 4,
+      weight: 3.2,
+      tags: ["조용해요", "애교많아요"],
+      desc: "차분하게 곁을 지켜주는 햇님이는 은근한 애교로 집안의 분위기를 따뜻하게 만들어줄 거예요.",
+      image: "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778076935/Gemini_Generated_Image_m591hlm591hlm591_gaadio.png",
+    },
+    {
+      id: 4,
+      name: "쭈쭈",
+      gender: "M",
+      age: 5,
+      weight: 4.8,
+      tags: ["용감해요", "충성스러워요"],
+      desc: "든든한 수호천사 쭈쭈! 주인만을 바라보는 일편단심 충성심을 가진 용감한 친구입니다.",
+      image: "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=300",
+    },
+    {
+      id: 5,
+      name: "마마",
+      gender: "F",
+      age: 6,
+      weight: 5.1,
+      tags: ["온순해요", "사람좋아"],
+      desc: "공격성이 전혀 없는 온순한 성격의 마마는 어린 아이가 있는 가정에도 아주 잘 어울려요.",
+      image: "https://images.unsplash.com/photo-1544568100-847a948585b9?q=80&w=300",
+    },
+    {
+      id: 6,
+      name: "알밤",
+      gender: "M",
+      age: 4,
+      weight: 4.0,
+      tags: ["밝아요", "식탐있어요"],
+      desc: "먹는 것만큼이나 뛰어노는 것도 좋아하는 알밤이는 긍정적인 에너지를 전파하는 활력소예요.",
+      image: "https://images.unsplash.com/photo-1534361960057-19889db9621e?q=80&w=300",
+    },
+    {
+      id: 7,
+      name: "장군이",
+      gender: "F",
+      age: 3,
+      weight: 2.7,
+      tags: ["소심해요", "따뜻해요"],
+      desc: "장군이는 처음엔 낯을 가릴 수 있지만, 한 번 마음을 열면 누구보다 깊은 애정을 주는 아이입니다.",
+      image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=300",
+    },
+    {
+      id: 8,
+      name: "순돌이",
+      gender: "M",
+      age: 5,
+      weight: 6.0,
+      tags: ["똑똑해요", "활발해요"],
+      desc: "훈련 습득 능력이 뛰어난 똑똑이 순돌이와 함께라면 즐거운 산책과 놀이 시간이 보장됩니다.",
+      image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=300",
+    },
+    {
+      id: 9,
+      name: "탄밤",
+      gender: "F",
+      age: 4,
+      weight: 3.6,
+      tags: ["애교많아요", "장난꾸러기"],
+      desc: "탄밤이는 애교 섞인 장난으로 웃음을 주는 타입이에요. 심심할 틈이 없는 일상을 선물할게요.",
+      image: "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=300",
+    },
+    {
+      id: 10,
+      name: "달님이",
+      gender: "F",
+      age: 7,
+      weight: 5.4,
+      tags: ["조용해요", "차분해요"],
+      desc: "우아하고 차분한 달님이는 조용한 환경을 좋아하며 집사님 옆에서 평온하게 쉬는 걸 즐겨요.",
+      image: "https://images.unsplash.com/photo-1510771463146-e89e6e86560e?q=80&w=300",
+    },
+    {
+      id: 11,
+      name: "별이",
+      gender: "M",
+      age: 3,
+      weight: 3.0,
+      tags: ["사람좋아", "애교많아요"],
+      desc: "별이는 눈만 마주쳐도 배를 뒤집는 애교쟁이예요. 사랑을 줄 수록 더 밝게 빛나는 아이랍니다.",
+      image: "https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?q=80&w=300",
+    },
+  ];
+
+  function renderDogCards() {
+    const grid = document.getElementById("dogGrid");
+    if(!grid) return;
+
+    dogs.forEach((dog) => {
+      const genderIcon = dog.gender === "M"
+              ? '<i class="fa-solid fa-mars gender-m"></i>'
+              : '<i class="fa-solid fa-venus gender-f"></i>';
+
+      const card = document.createElement("div");
+      card.className = "dog-card";
+      card.innerHTML = `
             <span class="badge">${dog.id}</span>
             <img src="${dog.image}" alt="${dog.name}" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
             <div class="dog-info">
@@ -542,72 +460,59 @@
                     ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
                 </div>
             </div>
+          `;
+      card.onclick = () => openModal(dog);
+      grid.appendChild(card);
+    });
+  }
+
+  const modal = document.getElementById("dogModal");
+  const closeModal = document.querySelector(".close-modal");
+
+  function openModal(dog) {
+    const modalBody = document.getElementById("modalBody");
+    const genderText = dog.gender === "M" ? "남아" : "여아";
+
+    modalBody.innerHTML = `
+          <img src="${dog.image}" class="modal-img" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+          <h2 style="margin-bottom:10px">${dog.name} (${genderText})</h2>
+          <p style="color:#666; margin-bottom:15px">나이: ${dog.age}개월 | 몸무게: ${dog.weight}kg</p>
+          <div class="tag-container" style="display:flex; gap:5px; flex-wrap:wrap;">
+              ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+          </div>
+          <div class="modal-desc" style="margin-top:20px; padding:15px; background:#f9f9f9; border-radius:10px;">
+              <p style="font-size:0.95rem; line-height:1.6; color:#333; font-weight:500;">"${dog.desc}"</p>
+              <p style="margin-top:10px; font-size:0.85rem; color:#666;">현재 새로운 가족의 따뜻한 사랑을 기다리고 있습니다.</p>
+              <p style="margin-top:10px; font-size:0.85rem; color:#999; line-height:1.6;">
+                  입양은 한 생명을 끝까지 책임지는 소중한 약속입니다. 아이의 성격과 특징을 잘 살펴주시고 신중한 결정을 부탁드립니다.
+              </p>
+          </div>
         `;
 
-          card.onclick = () => openModal(dog);
-          grid.appendChild(card);
-        });
-      }
+    // 클래스를 추가하여 중앙 정렬(Flex) 적용 및 스크롤 방지
+    modal.classList.add("show");
+    document.body.classList.add("no-scroll");
 
-      // ... 상단 dogs 데이터 및 renderDogCards 함수는 동일 ...
+    const modalContent = document.querySelector(".modal-content");
+    if (modalContent) modalContent.scrollTop = 0;
+  }
 
-      // 3. 모달 기능
-      const modal = document.getElementById("dogModal");
-      const closeModal = document.querySelector(".close-modal");
+  function closeModalWindow() {
+    modal.classList.remove("show");
+    document.body.classList.remove("no-scroll");
+  }
 
-      function openModal(dog) {
-        const modalBody = document.getElementById("modalBody");
-        const genderText = dog.gender === "M" ? "남아" : "여아";
+  if(closeModal) {
+    closeModal.onclick = closeModalWindow;
+  }
 
-        modalBody.innerHTML = `
-        <img src="${dog.image}" class="modal-img" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-        <h2 style="margin-bottom:10px">${dog.name} (${genderText})</h2>
-        <p style="color:#666; margin-bottom:15px">나이: ${dog.age}개월 | 몸무게: ${dog.weight}kg</p>
-        <div class="tag-container" style="display:flex; gap:5px; flex-wrap:wrap;">
-            ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
-        </div>
-        <div class="modal-desc" style="margin-top:20px; padding:15px; background:#f9f9f9; border-radius:10px;">
-            <p style="font-size:0.95rem; line-height:1.6; color:#333; font-weight:500;">
-                "${dog.desc}"
-            </p>
-            <p style="margin-top:10px; font-size:0.85rem; color:#666;">
-                현재 새로운 가족의 따뜻한 사랑을 기다리고 있습니다.
-            </p>
-            <!-- 스크롤 테스트를 위한 긴 텍스트 (필요시 삭제) -->
-            <p style="margin-top:10px; font-size:0.85rem; color:#999; line-height:1.6;">
-                입양은 한 생명을 끝까지 책임지는 소중한 약속입니다. 아이의 성격과 특징을 잘 살펴주시고,
-                신중한 결정을 부탁드립니다. 궁금한 점은 언제든 문의해 주세요.
-            </p>
-        </div>
-    `;
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      closeModalWindow();
+    }
+  };
 
-        // [수정] 모달 표시 및 배경 스크롤 방지
-        modal.style.display = "block";
-        document.body.style.overflow = "hidden"; // 메인 페이지 스크롤 방지
-
-        // [추가] 모달 내부 스크롤을 항상 맨 위로 초기화
-        const modalContent = document.querySelector(".modal-content");
-        if (modalContent) modalContent.scrollTop = 0;
-      }
-
-      // [수정] 닫기 기능을 함수로 통합
-      function closeModalWindow() {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto"; // 메인 페이지 스크롤 다시 허용
-      }
-
-      if(closeModal) {
-        closeModal.onclick = closeModalWindow;
-      }
-
-      window.onclick = (event) => {
-        if (event.target == modal) {
-          closeModalWindow();
-        }
-      };
-
-      // 초기화
-      document.addEventListener("DOMContentLoaded", renderDogCards);
-    </script>
-  </body>
+  document.addEventListener("DOMContentLoaded", renderDogCards);
+</script>
+</body>
 </html>
