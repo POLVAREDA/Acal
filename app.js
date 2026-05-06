@@ -3,7 +3,7 @@ const dogs = [
   {
     id: 1,
     name: "호두",
-    gender: "F",
+    gender: "M",
     age: 2,
     weight: 2.3,
     tags: ["활발해요", "사람좋아"],
