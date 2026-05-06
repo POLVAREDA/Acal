@@ -1,4 +1,5 @@
 /* 기본 설정 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css");
 :root {
   --primary-color: #006327;
   --bg-color: #fafaf6;
