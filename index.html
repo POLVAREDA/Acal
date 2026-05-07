@@ -531,7 +531,7 @@
         modalBody.innerHTML = `
           <img src="${dog.image}" class="modal-img" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
           <h2 style="margin-bottom:10px">${dog.name} (${genderText})</h2>
-          <p style="color:#666; margin-bottom:15px">나이: ${dog.age}개월 | 몸무게: ${dog.weight}kg</p>
+          <p style="color:#666; margin-bottom:15px">나이: ${dog.age}살 추정 | 몸무게: 약 ${dog.weight}kg</p>
           <div class="tag-container" style="display:flex; gap:5px; flex-wrap:wrap;">
               ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
           </div>
