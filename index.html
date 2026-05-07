@@ -510,7 +510,7 @@
             <img src="${dog.image}" alt="${dog.name}" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
             <div class="dog-info">
                 <div class="dog-name">${dog.name} ${genderIcon}</div>
-                <div class="dog-meta">${dog.age}개월 · ${dog.weight}kg</div>
+                <div class="dog-meta">${dog.age}살 · ${dog.weight}kg</div>
                 <div class="tag-container">
                     ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
                 </div>
