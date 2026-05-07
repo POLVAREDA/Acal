@@ -3,22 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>복댕이네 쉼터 - 입양 프로젝트</title>
-    <!-- Font Awesome for icons -->
+    <title>복댕이네 쉼터 - 입양하기</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <style>
-      /* 기본 설정 */
-      @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-gov.min.css");
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+
       :root {
-        --primary-color: #006327;
-        --bg-color: #fafaf6;
-        --white: #ffffff;
-        --text-main: #333333;
-        --text-sub: #666666;
-        --card-radius: 12px;
+        --primary-color: #1a4d2e;
+        --bg-light: #f1f5f1;
+        --text-gray: #777;
       }
 
       * {
@@ -26,345 +22,460 @@
         padding: 0;
         box-sizing: border-box;
       }
-
       body {
-        font-family:
-          "Pretendard",
-          -apple-system,
-          sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-main);
+        font-family: "Noto Sans KR", sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
         line-height: 1.5;
       }
-
-      /* 헤더 */
-      .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 20px;
-        background: var(--white);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-
-      .logo {
-        font-size: 1.2rem;
-        color: var(--primary-color);
-        font-weight: 800;
-      }
-
-      /* 히어로 섹션 */
-      .hero {
-        display: flex;
-        padding: 30px 20px;
-        background-color: #f3f6ee;
-        align-items: center;
-        overflow: hidden;
-      }
-
-      .hero-content {
-        flex: 1;
-      }
-
-      .hero-subline {
-        font-size: 0.85rem;
-        margin-bottom: 5px;
-      }
-
-      .hero-title {
-        font-size: 1.4rem;
-        margin-bottom: 15px;
-        line-height: 1.3;
-      }
-
-      .highlight {
-        color: var(--primary-color);
-      }
-
-      .hero-desc {
-        font-size: 0.9rem;
-        color: var(--text-sub);
-      }
-
-      .hero-image {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-      }
-
-      .hero-image img {
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-
-      /* 필터 영역 */
-      .filter-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px;
-      }
-
-      .total-count {
-        font-size: 0.85rem;
-        color: var(--text-sub);
-      }
-
-      /* 강아지 리스트 그리드 */
-      .dog-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        padding: 0 20px 30px 20px;
-      }
-
-      .dog-card {
-        background: var(--white);
-        border-radius: var(--card-radius);
-        overflow: hidden;
-        position: relative;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-        cursor: pointer;
-        transition: transform 0.2s;
-      }
-
-      .dog-card:active {
-        transform: scale(0.98);
-      }
-
-      .badge {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: var(--primary-color);
-        color: white;
-        padding: 2px 8px;
-        border-radius: 5px;
-        font-size: 0.75rem;
-        font-weight: bold;
-      }
-
-      .dog-card img {
-        width: 100%;
-        aspect-ratio: 1/1;
-        object-fit: cover;
-      }
-
-      .dog-info {
-        padding: 12px;
-      }
-
-      .dog-name {
-        font-weight: bold;
-        font-size: 1rem;
-        margin-bottom: 4px;
-      }
-
-      .gender-m {
-        color: #2196f3;
-      }
-      .gender-f {
-        color: #f44336;
-      }
-
-      .dog-meta {
-        font-size: 0.8rem;
-        color: var(--text-sub);
-        margin-bottom: 10px;
-      }
-
-      .tag-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-      }
-
-      .tag {
-        background: #f0f7eb;
-        color: var(--primary-color);
-        font-size: 0.7rem;
-        padding: 3px 8px;
-        border-radius: 20px;
-      }
-
-      /* CTA 카드 */
-      .cta-section {
-        padding: 0 20px 30px 20px;
-      }
-      .cta-card {
-        background: #f9fdf6;
-        border: 1px solid #eef5e8;
-        border-radius: var(--card-radius);
-        padding: 30px;
-        text-align: center;
-      }
-      .cta-icon {
-        font-size: 2rem;
-        margin-bottom: 10px;
-      }
-      .cta-card h3 {
-        margin-bottom: 10px;
-        color: var(--primary-color);
-      }
-      .cta-card p {
-        font-size: 0.9rem;
-        color: var(--text-sub);
-        margin-bottom: 20px;
-      }
-      .cta-button {
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        border-radius: 10px;
-        font-weight: bold;
-        width: 100%;
-        cursor: pointer;
-      }
-
-      /* 모달 [중앙 정렬 수정] */
-      .modal {
-        display: none; /* 초기값 */
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-
-        /* 중앙 정렬 핵심 속성 */
-        align-items: center;
-        justify-content: center;
-      }
-
-      /* JS에서 'show' 클래스를 붙였을 때만 보임 */
-      .modal.show {
-        display: flex;
-      }
-
-      .modal-content {
-        background-color: white;
-        padding: 20px;
-        width: 90%;
-        max-width: 450px;
-        border-radius: 15px;
-        position: relative;
-
-        /* 내부 스크롤 허용 */
-        max-height: 85vh;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-
       body.no-scroll {
         overflow: hidden;
       }
 
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: white;
+        min-height: 100vh;
+        position: relative;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      }
+
+      /* 히어로 섹션 */
+      .hero {
+        background: var(--bg-light);
+        padding: 40px 24px 80px 24px;
+        border-radius: 0 0 40px 40px;
+        position: relative;
+        overflow: hidden;
+      }
+      .logo {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 20px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .hero h1 {
+        font-size: 26px;
+        font-weight: 800;
+        margin-bottom: 10px;
+        line-height: 1.3;
+        position: relative;
+        z-index: 2;
+      }
+      .hero h1 span {
+        color: var(--primary-color);
+      }
+      .hero p {
+        font-size: 14px;
+        color: var(--text-gray);
+        position: relative;
+        z-index: 2;
+      }
+      .hero-img {
+        position: absolute;
+        right: -30px;
+        bottom: -20px;
+        width: 220px;
+        height: 220px;
+        /* border: 8px solid white; */
+        border-radius: 50%;
+        object-fit: cover;
+        z-index: 1;
+      }
+
+      /* 아이콘 작게 조정한 통계 섹션 */
+      .stats {
+        margin: -40px 24px 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 18px 10px;
+        border-radius: 24px;
+        display: flex;
+        justify-content: space-around;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        position: relative;
+        z-index: 5;
+      }
+      .stat-item {
+        text-align: center;
+        flex: 1;
+      }
+      .stat-item i {
+        color: #a8c69f;
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: block;
+      }
+      .stat-item .lbl {
+        font-size: 10px;
+        color: #bbb;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 2px;
+      }
+
+      /* 통계 카드 */
+      .stats {
+        margin: -40px 24px 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        border-radius: 24px;
+        display: flex;
+        justify-content: space-around;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        position: relative;
+        z-index: 5;
+      }
+      .stat-item {
+        text-align: center;
+      }
+      .stat-item i {
+        color: #a8c69f;
+        font-size: 20px;
+        margin-bottom: 5px;
+      }
+      .stat-item .val {
+        font-weight: 700;
+        display: block;
+        font-size: 14px;
+      }
+      .stat-item .lbl {
+        font-size: 10px;
+        color: #aaa;
+      }
+
+      /* 메인 리스트 */
+      .main-content {
+        padding: 40px 24px;
+      }
+      .list-title {
+        font-weight: 700;
+        margin-bottom: 20px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .list-title span {
+        color: #ccc;
+        font-weight: 400;
+        font-size: 14px;
+      }
+
+      /* 필터 */
+      .filters {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 25px;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+      .filters::-webkit-scrollbar {
+        display: none;
+      }
+      .filter-btn {
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: 1px solid #eee;
+        background: white;
+        font-size: 12px;
+        color: #666;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      /* 카드 그리드 */
+      .dog-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      .dog-card {
+        background: white;
+        border-radius: 24px;
+        overflow: hidden;
+        border: 1px solid #f0f0f0;
+        cursor: pointer;
+        transition: transform 0.2s;
+        position: relative;
+      }
+      .dog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+      .dog-card .badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: var(--primary-color);
+        color: white;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 10px;
+        font-weight: bold;
+        z-index: 2;
+      }
+      .dog-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+      .dog-info {
+        padding: 15px;
+      }
+      .dog-name {
+        font-weight: 700;
+        font-size: 17px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .gender-m {
+        color: #3b82f6;
+      }
+      .gender-f {
+        color: #ec4899;
+      }
+      .dog-meta {
+        font-size: 11px;
+        color: #aaa;
+        margin: 4px 0 10px;
+      }
+      .tag-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .tag {
+        font-size: 10px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        background: #f1f8e9;
+        color: #2e7d32;
+        border: 1px solid #e8f5e9;
+      }
+
+      /* 모달 스타일 (세로 최적화) */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        padding: 20px;
+      }
+      .modal.show {
+        display: flex;
+      }
+      .modal-content {
+        background: white;
+        width: 100%;
+        max-width: 450px;
+        max-height: 90vh;
+        border-radius: 30px;
+        overflow-y: auto;
+        position: relative;
+        animation: slideUp 0.3s ease-out;
+      }
+      @keyframes slideUp {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
       .close-modal {
         position: absolute;
+        top: 15px;
         right: 15px;
-        top: 10px;
-        font-size: 28px;
+        font-size: 18px;
+        color: white;
+        background: rgba(0, 0, 0, 0.4);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
-        z-index: 10;
+        z-index: 20;
       }
 
       .modal-img {
         width: 100%;
-        border-radius: 10px;
-        margin-bottom: 15px;
+        max-height: 45vh;
+        object-fit: cover;
+        display: block;
+      }
+      .modal-body {
+        padding: 25px;
+      }
+      .modal-desc {
+        line-height: 1.7;
+        color: #444;
+        font-size: 14px;
+        background: #f8f9fa;
+        padding: 18px;
+        border-radius: 18px;
+        margin-top: 15px;
+        word-break: keep-all;
       }
 
-      /* 하단 안내 */
-      .info-footer {
-        padding: 20px;
-        border-top: 1px solid #eee;
-      }
-      .info-box {
+      /* 하단 배너 */
+      .bottom-banner {
+        margin-top: 30px;
+        background: #fdfdf3;
+        padding: 15px;
+        border-radius: 20px;
+        border: 1px solid #f0f0e0;
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-size: 0.75rem;
-        color: var(--text-sub);
+        gap: 12px;
       }
-
-      /* 반응형 */
-      @media (min-width: 768px) {
-        .dog-grid {
-          grid-template-columns: repeat(3, 1fr);
-          max-width: 900px;
-          margin: 0 auto;
-        }
-        .hero {
-          padding: 50px 10%;
-        }
+      .banner-icon {
+        width: 40px;
+        height: 40px;
+        background: white;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #eee;
+        font-size: 20px;
       }
     </style>
   </head>
-
   <body>
-    <header class="header">
-      <h1 class="logo">🐾 복댕이네 쉼터</h1>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="hero-content">
-          <p class="hero-subline">평생의 가족을 기다려요💚</p>
-          <h2 class="hero-title">
-            11마리의 아이들이<br /><span class="highlight">새로운 가족</span>을
-            기다립니다
-          </h2>
-          <p class="hero-desc">사랑으로 안아주세요,<br />기적이 시작됩니다.</p>
-        </div>
-        <div class="hero-image">
-          <img
-            src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1778134571/KakaoTalk_20260507_151421483_wzamhz.jpg"
-            alt="메인 강아지"
-          />
-        </div>
-      </section>
-
-      <section class="filter-container">
-        <div class="dropdown"></div>
-        <span class="total-count">총 11마리</span>
-      </section>
-
-      <section class="dog-grid" id="dogGrid"></section>
-
-      <section class="cta-section">
-        <div class="cta-card">
-          <div class="cta-icon">🏠</div>
-          <h3>입양은 사랑입니다</h3>
-          <p>끝까지 책임질 수 있는<br />따뜻한 가족이 되어주세요.</p>
+    <div class="container">
+      <header class="hero">
+        <div class="logo"><i class="fas fa-home"></i> 복덩이네 쉼터</div>
+        <p style="font-weight: 500; margin-bottom: 5px">
+          평생의 가족을 기다려요 💚
+        </p>
+        <h1><span>11마리</span>의 아이들이<br />새로운 가족을 기다립니다</h1>
+        <div
+          style="
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 2;
+          "
+        >
           <button
-            class="cta-button"
-            onclick="alert('입양 절차 안내 페이지로 이동합니다')"
+            style="
+              background: var(--primary-color);
+              color: white;
+              border: none;
+              padding: 12px 22px;
+              border-radius: 12px;
+              font-weight: bold;
+              cursor: pointer;
+            "
           >
-            입양 절차 안내 <i class="fa-solid fa-chevron-right"></i>
+            입양하기
+          </button>
+          <button
+            style="
+              background: white;
+              color: var(--primary-color);
+              border: 1px solid var(--primary-color);
+              padding: 12px 22px;
+              border-radius: 12px;
+              font-weight: bold;
+              cursor: pointer;
+            "
+          >
+            쉼터 소개
           </button>
         </div>
+        <img
+          src="https://res.cloudinary.com/dkqqxjsek/image/upload/v1778134571/KakaoTalk_20260507_151421483_wzamhz.jpg"
+          class="hero-img"
+        />
+      </header>
+
+      <section class="stats">
+        <div class="stat-item">
+          <i class="fas fa-paw"></i>
+          <span class="lbl">보호중</span>
+          <span class="val">11마리</span>
+        </div>
+        <div class="stat-item">
+          <i class="fas fa-heart"></i>
+          <span class="lbl">입양완료</span>
+          <span class="val">4마리</span>
+        </div>
+        <div class="stat-item">
+          <i class="far fa-calendar-alt"></i>
+          <span class="lbl">함께한 기간</span>
+          <span class="val">1년 1개월</span>
+        </div>
       </section>
 
-      <footer class="info-footer">
-        <div class="info-box">
-          <i class="fa-solid fa-shield-dog"></i>
-          <p>
-            모든 아이들은 건강검진과 예방접종을 완료했어요.<br />입양 전 충분한
-            상담을 통해 신중히 결정해주세요.
-          </p>
+      <main class="main-content">
+        <div class="list-title">
+          <i class="fas fa-dog" style="color: var(--primary-color)"></i> 입양
+          가능한 아이들 <span>총 11마리</span>
         </div>
-      </footer>
-    </main>
+
+        <!-- <div class="filters">
+          <button class="filter-btn">
+            성별 전체 <i class="fas fa-chevron-down"></i>
+          </button>
+          <button class="filter-btn">
+            크기 전체 <i class="fas fa-chevron-down"></i>
+          </button>
+          <button class="filter-btn">
+            나이 전체 <i class="fas fa-chevron-down"></i>
+          </button>
+        </div> -->
+
+        <div class="dog-grid" id="dogGrid"></div>
+
+        <div class="bottom-banner">
+          <div class="banner-icon">🏠</div>
+          <div style="flex: 1">
+            <p style="font-weight: bold; font-size: 13px">
+              작은 관심이 큰 변화를 만듭니다
+            </p>
+            <p style="font-size: 10px; color: #999">따뜻한 가족이 되어주세요</p>
+          </div>
+          <button
+            style="
+              background: var(--primary-color);
+              color: white;
+              border: none;
+              padding: 8px 14px;
+              border-radius: 10px;
+              font-size: 11px;
+              font-weight: bold;
+              cursor: pointer;
+            "
+          >
+            함께하기
+          </button>
+        </div>
+      </main>
+    </div>
 
     <div id="dogModal" class="modal">
       <div class="modal-content">
-        <span class="close-modal">&times;</span>
+        <span class="close-modal" id="closeBtn">&times;</span>
         <div id="modalBody"></div>
       </div>
     </div>
@@ -493,81 +604,73 @@
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778136436/KakaoTalk_20260507_151421483_09_gu7cmt.jpg",
         },
       ];
-      function renderDogCards() {
-        const grid = document.getElementById("dogGrid");
-        if (!grid) return;
 
+      const grid = document.getElementById("dogGrid");
+      const modal = document.getElementById("dogModal");
+      const modalBody = document.getElementById("modalBody");
+      const closeBtn = document.getElementById("closeBtn");
+
+      function renderCards() {
         dogs.forEach((dog) => {
           const genderIcon =
             dog.gender === "M"
               ? '<i class="fa-solid fa-mars gender-m"></i>'
               : '<i class="fa-solid fa-venus gender-f"></i>';
-
           const card = document.createElement("div");
           card.className = "dog-card";
           card.innerHTML = `
-            <span class="badge">${dog.id}</span>
-            <img src="${dog.image}" alt="${dog.name}" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-            <div class="dog-info">
-                <div class="dog-name">${dog.name} ${genderIcon}</div>
-                <div class="dog-meta">약 ${dog.age}살 · ${dog.weight}kg</div>
-                <div class="tag-container">
-                    ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+                <span class="badge">${dog.id}</span>
+                <img src="${dog.image}" alt="${dog.name}" onerror="this.src='https://via.placeholder.com/300?text=Dog'">
+                <div class="dog-info">
+                    <div class="dog-name">${dog.name} ${genderIcon}</div>
+                    <div class="dog-meta">${dog.age === 0 ? "1살 미만" : "약 " + dog.age + "살"} · ${dog.weight}kg</div>
+                    <div class="tag-container">
+                        ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+                    </div>
                 </div>
-            </div>
-          `;
+            `;
           card.onclick = () => openModal(dog);
           grid.appendChild(card);
         });
       }
 
-      const modal = document.getElementById("dogModal");
-      const closeModal = document.querySelector(".close-modal");
-
       function openModal(dog) {
-        const modalBody = document.getElementById("modalBody");
         const genderText = dog.gender === "M" ? "남아" : "여아";
-
         modalBody.innerHTML = `
-          <img src="${dog.image}" class="modal-img" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-          <h2 style="margin-bottom:10px">${dog.name} (${genderText})</h2>
-          <p style="color:#666; margin-bottom:15px">나이: ${dog.age}살 추정 | 몸무게: 약 ${dog.weight}kg</p>
-          <div class="tag-container" style="display:flex; gap:5px; flex-wrap:wrap;">
-              ${dog.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
-          </div>
-          <div class="modal-desc" style="margin-top:20px; padding:15px; background:#f9f9f9; border-radius:10px;">
-              <p style="font-size:0.95rem; line-height:1.6; color:#333; font-weight:500;">"${dog.desc}"</p>
-              <p style="margin-top:10px; font-size:0.85rem; color:#666;">현재 새로운 가족의 따뜻한 사랑을 기다리고 있습니다.</p>
-              <p style="margin-top:10px; font-size:0.85rem; color:#999; line-height:1.6;">
-                  입양은 한 생명을 끝까지 책임지는 소중한 약속입니다. 아이의 성격과 특징을 잘 살펴주시고 신중한 결정을 부탁드립니다.
-              </p>
-          </div>
+            <img src="${dog.image}" class="modal-img" onerror="this.src='https://via.placeholder.com/300?text=Dog'">
+            <div class="modal-body">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div>
+                        <h2 style="font-size:24px; font-weight:800;">${dog.name}</h2>
+                        <p style="color:#888; font-size:14px; margin-bottom:15px;">${dog.age === 0 ? "1살 미만" : dog.age + "살 추정"} · ${genderText} · ${dog.weight}kg</p>
+                    </div>
+                    <span style="background:#f1f8e9; color:#2e7d32; padding:5px 10px; border-radius:8px; font-size:12px; font-weight:bold;">입양가능</span>
+                </div>
+                <div class="tag-container">
+                    ${dog.tags.map((tag) => `<span class="tag" style="padding:6px 10px; font-size:11px;"># ${tag}</span>`).join("")}
+                </div>
+                <div class="modal-desc">
+                    <p style="font-weight:700; margin-bottom:8px; color:var(--primary-color);">쉼터 아이 소개</p>
+                    <p>${dog.desc}</p>
+                </div>
+                <button style="width:100%; margin-top:25px; background:var(--primary-color); color:white; border:none; padding:16px; border-radius:15px; font-weight:bold; font-size:15px; cursor:pointer;">입양 신청서 작성하기</button>
+            </div>
         `;
-
-        // 클래스를 추가하여 중앙 정렬(Flex) 적용 및 스크롤 방지
         modal.classList.add("show");
         document.body.classList.add("no-scroll");
-
-        const modalContent = document.querySelector(".modal-content");
-        if (modalContent) modalContent.scrollTop = 0;
+        document.querySelector(".modal-content").scrollTop = 0;
       }
 
-      function closeModalWindow() {
+      function closeModal() {
         modal.classList.remove("show");
         document.body.classList.remove("no-scroll");
       }
 
-      if (closeModal) {
-        closeModal.onclick = closeModalWindow;
-      }
-
-      window.onclick = (event) => {
-        if (event.target == modal) {
-          closeModalWindow();
-        }
+      closeBtn.onclick = closeModal;
+      window.onclick = (e) => {
+        if (e.target == modal) closeModal();
       };
-
-      document.addEventListener("DOMContentLoaded", renderDogCards);
+      document.addEventListener("DOMContentLoaded", renderCards);
     </script>
   </body>
 </html>
