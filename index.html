@@ -81,41 +81,9 @@
         bottom: -20px;
         width: 220px;
         height: 220px;
-        /* border: 8px solid white; */
         border-radius: 50%;
         object-fit: cover;
         z-index: 1;
-      }
-
-      /* 아이콘 작게 조정한 통계 섹션 */
-      .stats {
-        margin: -40px 24px 0;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 18px 10px;
-        border-radius: 24px;
-        display: flex;
-        justify-content: space-around;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-        position: relative;
-        z-index: 5;
-      }
-      .stat-item {
-        text-align: center;
-        flex: 1;
-      }
-      .stat-item i {
-        color: #a8c69f;
-        font-size: 16px;
-        margin-bottom: 4px;
-        display: block;
-      }
-      .stat-item .lbl {
-        font-size: 10px;
-        color: #bbb;
-        font-weight: 500;
-        display: block;
-        margin-bottom: 2px;
       }
 
       /* 통계 카드 */
@@ -133,11 +101,13 @@
       }
       .stat-item {
         text-align: center;
+        flex: 1;
       }
       .stat-item i {
         color: #a8c69f;
         font-size: 20px;
         margin-bottom: 5px;
+        display: block;
       }
       .stat-item .val {
         font-weight: 700;
@@ -165,28 +135,6 @@
         color: #ccc;
         font-weight: 400;
         font-size: 14px;
-      }
-
-      /* 필터 */
-      .filters {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 25px;
-        overflow-x: auto;
-        padding-bottom: 5px;
-      }
-      .filters::-webkit-scrollbar {
-        display: none;
-      }
-      .filter-btn {
-        padding: 8px 16px;
-        border-radius: 20px;
-        border: 1px solid #eee;
-        background: white;
-        font-size: 12px;
-        color: #666;
-        white-space: nowrap;
-        cursor: pointer;
       }
 
       /* 카드 그리드 */
@@ -260,7 +208,7 @@
         border: 1px solid #e8f5e9;
       }
 
-      /* 모달 스타일 (세로 최적화) */
+      /* 모달 스타일 */
       .modal {
         position: fixed;
         top: 0;
@@ -333,6 +281,15 @@
         border-radius: 18px;
         margin-top: 15px;
         word-break: keep-all;
+      }
+
+      .status-badge {
+        background: #f1f8e9;
+        color: #2e7d32;
+        padding: 5px 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: bold;
       }
 
       /* 하단 배너 */
@@ -432,19 +389,6 @@
           <i class="fas fa-dog" style="color: var(--primary-color)"></i> 입양
           가능한 아이들 <span>총 11마리</span>
         </div>
-
-        <!-- <div class="filters">
-          <button class="filter-btn">
-            성별 전체 <i class="fas fa-chevron-down"></i>
-          </button>
-          <button class="filter-btn">
-            크기 전체 <i class="fas fa-chevron-down"></i>
-          </button>
-          <button class="filter-btn">
-            나이 전체 <i class="fas fa-chevron-down"></i>
-          </button>
-        </div> -->
-
         <div class="dog-grid" id="dogGrid"></div>
 
         <div class="bottom-banner">
@@ -453,22 +397,21 @@
             <p style="font-weight: bold; font-size: 13px">
               작은 관심이 큰 변화를 만듭니다
             </p>
-            <p style="font-size: 10px; color: #999">따뜻한 가족이 되어주세요</p>
+            <p style="font-size: 10px; color: #999">마음을 나누어주세요</p>
           </div>
-          <button
+          <a
+            href="https://aq.gy/f/dClVp"
             style="
+              text-decoration: none;
               background: var(--primary-color);
               color: white;
-              border: none;
               padding: 8px 14px;
               border-radius: 10px;
               font-size: 11px;
               font-weight: bold;
-              cursor: pointer;
             "
+            >후원하기</a
           >
-            함께하기
-          </button>
         </div>
       </main>
     </div>
@@ -492,6 +435,7 @@
           desc: "에너지가 넘치는 호두는 처음 보는 사람에게도 꼬리를 흔들며 다가가는 사교성 끝판왕이에요.",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778134982/KakaoTalk_20260507_151421483_04_ekodaq.jpg",
+          status: ["입양가능", "임보가능"], // 상태 정보 추가
         },
         {
           id: 2,
@@ -503,6 +447,7 @@
           desc: "순하고 애교많아서 친구들에게 양보도 잘하는 천사표! 겁이 많아 첫 만남은 경계해요.",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778135831/8_lsse4o.jpg",
+          status: ["입양가능", "임보가능"],
         },
         {
           id: 3,
@@ -514,6 +459,7 @@
           desc: "엉뚱하고 호기심이 왕성해요. 겁은 조금 있지만, 마음을 열면 애교가 무척 많은 아이예요.",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778135761/7_daya8i.jpg",
+          status: ["입양가능", "임보가능"],
         },
         {
           id: 4,
@@ -525,17 +471,19 @@
           desc: "듬직한 체구와 달리 성격이 점잖고 온순해요. 사람만 바라보는 해바라기 같은 아이.",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778135011/KakaoTalk_20260507_151421483_13_itcdqk.jpg",
+          status: ["입양가능", "임보가능"],
         },
         {
           id: 5,
           name: "마마",
           gender: "F",
           age: 6,
-          weight: 5.1,
-          tags: ["온순해요", "사람좋아"],
-          desc: "공격성이 전혀 없는 온순한 성격의 마마는 어린 아이가 있는 가정에도 아주 잘 어울려요.",
+          weight: 21,
+          tags: ["경계있어요", "애교쟁이"],
+          desc: "견사 밖이 무섭던 과거를 지나 이제는 먼저 엉덩이를 들이밀며 긁어달라고 조르는 애교쟁이. 낯선 사람은 아직 무서워요.",
           image:
-            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778135434/KakaoTalk_20260507_150757274_vopjub.jpg",
+            "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778144487/KakaoTalk_20260507_180000633_kivfpk.jpg",
+          status: [],
         },
         {
           id: 6,
@@ -547,6 +495,7 @@
           desc: "낯가림은 있지만 애교 많고 순해요.",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778076935/Gemini_Generated_Image_m591hlm591hlm591_gaadio.png",
+          status: ["입양가능"],
         },
         {
           id: 7,
@@ -558,6 +507,7 @@
           desc: "사람이 무서운 아이예요. 천천히 마음을 열고 있는 중이라 오래 본 사람에게 손을 허락한답니다.",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778134969/KakaoTalk_20260507_151421483_21_og4zo2.jpg",
+          status: ["입양가능"],
         },
         {
           id: 8,
@@ -569,6 +519,7 @@
           desc: "사람에게는 겁이 많지만, 친구들과 놀 땐 한없이 천진난만!",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778134993/KakaoTalk_20260507_151421483_12_egrow4.jpg",
+          status: ["입양가능"],
         },
         {
           id: 9,
@@ -580,6 +531,7 @@
           desc: "중력 거부 용수철, 활어견. 애교가 많고 에너지가 넘쳐요. 개보다는 사람을 좋아해요.",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778134974/KakaoTalk_20260507_151421483_24_hef2tk.jpg",
+          status: ["입양가능", "임보가능"],
         },
         {
           id: 10,
@@ -591,6 +543,7 @@
           desc: "영리하고 눈치가 빠른 달님이는 마음을 연 사람에게만 애교를 허락하는 도도하고 특별한 아이.",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778136373/KakaoTalk_20260507_154522577_04_ezajrf.jpg",
+          status: ["입양가능", "임보가능"],
         },
         {
           id: 11,
@@ -602,6 +555,7 @@
           desc: "유별난 매력, 말썽도 곧잘 부리지만 낯가림이 전혀 없어 처음 본 사람에게도 장난감을 물어다 줄만큼 활기차요.",
           image:
             "https://res.cloudinary.com/dkqqxjsek/image/upload/v1778136436/KakaoTalk_20260507_151421483_09_gu7cmt.jpg",
+          status: ["입양가능", "임보가능"],
         },
       ];
 
@@ -636,26 +590,42 @@
 
       function openModal(dog) {
         const genderText = dog.gender === "M" ? "남아" : "여아";
+
+        // 강아지별 상태 태그 생성 (입양가능, 임보가능 등)
+        const statusHtml = dog.status
+          .map((s) => `<span class="status-badge">${s}</span>`)
+          .join("");
+
         modalBody.innerHTML = `
-            <img src="${dog.image}" class="modal-img" onerror="this.src='https://via.placeholder.com/300?text=Dog'">
-            <div class="modal-body">
-                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                    <div>
-                        <h2 style="font-size:24px; font-weight:800;">${dog.name}</h2>
-                        <p style="color:#888; font-size:14px; margin-bottom:15px;">${dog.age === 0 ? "1살 미만" : dog.age + "살 추정"} · ${genderText} · ${dog.weight}kg</p>
-                    </div>
-                    <span style="background:#f1f8e9; color:#2e7d32; padding:5px 10px; border-radius:8px; font-size:12px; font-weight:bold;">입양가능</span>
+        <img src="${dog.image}" class="modal-img" onerror="this.src='https://via.placeholder.com/300?text=Dog'">
+        <div class="modal-body">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;">
+                <div>
+                    <h2 style="font-size:24px; font-weight:800;">${dog.name}</h2>
+                    <p style="color:#888; font-size:14px;">${dog.age === 0 ? "1살 미만" : dog.age + "살 추정"} · ${genderText} · ${dog.weight}kg</p>
                 </div>
-                <div class="tag-container">
-                    ${dog.tags.map((tag) => `<span class="tag" style="padding:6px 10px; font-size:11px;"># ${tag}</span>`).join("")}
+                <div style="display:flex; flex-direction:row; gap:5px;">
+                    ${statusHtml}
                 </div>
-                <div class="modal-desc">
-                    <p style="font-weight:700; margin-bottom:8px; color:var(--primary-color);">쉼터 아이 소개</p>
-                    <p>${dog.desc}</p>
-                </div>
-                <button style="width:100%; margin-top:25px; background:var(--primary-color); color:white; border:none; padding:16px; border-radius:15px; font-weight:bold; font-size:15px; cursor:pointer;">입양 신청서 작성하기</button>
             </div>
-        `;
+            <div class="tag-container">
+                ${dog.tags.map((tag) => `<span class="tag" style="padding:6px 10px; font-size:11px;"># ${tag}</span>`).join("")}
+            </div>
+            <div class="modal-desc">
+                <p style="font-weight:700; margin-bottom:8px; color:var(--primary-color);">쉼터 아이 소개</p>
+                <p>${dog.desc}</p>
+            </div>
+
+            <!-- 하단 버튼 배치 -->
+            <div style="display:flex; gap:10px; margin-top:25px;">
+                <button 
+                    onclick="window.location.href='입양_신청_링크'"
+                    style="flex:2; background:var(--primary-color); color:white; border:none; padding:16px; border-radius:15px; font-weight:bold; font-size:15px; cursor:pointer;">
+                    입양 신청하기
+                </button>
+            </div>
+        </div>
+    `;
         modal.classList.add("show");
         document.body.classList.add("no-scroll");
         document.querySelector(".modal-content").scrollTop = 0;
